@@ -1,33 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dotnetnuke type="Package" version="6.0">
-  <packages>
-    <package name="ToSic.Imageflow.Dnn" type="Library" version="01.00.00">
-      <friendlyName>Imageflow Library</friendlyName>
-      <description>
-		<![CDATA[<p>tosic imageflow dnn</p>]]>
-	  </description>
-      <owner>
-        <name>2sic</name>
-        <organization>2sic internet solutions (Switzerland)</organization>
-        <url>http://2sxc.org/</url>
-        <email>info@2sxc.org</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>True</azureCompatible>
-      <dependencies>
-        <dependency type="CoreVersion">07.04.02</dependency>
-      </dependencies>
-      <components>
-        <component type="ResourceFile">
-          <resourceFiles>
-            <basePath></basePath>
-            <resourceFile>
-              <name>Resources.zip</name>
-            </resourceFile>
-          </resourceFiles>
-        </component>
-      </components>
-    </package>
-  </packages>
+	<packages>
+		<package name="ToSic.Imageflow.Dnn" type="Library" version="01.00.00">
+			<friendlyName>Imageflow</friendlyName>
+
+			<description>
+				<![CDATA[<p>Imazen Imageflow - optimal images at incredible speeds - image resizer http module for high-performance image manipulation.</p>]]>
+			</description>
+
+			<owner>
+				<name>2sic + Imazen</name>
+				<organization>2sic internet solutions (Switzerland)</organization>
+				<url>http://2sxc.org/</url>
+				<email>info@2sxc.org</email>
+			</owner>
+
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>True</azureCompatible>
+
+			<dependencies>
+				<dependency type="CoreVersion">07.04.02</dependency>
+			</dependencies>
+
+			<components>
+
+				<component type="Config">
+					<!-- more on this here https://www.dnnsoftware.com/wiki/manifest-xml-merge -->
+					<config>
+						<configFile>web.config</configFile>
+
+						<install>
+							<configuration>
+								<nodes>
+
+									<!-- register the WebP Mime Type - seems complicated, but copied from DNNs registration of svg  https://github.com/dnnsoftware/Dnn.Platform/blob/c35fdc7fb75db0438f3b872ce4e279e3ea73e7c2/Dnn.AdminExperience/Library/Dnn.PersonaBar.UI/Dnn.PersonaBar.UI.dnn#L68-L97 -->
+									<node path="/configuration/system.webServer" targetpath="/configuration/system.webServer/staticContent" action="update" collision="ignore">
+										<staticContent>
+											<remove fileExtension=".webp" />
+											<mimeMap fileExtension=".webp" mimeType="image/webp" />
+										</staticContent>
+									</node>
+									<node path="/configuration/system.webServer/staticContent/remove[@fileExtension='.webp']" action="remove" />
+									<node path="/configuration/system.webServer/staticContent" action="add" key="remove" collision="overwrite">
+										<remove fileExtension=".webp" />
+									</node>
+									<node path="/configuration/system.webServer/staticContent/mimeMap[@fileExtension='.webp']" action="remove" />
+									<node path="/configuration/system.webServer/staticContent" action="add" key="mimeMap" collision="overwrite">
+										<mimeMap fileExtension=".webp" mimeType="image/webp" />
+									</node>
+
+									<!-- Register the http-modules in old/new versions as needed -->
+									<node path="/configuration/system.web/httpModules" action="update" key="name" collision="ignore">
+										<add name="ImageflowModule" type="ToSic.Imageflow.Dnn.ImageflowModule, ToSic.Imageflow.Dnn"/>
+									</node>
+									<node path="/configuration/system.webServer/modules" action="update" key="name" collision="ignore">
+										<add name="ImageflowModule" type="ToSic.Imageflow.Dnn.ImageflowModule, ToSic.Imageflow.Dnn"/>
+									</node>
+
+									<!-- for DNN 7.4.2 add codeBase for bin\Imageflow\Newtonsoft.Json.dll, version 10.0.0.0 -->
+									<!-- TODO: evaluate is it in line with DNN Newtonsoft.Json handling for different versions -->
+									<node path="/configuration/runtime/ab:assemblyBinding"
+									      action="update"
+									      collision="overwrite"
+									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Newtonsoft.Json'][ab:assemblyIdentity/@publicKeyToken='30ad4fe6b2a6aeed'][ab:codeBase]"
+									      nameSpace="urn:schemas-microsoft-com:asm.v1"
+									      nameSpacePrefix="ab">
+										<dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
+											<assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
+											<codeBase version="10.0.0.0" href="bin\Imageflow\Newtonsoft.Json.dll" />
+										</dependentAssembly>
+									</node>
+								</nodes>
+							</configuration>
+						</install>
+
+						<uninstall>
+							<configuration>
+								<nodes>
+									<node path="/configuration/system.web/httpModules/add[@name='ImageflowModule']" action="remove" />
+									<node path="/configuration/system.webServer/modules/add[@name='ImageflowModule']" action="remove" />
+								</nodes>
+							</configuration>
+						</uninstall>
+
+					</config>
+				</component>
+
+				<component type="ResourceFile">
+					<resourceFiles>
+						<basePath></basePath>
+						<resourceFile>
+							<name>Resources.zip</name>
+						</resourceFile>
+					</resourceFiles>
+				</component>
+
+			</components>
+		</package>
+	</packages>
 </dotnetnuke>

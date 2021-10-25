@@ -69,7 +69,7 @@
   <PropertyGroup>
     <PreBuildEvent>robocopy ..\packages\Imageflow.NativeRuntime.win-x86.1.5.8-rc62\runtimes runtimes /E
 robocopy ..\packages\Imageflow.NativeRuntime.win-x86_64.1.5.8-rc62\runtimes runtimes /E
-robocopy ..\packages\Newtonsoft.Json.10.0.3\lib\net20 Imageflow /E
+robocopy ..\packages\Newtonsoft.Json.10.0.3\lib\net45 Imageflow /E
 exit 0</PreBuildEvent>
   </PropertyGroup>
 </Project>

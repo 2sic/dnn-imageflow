@@ -1,31 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dotnetnuke type="Package" version="6.0">
-  <packages>
-    <package name="ToSic.Imageflow.Dnn_Symbols" type="Library" version="01.00.00">
-      <friendlyName>ToSicImageflowDnn Library Symbols</friendlyName>
-      <description><![CDATA[tosic imageflow dnn]]></description>
-      <owner>
-        <name>2sic</name>
-        <organization>2sic internet solutions (Switzerland)</organization>
-        <url>http://2sxc.org/</url>
-        <email>info@2sxc.org</email>
-      </owner>
-      <license src="License.txt" />
-      <releaseNotes src="ReleaseNotes.txt" />
-      <azureCompatible>True</azureCompatible>
-      <dependencies>
-        <dependency type="managedPackage" version="1.0.0">ToSic.Imageflow.Dnn</dependency>
-      </dependencies>
-      <components>
-        <component type="ResourceFile">
-          <resourceFiles>
-            <basePath></basePath>
-            <resourceFile>
-              <name>Resources.zip</name>
-            </resourceFile>
-          </resourceFiles>
-        </component>
-      </components>
-    </package>
-  </packages>
+	<packages>
+		<package name="ToSic.Imageflow.Dnn_Symbols" type="Library" version="01.00.00">
+			<friendlyName>Imageflow Symbols</friendlyName>
+
+			<description><![CDATA[Symbols for Imazen Imageflow]]></description>
+
+			<owner>
+				<name>2sic + Imazen</name>
+				<organization>2sic internet solutions (Switzerland)</organization>
+				<url>http://2sxc.org/</url>
+				<email>info@2sxc.org</email>
+			</owner>
+
+			<license src="License.txt" />
+			<releaseNotes src="ReleaseNotes.txt" />
+			<azureCompatible>True</azureCompatible>
+
+			<dependencies>
+				<dependency type="managedPackage" version="1.0.0">ToSic.Imageflow.Dnn</dependency>
+			</dependencies>
+
+			<components>
+
+				<component type="ResourceFile">
+					<resourceFiles>
+						<basePath></basePath>
+						<resourceFile>
+							<name>Resources.zip</name>
+						</resourceFile>
+					</resourceFiles>
+				</component>
+
+			</components>
+
+		</package>
+	</packages>
 </dotnetnuke>
