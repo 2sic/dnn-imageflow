@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToSic.Imageflow.Dnn", "ToSic.Imageflow.Dnn.csproj", "{37FAEC2A-9ED5-43B9-BDC5-3F26CEEC52FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37FAEC2A-9ED5-43B9-BDC5-3F26CEEC52FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37FAEC2A-9ED5-43B9-BDC5-3F26CEEC52FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37FAEC2A-9ED5-43B9-BDC5-3F26CEEC52FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37FAEC2A-9ED5-43B9-BDC5-3F26CEEC52FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {47D18600-47D9-4C0B-95EF-F88F2457A02A}
+	EndGlobalSection
+EndGlobal
