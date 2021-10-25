@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Imageflow Extension for DNN")]
-[assembly: AssemblyDescription("tosic imageflow dnn")]
+[assembly: AssemblyDescription("ImageFlow image resizer http module for Dnn")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("2sic")]
-[assembly: AssemblyProduct("Imageflow Extension for DNN")]
-[assembly: AssemblyCopyright("Copyright 2021 ToSic")]
+[assembly: AssemblyProduct("ToSic.Imageflow.Dnn")]
+[assembly: AssemblyCopyright("Copyright 2021 2sic")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
