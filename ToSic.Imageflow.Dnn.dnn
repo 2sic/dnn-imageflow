@@ -58,17 +58,16 @@
 										<add name="ImageflowModule" type="ToSic.Imageflow.Dnn.ImageflowModule, ToSic.Imageflow.Dnn"/>
 									</node>
 
-									<!-- for DNN 7.4.2 add codeBase for bin\Imageflow\Newtonsoft.Json.dll, version 10.0.0.0 -->
-									<!-- TODO: evaluate is it in line with DNN Newtonsoft.Json handling for different versions -->
+									<!-- for DNN 7.4.2 update Newtonsoft.Json.dll to version 10.0.0.0 (in same way as in DNN 9.x web.config) -->
 									<node path="/configuration/runtime/ab:assemblyBinding"
 									      action="update"
 									      collision="overwrite"
-									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Newtonsoft.Json'][ab:assemblyIdentity/@publicKeyToken='30ad4fe6b2a6aeed'][ab:codeBase]"
+									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Newtonsoft.Json'][ab:assemblyIdentity/@publicKeyToken='30ad4fe6b2a6aeed']"
 									      nameSpace="urn:schemas-microsoft-com:asm.v1"
 									      nameSpacePrefix="ab">
 										<dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
 											<assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
-											<codeBase version="10.0.0.0" href="bin\Imageflow\Newtonsoft.Json.dll" />
+											<bindingRedirect oldVersion="0.0.0.0-10.0.0.0" newVersion="10.0.0.0" />
 										</dependentAssembly>
 									</node>
 								</nodes>

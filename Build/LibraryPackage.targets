@@ -33,9 +33,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <ItemGroup>
       <BinInstallInclude 
 		Include="$(MSBuildProjectDirectory)\bin\*.dll" 
-		Exclude="$(MSBuildProjectDirectory)\bin\DotNetNuke*;$(MSBuildProjectDirectory)\bin\Telerik*;$(MSBuildProjectDirectory)\bin\System.*;$(MSBuildProjectDirectory)\bin\Microsoft.*;$(MSBuildProjectDirectory)\bin\Newtonsoft.Json.*;$(MSBuildProjectDirectory)\bin\netstandard.*" />
+		Exclude="$(MSBuildProjectDirectory)\bin\DotNetNuke*;$(MSBuildProjectDirectory)\bin\Telerik*;$(MSBuildProjectDirectory)\bin\System.*;$(MSBuildProjectDirectory)\bin\Microsoft.*;$(MSBuildProjectDirectory)\bin\netstandard.*" />
 	  <BinRuntimes Include="$(MSBuildProjectDirectory)\bin\runtimes\**\*.*" />
-	  <NewtonsoftJson Include="$(MSBuildProjectDirectory)\bin\Imageflow\Newtonsoft.Json.dll" />
     </ItemGroup>
 
     <ItemGroup>
@@ -52,7 +51,6 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <Copy SourceFiles="@(InstallInclude)" DestinationFolder="$(MSBuildProjectDirectory)\Package"/>
     <Copy SourceFiles="@(BinInstallInclude)" DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\bin"/>
 	<Copy SourceFiles="@(BinRuntimes)" DestinationFiles="@(BinRuntimes->'$(MSBuildProjectDirectory)\ResourcesZip\bin\runtimes\%(RecursiveDir)%(Filename)%(Extension)')" />
-	<Copy SourceFiles="@(NewtonsoftJson)" DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\bin\Imageflow"/>
 
     <CreateItem Include="$(MSBuildProjectDirectory)\ResourcesZip\**\*.*">
       <Output TaskParameter="Include" ItemName="ResourcesContent" />
