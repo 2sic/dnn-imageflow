@@ -168,13 +168,13 @@
     <PreBuildEvent>robocopy ..\packages\Imageflow.NativeRuntime.win-x86.1.5.8-rc62\runtimes runtimes /E
 robocopy ..\packages\Imageflow.NativeRuntime.win-x86_64.1.5.8-rc62\runtimes runtimes /E
 robocopy ..\packages\Newtonsoft.Json.10.0.3\lib\net45 .\ /E
-robocopy ..\packages\Microsoft.Extensions.Configuration.Abstractions.2.2.0\lib\netstandard2.0 Imageflow /E
+robocopy ..\packages\Microsoft.Extensions.Configuration.Abstractions.2.2.0\lib\netstandard2.0 .\ /E
 robocopy ..\packages\Microsoft.Extensions.DependencyInjection.2.2.0\lib\net461 Imageflow /E
 robocopy ..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0 Imageflow /E
-robocopy ..\packages\Microsoft.Extensions.FileProviders.Abstractions.2.2.0\lib\netstandard2.0 Imageflow /E
-robocopy ..\packages\Microsoft.Extensions.Hosting.Abstractions.2.2.0\lib\netstandard2.0 Imageflow /E
-robocopy ..\packages\Microsoft.Extensions.Logging.2.2.0\lib\netstandard2.0 Imageflow /E
-robocopy ..\packages\Microsoft.Extensions.Logging.Abstractions.2.2.0\lib\netstandard2.0 Imageflow /E
+robocopy ..\packages\Microsoft.Extensions.FileProviders.Abstractions.2.2.0\lib\netstandard2.0 .\ /E
+robocopy ..\packages\Microsoft.Extensions.Hosting.Abstractions.2.2.0\lib\netstandard2.0 .\ /E
+robocopy ..\packages\Microsoft.Extensions.Logging.2.2.0\lib\netstandard2.0 .\ /E
+robocopy ..\packages\Microsoft.Extensions.Logging.Abstractions.2.2.0\lib\netstandard2.0 .\ /E
 exit 0</PreBuildEvent>
   </PropertyGroup>
 </Project>
