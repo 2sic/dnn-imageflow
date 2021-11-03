@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web;
 
-namespace ToSic.Imageflow.Dnn
+namespace ToSic.Imageflow.Dnn.Options
 {
     public class UrlEventArgs
     {

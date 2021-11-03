@@ -1,28 +1,28 @@
-﻿using Imazen.Common.Extensibility.ClassicDiskCache;
-using Imazen.Common.Extensibility.StreamCache;
-using Imazen.Common.Instrumentation.Support.InfoAccumulators;
-using Imazen.Common.Storage;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using Imazen.Common.Extensibility.ClassicDiskCache;
+using Imazen.Common.Extensibility.StreamCache;
+using Imazen.Common.Instrumentation.Support.InfoAccumulators;
+using Imazen.Common.Storage;
+using ToSic.Imageflow.Dnn.Helpers;
 
-namespace ToSic.Imageflow.Dnn
+namespace ToSic.Imageflow.Dnn.Providers
 {
     internal class GlobalInfoProvider : IInfoProvider
     {
         private readonly IStreamCache streamCache;
-        private readonly ImageflowOptions options;
+        private readonly ImageflowModuleOptions _moduleOptions;
         private readonly List<string> pluginNames;
         private readonly List<IInfoProvider> infoProviders;
-        public GlobalInfoProvider(ImageflowOptions options,
+        public GlobalInfoProvider(ImageflowModuleOptions moduleOptions,
             IStreamCache streamCache,
             IClassicDiskCache diskCache, 
             IList<IBlobProvider> blobProviders)
         {
             this.streamCache = streamCache;
-            this.options = options;
+            this._moduleOptions = moduleOptions;
             var plugins = new List<object>() { null, streamCache, diskCache }.Concat(blobProviders).ToList();
             infoProviders = plugins.OfType<IInfoProvider>().ToList();
 
@@ -52,15 +52,15 @@ namespace ToSic.Imageflow.Dnn
             if (HttpContext.Current.Request.ServerVariables["SERVER_SOFTWARE"] != null)
                 q.Add("iis", HttpContext.Current.Request.ServerVariables["SERVER_SOFTWARE"]);
 
-            q.Add("default_commands", PathHelpers.SerializeCommandString(options.CommandDefaults));
+            q.Add("default_commands", PathHelpers.SerializeCommandString(_moduleOptions.CommandDefaults));
             q.Add("info_version", Assembly.GetAssembly(this.GetType()).GetInformationalVersion());
             q.Add("file_version", Assembly.GetAssembly(this.GetType()).GetFileVersion());
             query.Add("imageflow", 1);
-            query.AddString("enabled_cache", options.ActiveCacheBackend.ToString());
+            query.AddString("enabled_cache", _moduleOptions.ActiveCacheBackend.ToString());
             query.AddString("stream_cache", streamCache.GetType().Name);
-            query.Add("map_web_root", options.MapWebRoot);
+            query.Add("map_web_root", _moduleOptions.MapWebRoot);
             query.Add("request_signing_default", "never");
-            query.Add("default_cache_control", options.DefaultCacheControlString);
+            query.Add("default_cache_control", _moduleOptions.DefaultCacheControlString);
 
             foreach (var s in pluginNames)
             {

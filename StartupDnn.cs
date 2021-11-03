@@ -1,16 +1,9 @@
 ﻿using DotNetNuke.Web.Api;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.IO;
-using System.Web;
-using ToSic.Imageflow.Dnn.HybridCache;
-
-//using ToSic.Imageflow.Dnn.HybridCache;
 
 namespace ToSic.Imageflow.Dnn
 {
     /// <summary>
-    /// This configures .net Core Dependency Injection
+    /// This configures .net Dependency Injection
     /// The StartUp is defined as an IServiceRouteMapper.
     /// This way DNN will auto-run this code before anything else
     /// </summary>
@@ -18,9 +11,9 @@ namespace ToSic.Imageflow.Dnn
     {
         /// <summary>
         /// This will be called by DNN when loading the assemblies.
-        /// We just want to trigger the DI-Configure
+        /// We just want to trigger the DependencyInjection-Configure
         /// </summary>
         /// <param name="mapRouteManager"></param>
-        public void RegisterRoutes(IMapRoute mapRouteManager) => DI.Configure();
+        public void RegisterRoutes(IMapRoute mapRouteManager) => DependencyInjection.Configure();
     }
 }

@@ -2,15 +2,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace ToSic.Imageflow.Dnn.HybridCache
+namespace ToSic.Imageflow.Dnn.Cache
 {
-    /// <summary>
-    /// Imageflow.Server.HybridCache.HybridCacheServiceExtensions
-    /// </summary>
     public static class HybridCacheServiceExtensions
     {
-
-
         public static IServiceCollection AddImageflowHybridCache(this IServiceCollection services, HybridCacheOptions options)
         {
             services.AddLogging();

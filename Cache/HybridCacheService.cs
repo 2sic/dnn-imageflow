@@ -9,11 +9,8 @@ using Imazen.HybridCache;
 using Imazen.HybridCache.MetaStore;
 using Microsoft.Extensions.Logging;
 
-namespace ToSic.Imageflow.Dnn.HybridCache
+namespace ToSic.Imageflow.Dnn.Cache
 {
-    /// <summary>
-    /// Imageflow.Server.HybridCache.HybridCacheService
-    /// </summary>
     public class HybridCacheService : IStreamCache
     {
         private readonly Imazen.HybridCache.HybridCache cache;

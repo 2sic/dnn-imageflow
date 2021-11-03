@@ -2,7 +2,7 @@
 using System.IO;
 using Imazen.Common.Storage;
 
-namespace ToSic.Imageflow.Dnn
+namespace ToSic.Imageflow.Dnn.Providers
 {
     internal class BlobProviderFile : IBlobData
     {

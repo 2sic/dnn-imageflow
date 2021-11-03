@@ -1,9 +1,6 @@
 ﻿using System;
 
-/// <summary>
-/// Imageflow.Server.HybridCache.HybridCacheOptions
-/// </summary>
-namespace ToSic.Imageflow.Dnn.HybridCache
+namespace ToSic.Imageflow.Dnn.Cache
 {
     public class HybridCacheOptions
     {

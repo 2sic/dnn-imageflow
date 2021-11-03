@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ToSic.Imageflow.Dnn
+namespace ToSic.Imageflow.Dnn.Options
 {
     public class PresetOptions
     {

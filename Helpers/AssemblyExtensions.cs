@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace ToSic.Imageflow.Dnn
+namespace ToSic.Imageflow.Dnn.Helpers
 {
     internal static class AssemblyExtensions
     {

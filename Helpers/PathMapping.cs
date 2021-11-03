@@ -1,4 +1,4 @@
-﻿namespace ToSic.Imageflow.Dnn
+﻿namespace ToSic.Imageflow.Dnn.Helpers
 {
     public readonly struct PathMapping
     {

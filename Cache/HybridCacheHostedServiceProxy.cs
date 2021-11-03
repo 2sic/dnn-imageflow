@@ -3,11 +3,8 @@ using System.Threading.Tasks;
 using Imazen.Common.Extensibility.StreamCache;
 using Microsoft.Extensions.Hosting;
 
-namespace ToSic.Imageflow.Dnn.HybridCache
+namespace ToSic.Imageflow.Dnn.Cache
 {
-    /// <summary>
-    /// Imageflow.Server.HybridCache.HybridCacheHostedServiceProxy
-    /// </summary>
     internal class HybridCacheHostedServiceProxy : IHostedService
     {
 

@@ -1,10 +1,10 @@
-﻿using Imageflow.Fluent;
-using Imazen.Common.Storage;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Imageflow.Fluent;
+using Imazen.Common.Storage;
 
-namespace ToSic.Imageflow.Dnn
+namespace ToSic.Imageflow.Dnn.Providers
 {
     public class BlobFetchResult : IDisposable
     {

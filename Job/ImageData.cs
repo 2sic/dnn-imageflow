@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ToSic.Imageflow.Dnn
+namespace ToSic.Imageflow.Dnn.Job
 {
     public struct ImageData
     {

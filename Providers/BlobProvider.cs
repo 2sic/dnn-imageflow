@@ -4,8 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Imazen.Common.Storage;
+using ToSic.Imageflow.Dnn.Helpers;
 
-namespace ToSic.Imageflow.Dnn
+namespace ToSic.Imageflow.Dnn.Providers
 {
     public class BlobProvider
     {

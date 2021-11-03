@@ -1,4 +1,4 @@
-﻿namespace ToSic.Imageflow.Dnn
+﻿namespace ToSic.Imageflow.Dnn.Options
 {
     public enum PresetPriority
     {

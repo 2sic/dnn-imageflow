@@ -9,6 +9,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using ToSic.Imageflow.Dnn.Helpers;
+using ToSic.Imageflow.Dnn.Job;
+using ToSic.Imageflow.Dnn.Options;
+using ToSic.Imageflow.Dnn.Providers;
 
 namespace ToSic.Imageflow.Dnn
 {
@@ -22,7 +26,7 @@ namespace ToSic.Imageflow.Dnn
         private IEnumerable<IBlobProvider> blobProviders;
         private BlobProvider blobProvider;
         private GlobalInfoProvider globalInfoProvider;
-        private ImageflowOptions options = new ImageflowOptions(); // TODO
+        private ImageflowModuleOptions _moduleOptions = new ImageflowModuleOptions(); // TODO
         /// <summary>
         /// Dispose Imageflow HttpModule
         /// </summary>
@@ -52,26 +56,26 @@ namespace ToSic.Imageflow.Dnn
             // TODO: DNN Security ...
 
             // TODO: Caching
-            streamCache = DI.Resolve<IStreamCache>();
-            blobProviders = DI.Resolve<IEnumerable<IBlobProvider>>();
+            streamCache = DependencyInjection.Resolve<IStreamCache>();
+            blobProviders = DependencyInjection.Resolve<IEnumerable<IBlobProvider>>();
             var providers = blobProviders.ToList();
-            var mappedPaths = options.MappedPaths.ToList();
-            if (options.MapWebRoot) mappedPaths.Add(new PathMapping("/", HttpContext.Current.Server.MapPath("~")));
+            var mappedPaths = _moduleOptions.MappedPaths.ToList();
+            if (_moduleOptions.MapWebRoot) mappedPaths.Add(new PathMapping("/", HttpContext.Current.Server.MapPath("~")));
 
             blobProvider = new BlobProvider(providers, mappedPaths);
-            globalInfoProvider = new GlobalInfoProvider(options, streamCache, null, providers);
+            globalInfoProvider = new GlobalInfoProvider(_moduleOptions, streamCache, null, providers);
 
             // TODO: DNN File providers..
             //SimpleInvoke(context);
 
-            var imageJobInfo = new ImageJobInfo(context, options, blobProvider);
+            var imageJobInfo = new ImageJobInfo(context, _moduleOptions, blobProvider);
 
             // If the file is definitely missing hand to the next middleware
             // Remote providers will fail late rather than make 2 requests
             if (!imageJobInfo.PrimaryBlobMayExist()) return;
 
             string cacheKey = null;
-            var cachingPath = imageJobInfo.NeedsCaching() ? options.ActiveCacheBackend : CacheBackend.NoCache;
+            var cachingPath = imageJobInfo.NeedsCaching() ? _moduleOptions.ActiveCacheBackend : CacheBackend.NoCache;
             if (cachingPath != CacheBackend.NoCache)
             {
                 var taskCacheKey = imageJobInfo.GetFastCacheKey();
@@ -213,8 +217,8 @@ namespace ToSic.Imageflow.Dnn
         private void SetCachingHeaders(HttpContext context, string etag)
         {
             context.Response.Headers["ETag"] = etag;
-            if (options.DefaultCacheControlString != null)
-                context.Response.Headers["Cache-Control"] = options.DefaultCacheControlString;
+            if (_moduleOptions.DefaultCacheControlString != null)
+                context.Response.Headers["Cache-Control"] = _moduleOptions.DefaultCacheControlString;
         }
     }
 }

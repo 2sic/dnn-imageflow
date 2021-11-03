@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 using System.Web;
 using Imageflow.Fluent;
 using Imazen.Common.Storage;
+using ToSic.Imageflow.Dnn.Helpers;
+using ToSic.Imageflow.Dnn.Options;
+using ToSic.Imageflow.Dnn.Providers;
 
-namespace ToSic.Imageflow.Dnn
+namespace ToSic.Imageflow.Dnn.Job
 {
     public class ImageJobInfo
     {
-        public ImageJobInfo(HttpContext context, ImageflowOptions options, BlobProvider blobProvider)
+        public ImageJobInfo(HttpContext context, ImageflowModuleOptions moduleOptions, BlobProvider blobProvider)
         {
-            this.options = options;
-            Authorized = ProcessRewrites(context, options);
+            this._moduleOptions = moduleOptions;
+            Authorized = ProcessRewrites(context, moduleOptions);
 
             HasParams = PathHelpers.SupportedQuerystringKeys.Any(FinalQuery.ContainsKey);
 
@@ -31,7 +34,7 @@ namespace ToSic.Imageflow.Dnn
             // TODO: watermark, presets
         }
 
-        private readonly ImageflowOptions options;
+        private readonly ImageflowModuleOptions _moduleOptions;
         public string FinalVirtualPath { get; private set; }
         private Dictionary<string, string> FinalQuery { get; set; }
         public bool HasParams { get; }
@@ -41,13 +44,13 @@ namespace ToSic.Imageflow.Dnn
         private readonly BlobFetchCache primaryBlob;
         public string CommandString { get; } = "";
 
-        private bool ProcessRewrites(HttpContext context, ImageflowOptions options)
+        private bool ProcessRewrites(HttpContext context, ImageflowModuleOptions moduleOptions)
         {
             var path = context.Request.Path;
             var args = new UrlEventArgs(context, context.Request.Path, PathHelpers.ToQueryDictionary(context.Request.QueryString));
 
             // Apply rewrite handlers
-            foreach (var handler in options.Rewrite)
+            foreach (var handler in moduleOptions.Rewrite)
             {
                 var matches = string.IsNullOrEmpty(handler.PathPrefix) ||
                               path.StartsWith(handler.PathPrefix, StringComparison.OrdinalIgnoreCase);
@@ -61,7 +64,7 @@ namespace ToSic.Imageflow.Dnn
             // Set defaults if keys are missing, but at least 1 supported key is present
             if (PathHelpers.SupportedQuerystringKeys.Any(args.Query.ContainsKey))
             {
-                foreach (var pair in options.CommandDefaults)
+                foreach (var pair in moduleOptions.CommandDefaults)
                 {
                     if (!args.Query.ContainsKey(pair.Key))
                     {

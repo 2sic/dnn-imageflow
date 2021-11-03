@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 using System.Web;
 using Imageflow.Fluent;
 
-namespace ToSic.Imageflow.Dnn
+namespace ToSic.Imageflow.Dnn.Helpers
 {
+    /// <summary>
+    /// Identifying Common File Formats
+    /// </summary>
     internal static class MagicBytes
     {
         internal static string GetContentTypeFromBytes(byte[] data)

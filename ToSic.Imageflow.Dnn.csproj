@@ -37,32 +37,32 @@
   </PropertyGroup>
   <Import Project="Build\SolutionReferences.targets" />
   <ItemGroup>
-    <Compile Include="AssemblyExtensions.cs" />
-    <Compile Include="BlobFetchCache.cs" />
-    <Compile Include="BlobFetchResult.cs" />
-    <Compile Include="BlobProvider.cs" />
-    <Compile Include="BlobProviderFile.cs" />
-    <Compile Include="BlobProviderResult.cs" />
-    <Compile Include="CacheBackend.cs" />
-    <Compile Include="DI.cs" />
-    <Compile Include="GlobalInfoProvider.cs" />
-    <Compile Include="HybridCache\HybridCacheHostedServiceProxy.cs" />
-    <Compile Include="HybridCache\HybridCacheOptions.cs" />
-    <Compile Include="HybridCache\HybridCacheService.cs" />
-    <Compile Include="HybridCache\HybridCacheServiceExtensions.cs" />
-    <Compile Include="ImageData.cs" />
-    <Compile Include="Imageflow.cs" />
-    <Compile Include="ImageflowOptions.cs" />
-    <Compile Include="ImageJobInfo.cs" />
-    <Compile Include="MagicBytes.cs" />
-    <Compile Include="PathHelpers.cs" />
-    <Compile Include="PathMapping.cs" />
-    <Compile Include="PresetOptions.cs" />
-    <Compile Include="PresetPriority.cs" />
+    <Compile Include="Helpers\AssemblyExtensions.cs" />
+    <Compile Include="Providers\BlobFetchCache.cs" />
+    <Compile Include="Providers\BlobFetchResult.cs" />
+    <Compile Include="Providers\BlobProvider.cs" />
+    <Compile Include="Providers\BlobProviderFile.cs" />
+    <Compile Include="Providers\BlobProviderResult.cs" />
+    <Compile Include="Options\CacheBackend.cs" />
+    <Compile Include="DependencyInjection.cs" />
+    <Compile Include="Providers\GlobalInfoProvider.cs" />
+    <Compile Include="Cache\HybridCacheHostedServiceProxy.cs" />
+    <Compile Include="Cache\HybridCacheOptions.cs" />
+    <Compile Include="Cache\HybridCacheService.cs" />
+    <Compile Include="Cache\HybridCacheServiceExtensions.cs" />
+    <Compile Include="Job\ImageData.cs" />
+    <Compile Include="ImageflowModule.cs" />
+    <Compile Include="Options\ImageflowModuleOptions.cs" />
+    <Compile Include="Job\ImageJobInfo.cs" />
+    <Compile Include="Helpers\MagicBytes.cs" />
+    <Compile Include="Helpers\PathHelpers.cs" />
+    <Compile Include="Helpers\PathMapping.cs" />
+    <Compile Include="Options\PresetOptions.cs" />
+    <Compile Include="Options\PresetPriority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartupDnn.cs" />
-    <Compile Include="UrlEventArgs.cs" />
-    <Compile Include="UrlHandler.cs" />
+    <Compile Include="Options\UrlEventArgs.cs" />
+    <Compile Include="Options\UrlHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Build\Library.Build" />

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using ToSic.Imageflow.Dnn.Helpers;
+using ToSic.Imageflow.Dnn.Options;
 
 namespace ToSic.Imageflow.Dnn
 {
-    public class ImageflowOptions
+    public class ImageflowModuleOptions
     {
         internal CacheBackend ActiveCacheBackend { get; set; } = CacheBackend.StreamCache;
 
@@ -23,10 +25,10 @@ namespace ToSic.Imageflow.Dnn
 
         internal readonly Dictionary<string, PresetOptions> Presets = new Dictionary<string, PresetOptions>(StringComparer.OrdinalIgnoreCase);
 
-        public ImageflowOptions MapPath(string virtualPath, string physicalPath)
+        public ImageflowModuleOptions MapPath(string virtualPath, string physicalPath)
             => MapPath(virtualPath, physicalPath, false);
 
-        public ImageflowOptions MapPath(string virtualPath, string physicalPath, bool ignorePrefixCase)
+        public ImageflowModuleOptions MapPath(string virtualPath, string physicalPath, bool ignorePrefixCase)
         {
             mappedPaths.Add(new PathMapping(virtualPath, physicalPath, ignorePrefixCase));
             return this;
@@ -38,7 +40,7 @@ namespace ToSic.Imageflow.Dnn
         /// <param name="cacheControlString"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public ImageflowOptions SetDefaultCacheControlString(string cacheControlString)
+        public ImageflowModuleOptions SetDefaultCacheControlString(string cacheControlString)
         {
             DefaultCacheControlString = cacheControlString;
             return this;
