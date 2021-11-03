@@ -11,7 +11,7 @@ namespace ToSic.Imageflow.Dnn.Helpers
 {
     internal static class PathHelpers
     {
-        private static readonly string[] AcceptedImageExtensions = new string[] {
+        private static readonly string[] AcceptedImageExtensions = {
             ".png",
             ".jpg",
             ".jpeg",
@@ -23,52 +23,12 @@ namespace ToSic.Imageflow.Dnn.Helpers
             ".webp"
         };
 
-        public static string SanitizeImageExtension(string extension)
-        {
-            extension = extension.ToLowerInvariant().TrimStart('.');
-            switch (extension)
-            {
-                case "png":
-                    return "png";
-                case "gif":
-                    return "gif";
-                case "webp":
-                    return "webp";
-                case "jpeg":
-                case "jfif":
-                case "jif":
-                case "jfi":
-                case "jpe":
-                    return "jpg";
-                default:
-                    return null;
-            }
-        }
-
-        public static string GetImageExtensionFromContentType(string contentType)
-        {
-            switch (contentType)
-            {
-                case "image/png":
-                    return "png";
-                case "image/gif":
-                    return "gif";
-                case "image/webp":
-                    return "webp";
-                case "image/jpeg":
-                    return "jpg";
-                default:
-                    return null;
-            }
-        }
-
-        internal static bool IsImagePath(string path)
+        public static bool IsImagePath(string path)
         {
             return AcceptedImageExtensions.Any(imageFileExtension => path.EndsWith(imageFileExtension, StringComparison.OrdinalIgnoreCase));
         }
 
-        internal static readonly string[] SupportedQuerystringKeys = new string[]
-        {
+        public static readonly string[] SupportedQuerystringKeys = {
             "mode", "anchor", "flip", "sflip", "scale", "cache", "process",
             "quality", "zoom", "dpr", "crop", "cropxunits", "cropyunits",
             "w", "h", "width", "height", "maxwidth", "maxheight", "format", "thumbnail",
@@ -81,7 +41,7 @@ namespace ToSic.Imageflow.Dnn.Helpers
             "encoder", "decoder", "builder", "s.roundcorners.", "paddingwidth", "paddingheight", "margin", "borderwidth", "decoder.min_precise_scaling_ratio"
         };
 
-        internal static string Base64Hash(string data)
+        public static string Base64Hash(string data)
         {
             using (var sha2 = SHA256.Create())
             {
@@ -96,7 +56,7 @@ namespace ToSic.Imageflow.Dnn.Helpers
             }
         }
 
-        internal static Dictionary<string, string> ToQueryDictionary(NameValueCollection requestQuery)
+        public static Dictionary<string, string> ToQueryDictionary(NameValueCollection requestQuery)
         {
             var dict = new Dictionary<string, string>(requestQuery.Count, StringComparer.OrdinalIgnoreCase);
             foreach (var key in requestQuery.AllKeys)
@@ -106,10 +66,10 @@ namespace ToSic.Imageflow.Dnn.Helpers
             return dict;
         }
 
-        internal static string SerializeCommandString(Dictionary<string, string> finalQuery)
+        public static string SerializeCommandString(Dictionary<string, string> finalQuery)
         {
             var qs = QueryString.Create(finalQuery.Select(p => new KeyValuePair<string, StringValues>(p.Key, p.Value)));
-            return qs.ToString()?.TrimStart('?') ?? "";
+            return qs.ToString()?.TrimStart('?');
         }
     }
 }

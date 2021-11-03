@@ -2,7 +2,7 @@
 
 namespace ToSic.Imageflow.Dnn.Job
 {
-    public struct ImageData
+    internal struct ImageData
     {
         public ArraySegment<byte> ResultBytes;
         public string ContentType;

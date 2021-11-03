@@ -6,7 +6,7 @@ namespace ToSic.Imageflow.Dnn.Providers
 {
     internal struct BlobProviderResult
     {
-        internal bool IsFile;
-        internal Func<Task<IBlobData>> GetBlob;
+        public bool IsFile;
+        public Func<Task<IBlobData>> GetBlob;
     }
 }

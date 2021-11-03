@@ -6,21 +6,15 @@ using Imazen.Common.Storage;
 
 namespace ToSic.Imageflow.Dnn.Providers
 {
-    public class BlobFetchResult : IDisposable
+    internal class BlobFetchResult : IDisposable
     {
-        private IBlobData blob;
-        private StreamSource streamSource;
-        private ArraySegment<byte> bytes;
+        private IBlobData _blob;
+        private StreamSource _streamSource;
+        private ArraySegment<byte> _bytes;
 
-
-        internal BytesSource GetBytesSource()
+        public BytesSource GetBytesSource()
         {
-            return new BytesSource(bytes);
-        }
-        public void Dispose()
-        {
-            streamSource?.Dispose();
-            blob?.Dispose();
+            return new BytesSource(_bytes);
         }
 
         public static async Task<BlobFetchResult> FromCache(BlobFetchCache blobFetchCache)
@@ -32,12 +26,18 @@ namespace ToSic.Imageflow.Dnn.Providers
                 var source = new StreamSource(blob.OpenRead(), true);
                 var result = new BlobFetchResult()
                 {
-                    streamSource = source,
-                    blob = blob,
-                    bytes = await source.GetBytesAsync(CancellationToken.None)
+                    _streamSource = source,
+                    _blob = blob,
+                    _bytes = await source.GetBytesAsync(CancellationToken.None)
                 };
                 return result;
             }
+        }
+
+        public void Dispose()
+        {
+            _streamSource?.Dispose();
+            _blob?.Dispose();
         }
     }
 }

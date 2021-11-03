@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ToSic.Imageflow.Dnn.Cache
 {
-    public static class HybridCacheServiceExtensions
+    internal static class HybridCacheServiceExtensions
     {
         public static IServiceCollection AddImageflowHybridCache(this IServiceCollection services, HybridCacheOptions options)
         {
@@ -16,7 +16,6 @@ namespace ToSic.Imageflow.Dnn.Cache
                 return new HybridCacheService(options, logger);
             });
 
-            services.AddHostedService<HybridCacheHostedServiceProxy>();
             return services;
         }
     }

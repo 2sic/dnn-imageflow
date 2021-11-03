@@ -37,16 +37,12 @@
   </PropertyGroup>
   <Import Project="Build\SolutionReferences.targets" />
   <ItemGroup>
-    <Compile Include="Helpers\AssemblyExtensions.cs" />
     <Compile Include="Providers\BlobFetchCache.cs" />
     <Compile Include="Providers\BlobFetchResult.cs" />
     <Compile Include="Providers\BlobProvider.cs" />
     <Compile Include="Providers\BlobProviderFile.cs" />
     <Compile Include="Providers\BlobProviderResult.cs" />
-    <Compile Include="Options\CacheBackend.cs" />
     <Compile Include="DependencyInjection.cs" />
-    <Compile Include="Providers\GlobalInfoProvider.cs" />
-    <Compile Include="Cache\HybridCacheHostedServiceProxy.cs" />
     <Compile Include="Cache\HybridCacheOptions.cs" />
     <Compile Include="Cache\HybridCacheService.cs" />
     <Compile Include="Cache\HybridCacheServiceExtensions.cs" />
@@ -57,12 +53,9 @@
     <Compile Include="Helpers\MagicBytes.cs" />
     <Compile Include="Helpers\PathHelpers.cs" />
     <Compile Include="Helpers\PathMapping.cs" />
-    <Compile Include="Options\PresetOptions.cs" />
-    <Compile Include="Options\PresetPriority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartupDnn.cs" />
     <Compile Include="Options\UrlEventArgs.cs" />
-    <Compile Include="Options\UrlHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Build\Library.Build" />

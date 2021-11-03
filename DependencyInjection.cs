@@ -6,46 +6,16 @@ using ToSic.Imageflow.Dnn.Cache;
 
 namespace ToSic.Imageflow.Dnn
 {
-    /// <summary>
-    /// Dependency Injection
-    /// </summary>
-    public class DependencyInjection
+    internal class DependencyInjection
     {
-        /// <summary>
-        /// Dictionary key for keeping the Injection Service Provider in the Http-Context
-        /// </summary>
-        private const string ServiceProviderKey = "imageflow-scoped-serviceprovider";
-
         private static bool _alreadyConfigured;
         private static readonly IServiceCollection ServiceCollection = new ServiceCollection();
         private static IServiceProvider _serviceProvider;
 
         public static IServiceProvider GetServiceProvider()
         {
-            if (!_alreadyConfigured) Configure();
+            Configure();
             return _serviceProvider;
-
-            //// Because Imageflow runs inside DNN as a webforms project and not asp.net core mvc, we have
-            //// to make sure the service-provider object is disposed correctly. If we don't do this,
-            //// connections to the database are kept open, and this leads to errors like "SQL timeout:
-            //// "All pooled connections were in use". https://github.com/2sic/2sxc/issues/1200
-            //// Work-around for issue https://github.com/2sic/2sxc/issues/1200
-            //// Scope service-provider based on request
-            //var httpCtx = HttpContext.Current;
-            //if (httpCtx == null) return _serviceProvider.CreateScope().ServiceProvider;
-
-            //if (httpCtx.Items[ServiceProviderKey] == null)
-            //{
-            //    httpCtx.Items[ServiceProviderKey] = _serviceProvider.CreateScope().ServiceProvider;
-
-            //    // Make sure service provider is disposed after request finishes
-            //    httpCtx.AddOnRequestCompleted(context =>
-            //    {
-            //        ((IDisposable)context.Items[ServiceProviderKey])?.Dispose();
-            //    });
-            //}
-
-            //return (IServiceProvider)httpCtx.Items[ServiceProviderKey];
         }
 
         /// <summary>
@@ -75,8 +45,6 @@ namespace ToSic.Imageflow.Dnn
 
             _alreadyConfigured = true;
         }
-
-
 
         /// <summary>
         /// ConfigureServices for DI

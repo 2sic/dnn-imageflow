@@ -11,12 +11,12 @@ using Microsoft.Extensions.Logging;
 
 namespace ToSic.Imageflow.Dnn.Cache
 {
-    public class HybridCacheService : IStreamCache
+    internal class HybridCacheService : IStreamCache
     {
-        private readonly Imazen.HybridCache.HybridCache cache;
+        private readonly HybridCache _cache;
+
         public HybridCacheService(HybridCacheOptions options, ILogger<HybridCacheService> logger)
         {
-
             var cacheOptions = new Imazen.HybridCache.HybridCacheOptions(options.DiskCacheDirectory)
             {
                 AsyncCacheOptions = new AsyncCacheOptions()
@@ -36,33 +36,24 @@ namespace ToSic.Imageflow.Dnn.Cache
                     MinAgeToDelete = options.MinAgeToDelete.Ticks > 0 ? options.MinAgeToDelete : TimeSpan.Zero,
                 }
             };
+
             var database = new MetaStore(new MetaStoreOptions(options.DiskCacheDirectory)
             {
                 Shards = Math.Max(1, options.DatabaseShards),
                 MaxLogFilesPerShard = 3,
             }, cacheOptions, logger);
-            cache = new Imazen.HybridCache.HybridCache(database, cacheOptions, logger);
+
+            _cache = new HybridCache(database, cacheOptions, logger);
         }
 
-        public IEnumerable<IIssue> GetIssues()
-        {
-            return cache.GetIssues();
-        }
+        public IEnumerable<IIssue> GetIssues() => _cache.GetIssues();
 
-        public Task StartAsync(CancellationToken cancellationToken)
-        {
-            return cache.StartAsync(cancellationToken);
-        }
+        public Task StartAsync(CancellationToken cancellationToken) => _cache.StartAsync(cancellationToken);
 
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            return cache.StopAsync(cancellationToken);
-        }
+        public Task StopAsync(CancellationToken cancellationToken) => _cache.StopAsync(cancellationToken);
 
         public Task<IStreamCacheResult> GetOrCreateBytes(byte[] key, AsyncBytesResult dataProviderCallback, CancellationToken cancellationToken,
-            bool retrieveContentType)
-        {
-            return cache.GetOrCreateBytes(key, dataProviderCallback, cancellationToken, retrieveContentType);
-        }
+            bool retrieveContentType) =>
+            _cache.GetOrCreateBytes(key, dataProviderCallback, cancellationToken, retrieveContentType);
     }
 }

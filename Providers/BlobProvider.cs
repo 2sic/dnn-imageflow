@@ -8,23 +8,23 @@ using ToSic.Imageflow.Dnn.Helpers;
 
 namespace ToSic.Imageflow.Dnn.Providers
 {
-    public class BlobProvider
+    internal class BlobProvider
     {
-        private readonly List<IBlobProvider> blobProviders = new List<IBlobProvider>();
-        private readonly List<string> blobPrefixes = new List<string>();
-        private readonly List<PathMapping> pathMappings;
+        private readonly List<IBlobProvider> _blobProviders = new List<IBlobProvider>();
+        private readonly List<string> _blobPrefixes = new List<string>();
+        private readonly List<PathMapping> _pathMappings;
         public BlobProvider(IEnumerable<IBlobProvider> blobProviders, List<PathMapping> pathMappings)
         {
-            this.pathMappings = pathMappings.ToList();
-            this.pathMappings.Sort((a, b) => b.VirtualPath.Length.CompareTo(a.VirtualPath.Length));
+            _pathMappings = pathMappings.ToList();
+            _pathMappings.Sort((a, b) => b.VirtualPath.Length.CompareTo(a.VirtualPath.Length));
 
             foreach (var provider in blobProviders)
             {
-                this.blobProviders.Add(provider);
+                _blobProviders.Add(provider);
                 foreach (var prefix in provider.GetPrefixes())
                 {
                     var conflictingPrefix =
-                        blobPrefixes.FirstOrDefault(p =>
+                        _blobPrefixes.FirstOrDefault(p =>
                             prefix.StartsWith(p, StringComparison.OrdinalIgnoreCase) ||
                             p.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));
                     if (conflictingPrefix != null)
@@ -33,21 +33,21 @@ namespace ToSic.Imageflow.Dnn.Providers
                     }
                     // We don't check for conflicts with PathMappings because / is a path mapping usually, 
                     // and we simply prefer blobs over files if there are overlapping prefixes.
-                    blobPrefixes.Add(prefix);
+                    _blobPrefixes.Add(prefix);
                 }
             }
         }
 
-        internal BlobProviderResult? GetResult(string virtualPath)
+        public BlobProviderResult? GetResult(string virtualPath)
         {
             return GetBlobResult(virtualPath) ?? GetFileResult(virtualPath);
         }
 
         private BlobProviderResult? GetBlobResult(string virtualPath)
         {
-            if (blobPrefixes.Any(p => virtualPath.StartsWith(p, StringComparison.OrdinalIgnoreCase)))
+            if (_blobPrefixes.Any(p => virtualPath.StartsWith(p, StringComparison.OrdinalIgnoreCase)))
             {
-                foreach (var provider in blobProviders)
+                foreach (var provider in _blobProviders)
                 {
                     if (provider.SupportsPath(virtualPath))
                     {
@@ -64,7 +64,7 @@ namespace ToSic.Imageflow.Dnn.Providers
 
         private BlobProviderResult? GetFileResult(string virtualPath)
         {
-            var mapping = pathMappings.FirstOrDefault(
+            var mapping = _pathMappings.FirstOrDefault(
                 m => virtualPath.StartsWith(m.VirtualPath,
                     m.IgnorePrefixCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal));
             if (mapping.PhysicalPath == null || mapping.VirtualPath == null) return null;
@@ -80,17 +80,12 @@ namespace ToSic.Imageflow.Dnn.Providers
                 physicalDir,
                 relativePath));
             if (!physicalPath.StartsWith(physicalDir, StringComparison.Ordinal))
-            {
-                return null; //We stopped a directory traversal attack (most likely)
-            }
+                return null; // We stopped a directory traversal attack (most likely)
 
 
             var lastWriteTimeUtc = File.GetLastWriteTimeUtc(physicalPath);
-            if (lastWriteTimeUtc.Year == 1601) // file doesn't exist, pass to next middleware
-            {
+            if (lastWriteTimeUtc.Year == 1601) // file doesn't exist
                 return null;
-
-            }
 
             return new BlobProviderResult()
             {

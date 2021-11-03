@@ -2,6 +2,9 @@
 
 namespace ToSic.Imageflow.Dnn.Cache
 {
+    /// <summary>
+    /// Hybrid cache options
+    /// </summary>
     public class HybridCacheOptions
     {
         /// <summary>
@@ -37,6 +40,10 @@ namespace ToSic.Imageflow.Dnn.Cache
         /// </summary>
         public int DatabaseShards { get; set; } = 8;
 
+        /// <summary>
+        /// HybridCacheOptions with cache folder
+        /// </summary>
+        /// <param name="cacheDir"></param>
         public HybridCacheOptions(string cacheDir)
         {
             DiskCacheDirectory = cacheDir;

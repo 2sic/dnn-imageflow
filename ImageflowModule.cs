@@ -1,9 +1,7 @@
-using Imageflow.Fluent;
 using Imazen.Common.Extensibility.StreamCache;
 using Imazen.Common.Storage;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -22,18 +20,10 @@ namespace ToSic.Imageflow.Dnn
     public class ImageflowModule : IHttpModule
     {
         //private IClassicDiskCache diskCache;
-        private IStreamCache streamCache;
-        private IEnumerable<IBlobProvider> blobProviders;
-        private BlobProvider blobProvider;
-        private GlobalInfoProvider globalInfoProvider;
-        private ImageflowModuleOptions _moduleOptions = new ImageflowModuleOptions(); // TODO
-        /// <summary>
-        /// Dispose Imageflow HttpModule
-        /// </summary>
-        public void Dispose()
-        {
-            //throw new NotImplementedException();
-        }
+        private IStreamCache _streamCache;
+        private IEnumerable<IBlobProvider> _blobProviders;
+        private BlobProvider _blobProvider;
+        private readonly ImageflowModuleOptions _options = new ImageflowModuleOptions();
 
         /// <summary>
         /// Init Imageflow HttpModule
@@ -47,50 +37,33 @@ namespace ToSic.Imageflow.Dnn
 
         private async Task ImageflowRequestAsync(object source, EventArgs e)
         {
-            // TODO: Imageflow configuration
-
             var context = ((HttpApplication)source).Context;
 
             if (!RequestIsValid(context.Request)) return;
 
             // TODO: DNN Security ...
-
-            // TODO: Caching
-            streamCache = DependencyInjection.Resolve<IStreamCache>();
-            blobProviders = DependencyInjection.Resolve<IEnumerable<IBlobProvider>>();
-            var providers = blobProviders.ToList();
-            var mappedPaths = _moduleOptions.MappedPaths.ToList();
-            if (_moduleOptions.MapWebRoot) mappedPaths.Add(new PathMapping("/", HttpContext.Current.Server.MapPath("~")));
-
-            blobProvider = new BlobProvider(providers, mappedPaths);
-            globalInfoProvider = new GlobalInfoProvider(_moduleOptions, streamCache, null, providers);
-
             // TODO: DNN File providers..
-            //SimpleInvoke(context);
 
-            var imageJobInfo = new ImageJobInfo(context, _moduleOptions, blobProvider);
+            // Caching
+            PrepareHybridCacheDependencies();
 
-            // If the file is definitely missing hand to the next middleware
+            var imageJobInfo = new ImageJobInfo(context, _options, _blobProvider);
+
+            // Skip if the file is definitely missing.
             // Remote providers will fail late rather than make 2 requests
             if (!imageJobInfo.PrimaryBlobMayExist()) return;
 
-            string cacheKey = null;
-            var cachingPath = imageJobInfo.NeedsCaching() ? _moduleOptions.ActiveCacheBackend : CacheBackend.NoCache;
-            if (cachingPath != CacheBackend.NoCache)
+            // Skip when caching is not needed.
+            if (!imageJobInfo.NeedsCaching()) return;
+
+            var taskCacheKey = imageJobInfo.GetFastCacheKey();
+            var cacheKey = taskCacheKey.GetAwaiter().GetResult();
+            var etag = context.Request.Headers["If-None-Match"];
+
+            if (!string.IsNullOrEmpty(etag) && cacheKey == etag)
             {
-                var taskCacheKey = imageJobInfo.GetFastCacheKey();
-                cacheKey = taskCacheKey.GetAwaiter().GetResult();
-
-                var etag = context.Request.Headers["If-None-Match"];
-                if (!string.IsNullOrEmpty(etag) && cacheKey == etag)
-                {
-
-                    context.Response.StatusCode = 304;
-                    // context.Response.ContentLength = 0;
-                    context.Response.ContentType = null;
-                    context.Response.End();
-                    return;
-                }
+                NotModified(context);
+                return;
             }
 
             try
@@ -123,50 +96,25 @@ namespace ToSic.Imageflow.Dnn
             return true;
         }
 
-        //private void SimpleInvoke(HttpContext context)
-        //{
-        //    // simple case when image is on file system
-        //    var imageBytes = GetImageBytesFromFileSystem(context);
+        private void PrepareHybridCacheDependencies()
+        {
+            _streamCache = DependencyInjection.Resolve<IStreamCache>();
 
-        //    // do work
-        //    BuildImage(imageBytes, context);
-        //}
+            _blobProviders = DependencyInjection.Resolve<IEnumerable<IBlobProvider>>();
 
-        //private byte[] GetImageBytesFromFileSystem(HttpContext context)
-        //{
-        //    var fullPath = context.Request.MapPath(context.Request.Path);
-        //    return File.Exists(fullPath) ? File.ReadAllBytes(fullPath) : null;
-        //}
+            var mappedPaths = new List<PathMapping>
+            {
+                new PathMapping("/", HttpContext.Current.Server.MapPath("~"))
+            };
 
-        //private void BuildImage(byte[] imageBytes, HttpContext context)
-        //{
-        //    if (imageBytes == null) return;
-
-        //    using (var imageJob = new ImageJob())
-        //    {
-        //        var buildEncodeResult = imageJob.BuildCommandString(
-        //                new BytesSource(imageBytes),
-        //                new BytesDestination(),
-        //                context.Request.QueryString.ToString())
-        //            .Finish().InProcessAsync().Result.First;
-
-        //        var processedImage = buildEncodeResult.TryGetBytes();
-
-        //        if (processedImage?.Array == null) return;
-
-        //        // return imageflow processed image 
-        //        context.Response.ContentType = buildEncodeResult.PreferredMimeType;
-        //        context.Response.BinaryWrite(processedImage.Value.Array);
-
-        //        context.Response.End(); // terminate request
-        //    }
-        //}
+            _blobProvider = new BlobProvider(_blobProviders, mappedPaths);
+        }
 
         private async Task ProcessWithStreamCache(HttpContext context, string cacheKey, ImageJobInfo info)
         {
-            var keyBytes = Encoding.UTF8.GetBytes(cacheKey);
-            var typeName = streamCache.GetType().Name;
-            var cacheResult = await streamCache.GetOrCreateBytes(keyBytes, async (cancellationToken) =>
+            var key = Encoding.UTF8.GetBytes(cacheKey);
+            var typeName = _streamCache.GetType().Name;
+            var cacheResult = await _streamCache.GetOrCreateBytes(key, async (cancellationToken) =>
             {
                 if (info.HasParams)
                 {
@@ -193,7 +141,7 @@ namespace ToSic.Imageflow.Dnn
                     }
                     SetCachingHeaders(context, cacheKey);
                     await MagicBytes.ProxyToStream(cacheResult.Data, context.Response);
-                    context.Response.End(); // terminate request
+                    context.Response.End();
                 }
             }
             else
@@ -203,22 +151,35 @@ namespace ToSic.Imageflow.Dnn
             }
         }
 
-        private void NotFound(HttpContext context, BlobMissingException e)
+        private static void NotModified(HttpContext context)
         {
-            // We allow 404s to be cached, but not 403s or license errors
-            var s = "The specified resource does not exist.\r\n" + e.Message;
+            context.Response.StatusCode = 304;
+            context.Response.ContentType = null;
+            context.Response.End();
+        }
+
+        private static void NotFound(HttpContext context, BlobMissingException e)
+        {
+            var message = "The specified resource does not exist.\r\n" + e.Message;
             context.Response.StatusCode = 404;
             context.Response.ContentType = "text/plain; charset=utf-8";
-            var bytes = Encoding.UTF8.GetBytes(s);
-            context.Response.BinaryWrite(bytes);
-            context.Response.End(); // terminate request
+            context.Response.Write(message);
+            context.Response.End();
         }
 
         private void SetCachingHeaders(HttpContext context, string etag)
         {
             context.Response.Headers["ETag"] = etag;
-            if (_moduleOptions.DefaultCacheControlString != null)
-                context.Response.Headers["Cache-Control"] = _moduleOptions.DefaultCacheControlString;
+            if (_options.DefaultCacheControlString != null)
+                context.Response.Headers["Cache-Control"] = _options.DefaultCacheControlString;
+        }
+
+        /// <summary>
+        /// Dispose Imageflow HttpModule
+        /// </summary>
+        public void Dispose()
+        {
+            //throw new NotImplementedException();
         }
     }
 }

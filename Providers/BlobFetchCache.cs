@@ -3,38 +3,38 @@ using Imazen.Common.Storage;
 
 namespace ToSic.Imageflow.Dnn.Providers
 {
-    public class BlobFetchCache
+    internal class BlobFetchCache
     {
         public BlobFetchCache(string virtualPath, BlobProvider provider)
         {
-            this.virtualPath = virtualPath;
-            this.provider = provider;
-            resultFetched = false;
-            blobFetched = false;
+            _virtualPath = virtualPath;
+            _provider = provider;
+            _resultFetched = false;
+            _blobFetched = false;
         }
 
-        private readonly BlobProvider provider;
-        private readonly string virtualPath;
-        private bool resultFetched;
-        private bool blobFetched;
-        private BlobProviderResult? result;
-        private IBlobData blob;
+        private readonly BlobProvider _provider;
+        private readonly string _virtualPath;
+        private bool _resultFetched;
+        private bool _blobFetched;
+        private BlobProviderResult? _result;
+        private IBlobData _blob;
 
-        internal BlobProviderResult? GetBlobResult()
+        public BlobProviderResult? GetBlobResult()
         {
-            if (resultFetched) return result;
-            result = provider.GetResult(virtualPath);
-            resultFetched = true;
-            return result;
+            if (_resultFetched) return _result;
+            _result = _provider.GetResult(_virtualPath);
+            _resultFetched = true;
+            return _result;
         }
 
-        internal async Task<IBlobData> GetBlob()
+        public async Task<IBlobData> GetBlob()
         {
-            if (blobFetched) return blob;
+            if (_blobFetched) return _blob;
             var blobResult = GetBlobResult();
-            if (blobResult != null) blob = await blobResult.Value.GetBlob();
-            blobFetched = true;
-            return blob;
+            if (blobResult != null) _blob = await blobResult.Value.GetBlob();
+            _blobFetched = true;
+            return _blob;
         }
     }
 }
