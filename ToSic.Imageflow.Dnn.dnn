@@ -58,7 +58,7 @@
 										<add name="ImageflowModule" type="ToSic.Imageflow.Dnn.ImageflowModule, ToSic.Imageflow.Dnn"/>
 									</node>
 
-									<!-- for DNN 7.4.2 update Newtonsoft.Json.dll to version 10.0.0.0 (in same way as in DNN 9.x web.config) -->
+									<!-- Imageflow for DNN 7.4.2 update Newtonsoft.Json.dll to version 10.0.0.0 (in same way as in DNN 9.x web.config) -->
 									<node path="/configuration/runtime/ab:assemblyBinding"
 									      action="update"
 									      collision="overwrite"
@@ -70,6 +70,98 @@
 											<bindingRedirect oldVersion="0.0.0.0-10.0.0.0" newVersion="10.0.0.0" />
 										</dependentAssembly>
 									</node>
+
+									<!-- Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.Configuration.Abstractions.dll, version 2.2.0.0 -->
+									<node path="/configuration/runtime/ab:assemblyBinding"
+									      action="update"
+									      collision="overwrite"
+									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.Configuration.Abstractions'][ab:bindingRedirect]"
+									      nameSpace="urn:schemas-microsoft-com:asm.v1"
+									      nameSpacePrefix="ab">
+										<dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
+											<assemblyIdentity name="Microsoft.Extensions.Configuration.Abstractions" publicKeyToken="adb9793829ddae60" />
+											<codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.Configuration.Abstractions.dll" />
+										</dependentAssembly>
+									</node>
+
+									<!-- Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.DependencyInjection.dll, version 2.2.0.0 -->
+									<node path="/configuration/runtime/ab:assemblyBinding"
+									      action="update"
+									      collision="overwrite"
+									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection'][ab:bindingRedirect]"
+									      nameSpace="urn:schemas-microsoft-com:asm.v1"
+									      nameSpacePrefix="ab">
+										<dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
+											<assemblyIdentity name="Microsoft.Extensions.DependencyInjection" publicKeyToken="adb9793829ddae60" />
+											<codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.DependencyInjection.dll" />
+										</dependentAssembly>
+									</node>
+
+									<!-- Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.DependencyInjection.Abstractions.dll, version 2.2.0.0 -->
+									<node path="/configuration/runtime/ab:assemblyBinding"
+									      action="update"
+									      collision="overwrite"
+									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection.Abstractions'][ab:bindingRedirect]"
+									      nameSpace="urn:schemas-microsoft-com:asm.v1"
+									      nameSpacePrefix="ab">
+										<dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
+											<assemblyIdentity name="Microsoft.Extensions.DependencyInjection.Abstractions" publicKeyToken="adb9793829ddae60"/>
+											<codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+										</dependentAssembly>
+									</node>
+
+									<!-- Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.FileProviders.Abstractions.dll, version 2.2.0.0 -->
+									<node path="/configuration/runtime/ab:assemblyBinding"
+									      action="update"
+									      collision="overwrite"
+									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.FileProviders.Abstractions'][ab:bindingRedirect]"
+									      nameSpace="urn:schemas-microsoft-com:asm.v1"
+									      nameSpacePrefix="ab">
+										<dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
+											<assemblyIdentity name="Microsoft.Extensions.FileProviders.Abstractions" publicKeyToken="adb9793829ddae60" />
+											<codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.FileProviders.Abstractions.dll" />
+										</dependentAssembly>
+									</node>
+
+									<!-- Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.Hosting.Abstractions.dll, version 2.2.0.0 -->
+									<node path="/configuration/runtime/ab:assemblyBinding"
+									      action="update"
+									      collision="overwrite"
+									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.Hosting.Abstractions'][ab:bindingRedirect]"
+									      nameSpace="urn:schemas-microsoft-com:asm.v1"
+									      nameSpacePrefix="ab">
+										<dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
+											<assemblyIdentity name="Microsoft.Extensions.Hosting.Abstractions" publicKeyToken="adb9793829ddae60"/>
+											<codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.Hosting.Abstractions.dll" />
+										</dependentAssembly>
+									</node>
+
+									<!-- Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.Logging.Abstractions.dll, version 2.2.0.0 -->
+									<node path="/configuration/runtime/ab:assemblyBinding"
+									      action="update"
+									      collision="overwrite"
+									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.Logging.Abstractions'][ab:bindingRedirect]"
+									      nameSpace="urn:schemas-microsoft-com:asm.v1"
+									      nameSpacePrefix="ab">
+										<dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
+											<assemblyIdentity name="Microsoft.Extensions.Logging.Abstractions" publicKeyToken="adb9793829ddae60" />
+											<codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.Logging.Abstractions.dll" />
+										</dependentAssembly>
+									</node>
+
+									<!-- Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.Primitives.dll, version 2.2.0.0 -->
+									<node path="/configuration/runtime/ab:assemblyBinding"
+									      action="update"
+									      collision="overwrite"
+									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.Primitives'][ab:bindingRedirect]"
+									      nameSpace="urn:schemas-microsoft-com:asm.v1"
+									      nameSpacePrefix="ab">
+										<dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
+											<assemblyIdentity name="Microsoft.Extensions.Primitives" publicKeyToken="adb9793829ddae60" />
+											<codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.Primitives.dll" />
+										</dependentAssembly>
+									</node>
+
 								</nodes>
 							</configuration>
 						</install>
