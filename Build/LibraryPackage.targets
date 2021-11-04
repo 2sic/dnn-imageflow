@@ -147,7 +147,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 				$(MSBuildProjectDirectory)\bin\System.Xml.XmlDocument.dll;
 				$(MSBuildProjectDirectory)\bin\System.Xml.XmlSerializer.dll;
 				$(MSBuildProjectDirectory)\bin\System.Xml.XPath.dll;
-				$(MSBuildProjectDirectory)\bin\System.Xml.XPath.XDocument.dll" />
+				$(MSBuildProjectDirectory)\bin\System.Xml.XPath.XDocument.dll;
+				$(MSBuildProjectDirectory)\bin\ToSic.Imageflow.Dnn.dll" />
 			<BinImageflowInclude Include="$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.*.dll" />
 			<BinRuntimes Include="$(MSBuildProjectDirectory)\bin\runtimes\**\*.*" />
 		</ItemGroup>
