@@ -39,6 +39,9 @@ namespace ToSic.Imageflow.Dnn
         {
             if (_alreadyConfigured) return;
 
+            // ensure that native assemblies are in place, before we start to use them
+            UpgradeUtil.UpgradeNativeAssemblies();
+
             //setup our DependencyInjection
             ConfigureServices(ServiceCollection);
             _serviceProvider = ServiceCollection.BuildServiceProvider();

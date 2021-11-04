@@ -122,6 +122,31 @@
 					</resourceFiles>
 				</component>
 
+				<!-- This is simplified "module" component in "library" package, just enough to support UpgradeModule -->
+				<component type="Module">
+					<desktopModule>
+						<moduleName>Imageflow</moduleName>
+						<businessControllerClass>ToSic.Imageflow.Dnn.BusinessController</businessControllerClass>
+						<isAdmin>true</isAdmin>
+						<isPremium>true</isPremium>
+						<supportedFeatures>
+							<supportedFeature type="Upgradeable" />
+						</supportedFeatures>
+					</desktopModule>
+					<eventMessage>
+						<processorType>
+							DotNetNuke.Entities.Modules.EventMessageProcessor,
+							DotNetNuke
+						</processorType>
+						<processorCommand>UpgradeModule</processorCommand>
+						<attributes>
+							<businessControllerClass>ToSic.Imageflow.Dnn.BusinessController</businessControllerClass>
+							<desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
+							<upgradeVersionsList>01.00.00</upgradeVersionsList>
+						</attributes>
+					</eventMessage>
+				</component>
+
 			</components>
 		</package>
 	</packages>

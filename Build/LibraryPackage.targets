@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="windows-1252"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
 The MIT License (MIT)
 Copyright (c) 2019 Upendo Ventures, LLC
@@ -45,6 +45,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 				$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Logging.dll;
 				$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Options.dll;
 				$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Primitives.dll;
+				$(MSBuildProjectDirectory)\bin\Microsoft.IO.RecyclableMemoryStream.dll;
 				$(MSBuildProjectDirectory)\bin\Microsoft.Win32.Primitives.dll;
 				$(MSBuildProjectDirectory)\bin\netstandard.dll;
 				$(MSBuildProjectDirectory)\bin\Newtonsoft.Json.dll;
@@ -149,7 +150,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 				$(MSBuildProjectDirectory)\bin\System.Xml.XPath.dll;
 				$(MSBuildProjectDirectory)\bin\System.Xml.XPath.XDocument.dll;
 				$(MSBuildProjectDirectory)\bin\ToSic.Imageflow.Dnn.dll" />
-			<BinImageflowInclude Include="$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.*.dll" />
+			<BinImageflowInclude Include="$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.DependencyInjection.dll;
+				$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
 			<BinRuntimes Include="$(MSBuildProjectDirectory)\bin\runtimes\**\*.*" />
 		</ItemGroup>
 
@@ -167,7 +169,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		<Copy SourceFiles="@(InstallInclude)" DestinationFolder="$(MSBuildProjectDirectory)\Package"/>
 		<Copy SourceFiles="@(BinInstallInclude)" DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\bin"/>
 		<Copy SourceFiles="@(BinImageflowInclude)" DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\bin\Imageflow"/>
-		<Copy SourceFiles="@(BinRuntimes)" DestinationFiles="@(BinRuntimes->'$(MSBuildProjectDirectory)\ResourcesZip\bin\temp\runtimes\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(BinRuntimes)" DestinationFiles="@(BinRuntimes->'$(MSBuildProjectDirectory)\ResourcesZip\bin\_temp_\runtimes\%(RecursiveDir)%(Filename)%(Extension)')" />
 
 		<CreateItem Include="$(MSBuildProjectDirectory)\ResourcesZip\**\*.*">
 			<Output TaskParameter="Include" ItemName="ResourcesContent" />
@@ -186,10 +188,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		<Copy SourceFiles="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Install.$(Extension)" DestinationFolder="$(WebsiteInstallPath)" />
 		<Message Importance="High" Text="Install Package: $(WebsiteInstallPath)\$(PackageName)_$(Version)_Install.$(Extension)" />
 
-
 		<RemoveDir Directories="$(MSBuildProjectDirectory)\Package" />
-		<RemoveDir Directories="$(MSBuildProjectDirectory)\ResourcesZip\bin\Imageflow" />
-		<RemoveDir Directories="$(MSBuildProjectDirectory)\ResourcesZip\bin" />
 		<RemoveDir Directories="$(MSBuildProjectDirectory)\ResourcesZip" />
 		<Delete Files="$(MSBuildProjectDirectory)\Resources.$(Extension)" />
 
@@ -213,13 +212,11 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		<Message Importance="High" Text="Symbols Package: $(WebsiteInstallPath)\$(PackageName)_$(Version)_Symbols.$(Extension)" />
 
 		<!-- Cleanup -->
+		<RemoveDir Directories="$(MSBuildProjectDirectory)\Package" />
+		<RemoveDir Directories="$(MSBuildProjectDirectory)\ResourcesZip" />
 		<Delete Files="$(MSBuildProjectDirectory)\Resources.$(Extension)" />
 		<Delete Files="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Install.$(Extension)" />
 		<Delete Files="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Symbols.$(Extension)" />
-
-		<RemoveDir Directories="$(MSBuildProjectDirectory)\Package" />
-		<RemoveDir Directories="$(MSBuildProjectDirectory)\ResourcesZip\bin" />
-		<RemoveDir Directories="$(MSBuildProjectDirectory)\ResourcesZip" />
 
 	</Target>
 </Project>
