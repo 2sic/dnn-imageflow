@@ -1,5 +1,5 @@
 # dnn-imageflow
-ImageFlow image resizer http module for Dnn
+Imageflow image resizer http module for Dnn
 
 ## Setup DEV ENV
 

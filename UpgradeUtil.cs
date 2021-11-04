@@ -5,8 +5,7 @@ namespace ToSic.Imageflow.Dnn
 {
     internal static class UpgradeUtil
     {
-        public static bool Upgraded => _alreadyUpgraded;
-        private static bool _alreadyUpgraded;
+        public static bool Upgraded { get; private set; }
 
         // Replace native assemblies
         private static readonly string[] Files = {
@@ -23,23 +22,23 @@ namespace ToSic.Imageflow.Dnn
         /// </summary>
         public static void UpgradeNativeAssemblies()
         {
-            // ensure that upgrade executed only ounce
-            if (_alreadyUpgraded) return;
+            // ensure that upgrade is executed only ounce
+            if (Upgraded) return;
 
             lock (UpgradeLock)
             {
                 // after waiting...
-                if (!_alreadyUpgraded) _alreadyUpgraded = !Directory.Exists(Temp);
+                if (!Upgraded) Upgraded = !Directory.Exists(Temp);
 
                 // if upgrade is already done before and "temp" is missing, than no work
-                if (_alreadyUpgraded) return;
+                if (Upgraded) return;
 
                 // this part is tricky...
                 var withoutExceptions = ReplaceNativeAssemblies();
                 if (!withoutExceptions) return;
 
                 // remove "temp" folder as persistent flag that upgrade is done
-                _alreadyUpgraded = DeleteTempFolder();
+                Upgraded = DeleteTempFolder();
             }
         }
 
@@ -72,7 +71,7 @@ namespace ToSic.Imageflow.Dnn
                 }
                 catch
                 {
-                    _alreadyUpgraded = false;
+                    Upgraded = false;
                     withoutExceptions = false;
                 }
             }
