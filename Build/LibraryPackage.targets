@@ -157,7 +157,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 		<ItemGroup>
 			<InstallInclude Include="*.dnn" Exclude="**\obj\**;**\_ReSharper*\**;packages\**;*_Symbols.dnn" />
-			<InstallInclude Include="ReleaseNotes.txt;License.txt" />
+			<InstallInclude Include="icon.png;ReleaseNotes.txt;License.txt" />
 		</ItemGroup>
 
 		<ItemGroup>
