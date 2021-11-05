@@ -17,7 +17,7 @@ It is similar to [oqt-imageflow](https://github.com/2sic/oqtane-imageflow) for [
 
 ## Usage
 
-Simply store files with images in DNN website (as any other normal unrestricted image, eg `/Portal/0/Images/img.jpg`).
+Simply store files with images in DNN website (as any other, normal, unrestricted image, eg `/Portals/0/Images/img.jpg`).
 
 In image link use [Querystring API](https://docs.imageflow.io/querystring/introduction.html) for image manipulation, like is:
 - automatically crop away whitespace
