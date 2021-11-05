@@ -6,6 +6,8 @@
 
 			<description><![CDATA[Symbols for Imazen Imageflow]]></description>
 
+			<iconFile>~/Resources/Libraries/ToSic/Imageflow/icon.png</iconFile>
+
 			<owner>
 				<name>2sic + Imazen</name>
 				<organization>2sic internet solutions (Switzerland)</organization>

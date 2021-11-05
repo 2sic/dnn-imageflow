@@ -169,7 +169,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		<Copy SourceFiles="@(InstallInclude)" DestinationFolder="$(MSBuildProjectDirectory)\Package"/>
 		<Copy SourceFiles="@(BinInstallInclude)" DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\bin"/>
 		<Copy SourceFiles="@(BinImageflowInclude)" DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\bin\Imageflow"/>
-		<Copy SourceFiles="@(BinRuntimes)" DestinationFiles="@(BinRuntimes->'$(MSBuildProjectDirectory)\ResourcesZip\bin\_temp_\runtimes\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(BinRuntimes)" DestinationFiles="@(BinRuntimes->'$(MSBuildProjectDirectory)\ResourcesZip\bin\runtimes\%(RecursiveDir)%(Filename)%(Extension).pending')" />
 
 		<CreateItem Include="$(MSBuildProjectDirectory)\ResourcesZip\**\*.*">
 			<Output TaskParameter="Include" ItemName="ResourcesContent" />

@@ -6,16 +6,17 @@ namespace ToSic.Imageflow.Dnn
     internal static class UpgradeUtil
     {
         public static bool Upgraded { get; private set; }
+        private const string PendingExtension = "pending";
 
         // Replace native assemblies
-        private static readonly string[] Files = {
-            @"runtimes\win-x64\native\imageflow.dll",
-            @"runtimes\win-x86\native\imageflow.dll"
+        private static readonly string[] NativeAssemblies = {
+            @"win-x64\native\imageflow.dll",
+            @"win-x86\native\imageflow.dll"
         };
 
         private static readonly object UpgradeLock = new object();
         private static string Bin { get; } = HttpContext.Current.Server.MapPath(@"~\bin\");
-        private static string Temp { get; } = Path.Combine(Bin, "_temp_"); // Dnn install should place native assemblies in this folder
+        private static string Runtimes { get; } = Path.Combine(Bin, "runtimes"); // Dnn install should place native assemblies in this folder
 
         /// <summary>
         /// Ensure that native assemblies are in place, before we start to use them.
@@ -27,18 +28,14 @@ namespace ToSic.Imageflow.Dnn
 
             lock (UpgradeLock)
             {
-                // after waiting...
-                if (!Upgraded) Upgraded = !Directory.Exists(Temp);
+                // after waiting...Any pending native assemblies?
+                if (!Upgraded) Upgraded = Directory.GetFiles(Runtimes, $"*.{PendingExtension}", SearchOption.AllDirectories).Length == 0;
 
-                // if upgrade is already done before and "temp" is missing, than no work
+                // if upgrade is already done before and there is no pending assemblies, than we are done
                 if (Upgraded) return;
 
                 // this part is tricky...
-                var withoutExceptions = ReplaceNativeAssemblies();
-                if (!withoutExceptions) return;
-
-                // remove "temp" folder as persistent flag that upgrade is done
-                Upgraded = DeleteTempFolder();
+                ReplaceNativeAssemblies();
             }
         }
 
@@ -47,54 +44,29 @@ namespace ToSic.Imageflow.Dnn
         /// because are in use and loaded.
         /// This part is tricky and it is possible that it will be executed more times, until all work is done.
         /// </summary>
-        /// <returns>is executed without exception</returns>
-        private static bool ReplaceNativeAssemblies()
+        private static void ReplaceNativeAssemblies()
         {
             var withoutExceptions = true;
 
-            foreach (var file in Files)
+            foreach (var file in NativeAssemblies)
             {
-                var sourceFile = Path.Combine(Temp, file);
+                var sourceFile = Path.Combine(Runtimes, $"{file}.{PendingExtension}");
                 if (!File.Exists(sourceFile)) continue;
 
                 try
                 {
-                    var destinationFile = Path.Combine(Bin, file);
-
-                    var directoryName = Path.GetDirectoryName(destinationFile);
-                    if (!string.IsNullOrEmpty(directoryName) && !Directory.Exists(directoryName))
-                        Directory.CreateDirectory(directoryName);
-
+                    var destinationFile = Path.Combine(Runtimes, file);
                     if (File.Exists(destinationFile)) File.Delete(destinationFile);
-
+                    // Rename file, remove ".pending" extension to get normal "assembly.dll" filename
                     File.Move(sourceFile, destinationFile);
                 }
                 catch
                 {
-                    Upgraded = false;
                     withoutExceptions = false;
                 }
             }
 
-            return withoutExceptions;
-        }
-
-        /// <summary>
-        /// "temp" folder is removed as persistent flag that upgrade is done.
-        /// </summary>
-        /// <returns>is deleted</returns>
-        private static bool DeleteTempFolder()
-        {
-            // Delete "temp" folder when upgrade is without exceptions.
-            try
-            {
-                Directory.Delete(Temp, true);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            Upgraded = withoutExceptions;
         }
     }
 }
