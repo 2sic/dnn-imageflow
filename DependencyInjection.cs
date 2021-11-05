@@ -12,6 +12,8 @@ namespace ToSic.Imageflow.Dnn
         private static readonly IServiceCollection ServiceCollection = new ServiceCollection();
         private static IServiceProvider _serviceProvider;
 
+        private static readonly object ConfigureLock = new object();
+
         public static IServiceProvider GetServiceProvider()
         {
             Configure();
@@ -42,11 +44,17 @@ namespace ToSic.Imageflow.Dnn
             // ensure that native assemblies are in place, before we start to use them
             UpgradeUtil.UpgradeNativeAssemblies();
 
-            //setup our DependencyInjection
-            ConfigureServices(ServiceCollection);
-            _serviceProvider = ServiceCollection.BuildServiceProvider();
+            lock (ConfigureLock)
+            {
+                // after waiting..
+                if (_alreadyConfigured) return;
 
-            _alreadyConfigured = true;
+                //setup our DependencyInjection
+                ConfigureServices(ServiceCollection);
+                _serviceProvider = ServiceCollection.BuildServiceProvider();
+
+                _alreadyConfigured = true;
+            }
         }
 
         /// <summary>
