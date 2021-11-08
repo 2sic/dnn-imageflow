@@ -16,7 +16,7 @@ It is similar to [oqt-imageflow](https://github.com/2sic/oqtane-imageflow) for [
 1. More DNN [info...](https://azing.org/dnn-community/)
 
 ### Notes:
-1. As part of dnn extension installation it will automaticly unregister older ImageResizer http module in web.config. 
+1. As part of dnn extension installation it will automatically unregister older ImageResizer http module in web.config. 
 
 ## Usage
 
