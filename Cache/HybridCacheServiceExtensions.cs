@@ -8,11 +8,9 @@ namespace ToSic.Imageflow.Dnn.Cache
     {
         public static IServiceCollection AddImageflowHybridCache(this IServiceCollection services, HybridCacheOptions options)
         {
-            services.AddLogging();
-
             services.AddSingleton<IStreamCache>(container =>
             {
-                var logger = container.GetRequiredService<ILogger<HybridCacheService>>();
+                var logger = container.GetService<ILogger<HybridCacheService>>();
                 return new HybridCacheService(options, logger);
             });
 

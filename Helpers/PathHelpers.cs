@@ -4,8 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Primitives;
+using System.Web;
 
 namespace ToSic.Imageflow.Dnn.Helpers
 {
@@ -68,8 +67,13 @@ namespace ToSic.Imageflow.Dnn.Helpers
 
         public static string SerializeCommandString(Dictionary<string, string> finalQuery)
         {
-            var qs = QueryString.Create(finalQuery.Select(p => new KeyValuePair<string, StringValues>(p.Key, p.Value)));
-            return qs.ToString()?.TrimStart('?');
+            var sb = new StringBuilder();
+            foreach (var key in finalQuery.Keys.Where(k => !string.IsNullOrEmpty(k)))
+            {
+                sb.Append($"&{key}={HttpUtility.UrlEncode(finalQuery[key])}");
+            }
+            return sb.ToString()?.TrimStart('&');
+
         }
     }
 }
