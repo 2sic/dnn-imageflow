@@ -10,12 +10,12 @@ It is similar to [oqt-imageflow](https://github.com/2sic/oqtane-imageflow) for [
 
 ## Installation
 
-1. Please [install](https://www.nvquicksite.com/) [DNN 9+](https://github.com/dnnsoftware/Dnn.Platform/releases).
+1. Please [install](https://www.nvquicksite.com/) [DNN 9.2+](https://github.com/dnnsoftware/Dnn.Platform/releases).
 1. Download latest *ToSic.Imageflow.Dnn_NN.NN.NN_Install.zip* from dnn-imageflow [releases](https://github.com/2sic/dnn-imageflow/releases) [](https://github.com/2sic/dnn-imageflow).
 1. Install *ToSic.Imageflow.Dnn_NN.NN.NN_Install.zip* dnn extension [as usually](https://www.dnnsoftware.com/docs/administrators/extensions/install-extension.html).
 1. More DNN [info...](https://azing.org/dnn-community/)
 
-### Notes:
+### Note
 1. As part of dnn extension installation it will automatically unregister older ImageResizer http module in web.config. 
 
 ## Usage
