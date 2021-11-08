@@ -22,7 +22,7 @@
 			<azureCompatible>True</azureCompatible>
 
 			<dependencies>
-				<dependency type="CoreVersion">07.04.02</dependency>
+				<dependency type="CoreVersion">09.02.00</dependency>
 			</dependencies>
 			
 			<components>
@@ -51,7 +51,6 @@
 									<node path="/configuration/system.webServer/staticContent" action="add" key="mimeMap" collision="overwrite">
 										<mimeMap fileExtension=".webp" mimeType="image/webp" />
 									</node>
-
 
 									<!-- Comment & UnRegister the ImageResizer http-modules in old/new versions as needed -->
 									<node path="/configuration/system.web/httpModules/add[@name='ImageResizingModule']" action="insertbefore" key="add" collision="save">
