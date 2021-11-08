@@ -170,7 +170,7 @@ robocopy .\ ..\..\Website\bin System.Buffers.dll
 robocopy .\ ..\..\Website\bin System.Memory.dll
 robocopy .\ ..\..\Website\bin System.Numerics.Vectors.dll
 robocopy .\ ..\..\Website\bin System.Runtime.CompilerServices.Unsafe.dll
-robocopy .\ ..\..\Website\bin ToSic.Imageflow.Dnn.dll
+robocopy .\ ..\..\Website\bin ToSic.Imageflow.Dnn.*
 exit 0</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>

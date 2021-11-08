@@ -52,11 +52,22 @@
 										<mimeMap fileExtension=".webp" mimeType="image/webp" />
 									</node>
 
-									<!-- Register the http-modules in old/new versions as needed -->
-									<node path="/configuration/system.web/httpModules" action="update" key="name" collision="ignore">
+
+									<!-- Comment & UnRegister the ImageResizer http-modules in old/new versions as needed -->
+									<node path="/configuration/system.web/httpModules/add[@name='ImageResizingModule']" action="insertbefore" key="add" collision="save">
+										<!-- <add name="ImageResizingModule" type="ImageResizer.InterceptModule"/> -->
+									</node>
+									<node path="/configuration/system.webServer/modules/add[@name='ImageResizingModule']" action="insertbefore" key="add" collision="save">
+										<!-- <add name="ImageResizingModule" type="ImageResizer.InterceptModule"/> -->
+									</node>
+									<node path="/configuration/system.web/httpModules/add[@name='ImageResizingModule']" action="remove" />
+									<node path="/configuration/system.webServer/modules/add[@name='ImageResizingModule']" action="remove" />
+
+									<!-- Register the Imageflow http-modules in old/new versions as needed -->
+									<node path="/configuration/system.web/httpModules" action="update" key="name" collision="overwrite">
 										<add name="ImageflowModule" type="ToSic.Imageflow.Dnn.ImageflowModule, ToSic.Imageflow.Dnn"/>
 									</node>
-									<node path="/configuration/system.webServer/modules" action="update" key="name" collision="ignore">
+									<node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
 										<add name="ImageflowModule" type="ToSic.Imageflow.Dnn.ImageflowModule, ToSic.Imageflow.Dnn"/>
 									</node>
 
@@ -64,7 +75,7 @@
 									<node path="/configuration/runtime/ab:assemblyBinding"
 									      action="update"
 									      collision="overwrite"
-									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection'][ab:bindingRedirect]"
+									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection'][ab:assemblyIdentity/@publicKeyToken='adb9793829ddae60']"
 									      nameSpace="urn:schemas-microsoft-com:asm.v1"
 									      nameSpacePrefix="ab">
 										<dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
@@ -77,7 +88,7 @@
 									<node path="/configuration/runtime/ab:assemblyBinding"
 									      action="update"
 									      collision="overwrite"
-									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection.Abstractions'][ab:bindingRedirect]"
+									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection.Abstractions'][ab:assemblyIdentity/@publicKeyToken='adb9793829ddae60']"
 									      nameSpace="urn:schemas-microsoft-com:asm.v1"
 									      nameSpacePrefix="ab">
 										<dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
