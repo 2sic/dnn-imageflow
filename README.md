@@ -67,8 +67,8 @@ In image link use [Querystring API](https://docs.imageflow.io/querystring/introd
 
 ## Setup DEV ENV
 
-1. Ensure you have DNN in folder `Website`.
-1. Clone this repo as sibling folder `ToSic.Imageflow.Dnn`.
+1. Ensure you have DNN 9.2+ in folder `Website`.
+1. Clone this repo as sibling folder `dnn-imageflow`.
 1. In VS open `ToSic.Imageflow.Dnn` solution.
 1. Restore NuGet Packages.
 1. Set **Release** configuration in configuration manager.
