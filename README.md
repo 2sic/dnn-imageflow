@@ -15,6 +15,9 @@ It is similar to [oqt-imageflow](https://github.com/2sic/oqtane-imageflow) for [
 1. Install *ToSic.Imageflow.Dnn_NN.NN.NN_Install.zip* dnn extension [as usually](https://www.dnnsoftware.com/docs/administrators/extensions/install-extension.html).
 1. More DNN [info...](https://azing.org/dnn-community/)
 
+### Notes:
+1. As part of dnn extension installation it will automaticly unregister older ImageResizer http module in web.config. 
+
 ## Usage
 
 Simply store files with images in DNN website (as any other, normal, unrestricted image, eg `/Portals/0/Images/img.jpg`).

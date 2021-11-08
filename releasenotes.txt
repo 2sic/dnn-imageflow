@@ -4,3 +4,7 @@
 <ul>
 	<li>First version</li>
 </ul>
+<p>Notes</p>
+<ul>
+	<li>As part of dnn extension installation it will automaticly unregister older ImageResizer http module in web.config.</li>
+</ul>
