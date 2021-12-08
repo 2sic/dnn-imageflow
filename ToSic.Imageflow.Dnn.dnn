@@ -52,15 +52,15 @@
 										<mimeMap fileExtension=".webp" mimeType="image/webp" />
 									</node>
 
-									<!-- Comment & UnRegister the ImageResizer http-modules in old/new versions as needed -->
-									<node path="/configuration/system.web/httpModules/add[@name='ImageResizingModule']" action="insertbefore" key="add" collision="save">
-										<!-- <add name="ImageResizingModule" type="ImageResizer.InterceptModule"/> -->
+									<!-- Remove the ImageResizer http-modules in old/new versions as needed -->
+									<!--<node path="/configuration/system.web/httpModules/remove[@name='ImageResizingModule']" action="remove" />
+									<node path="/configuration/system.webServer/modules/remove[@name='ImageResizingModule']" action="remove" />-->
+									<node path="/configuration/system.web/httpModules/add[@name='ImageResizingModule']" action="insertafter" key="add" collision="save">
+										<remove name="ImageResizingModule"/>
 									</node>
-									<node path="/configuration/system.webServer/modules/add[@name='ImageResizingModule']" action="insertbefore" key="add" collision="save">
-										<!-- <add name="ImageResizingModule" type="ImageResizer.InterceptModule"/> -->
+									<node path="/configuration/system.webServer/modules/add[@name='ImageResizingModule']" action="insertafter" key="add" collision="save">
+										<remove name="ImageResizingModule"/>
 									</node>
-									<node path="/configuration/system.web/httpModules/add[@name='ImageResizingModule']" action="remove" />
-									<node path="/configuration/system.webServer/modules/add[@name='ImageResizingModule']" action="remove" />
 
 									<!-- Register the Imageflow http-modules in old/new versions as needed -->
 									<node path="/configuration/system.web/httpModules" action="update" key="name" collision="overwrite">
