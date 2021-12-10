@@ -1,5 +1,6 @@
 using Imazen.Common.Extensibility.StreamCache;
 using Imazen.Common.Storage;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,17 @@ namespace ToSic.Imageflow.Dnn
     /// </summary>
     public class ImageflowModule : IHttpModule
     {
+        public static IServiceProvider ServiceProvider;
         //private IClassicDiskCache diskCache;
         private IStreamCache _streamCache;
         private IEnumerable<IBlobProvider> _blobProviders;
         private BlobProvider _blobProvider;
         private readonly ImageflowModuleOptions _options = new ImageflowModuleOptions();
+
+        public static void SetServiceProvider(IServiceProvider serviceProvider)
+        {
+            ServiceProvider = serviceProvider;
+        }
 
         /// <summary>
         /// Init Imageflow HttpModule
@@ -35,11 +42,36 @@ namespace ToSic.Imageflow.Dnn
             application.AddOnBeginRequestAsync(wrapper.BeginEventHandler, wrapper.EndEventHandler);
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing,
+        /// releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing,
+        /// releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <param name="disposing">
+        /// true if the object is currently disposing.
+        /// </param>
+        protected virtual void Dispose(bool disposing)
+        {
+            // left empty by design
+        }
+
         private async Task ImageflowRequestAsync(object source, EventArgs e)
         {
             var context = ((HttpApplication)source).Context;
 
-            if (!RequestIsValid(context.Request)) return;
+            var request = context.Request;
+
+            if (!RequestIsValid(request)) return;
+
+
 
             // TODO: DNN Security ...
             // TODO: DNN File providers..
@@ -58,7 +90,7 @@ namespace ToSic.Imageflow.Dnn
 
             var taskCacheKey = imageJobInfo.GetFastCacheKey();
             var cacheKey = taskCacheKey.GetAwaiter().GetResult();
-            var etag = context.Request.Headers["If-None-Match"];
+            var etag = request.Headers["If-None-Match"];
 
             if (!string.IsNullOrEmpty(etag) && cacheKey == etag)
             {
@@ -98,9 +130,9 @@ namespace ToSic.Imageflow.Dnn
 
         private void PrepareHybridCacheDependencies()
         {
-            _streamCache = DependencyInjection.Resolve<IStreamCache>();
+            _streamCache = ServiceProvider.GetService<IStreamCache>();
 
-            _blobProviders = DependencyInjection.Resolve<IEnumerable<IBlobProvider>>();
+            _blobProviders = ServiceProvider.GetService<IEnumerable<IBlobProvider>>();
 
             var mappedPaths = new List<PathMapping>
             {
@@ -174,12 +206,6 @@ namespace ToSic.Imageflow.Dnn
                 context.Response.Headers["Cache-Control"] = _options.DefaultCacheControlString;
         }
 
-        /// <summary>
-        /// Dispose Imageflow HttpModule
-        /// </summary>
-        public void Dispose()
-        {
-            //throw new NotImplementedException();
-        }
+
     }
 }
