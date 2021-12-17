@@ -22,7 +22,7 @@
 			<azureCompatible>True</azureCompatible>
 
 			<dependencies>
-				<dependency type="CoreVersion">09.02.00</dependency>
+        <dependency type="CoreVersion">07.04.02</dependency>
 			</dependencies>
 			
 			<components>
@@ -70,31 +70,31 @@
 										<add name="ImageflowModule" type="ToSic.Imageflow.Dnn.ImageflowModule, ToSic.Imageflow.Dnn"/>
 									</node>
 
-									<!-- Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.DependencyInjection.dll, version 2.2.0.0 -->
-									<node path="/configuration/runtime/ab:assemblyBinding"
+                  <!-- Imageflow add bindingRedirects for bin\Microsoft.Extensions.DependencyInjection.dll, version 2.2.0.0 -->
+                  <!--<node path="/configuration/runtime/ab:assemblyBinding"
 									      action="update"
-									      collision="overwrite"
+									      collision="ignore"
 									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection'][ab:assemblyIdentity/@publicKeyToken='adb9793829ddae60']"
 									      nameSpace="urn:schemas-microsoft-com:asm.v1"
 									      nameSpacePrefix="ab">
-										<dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-											<assemblyIdentity name="Microsoft.Extensions.DependencyInjection" publicKeyToken="adb9793829ddae60" />
-											<codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.DependencyInjection.dll" />
-										</dependentAssembly>
-									</node>
+                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
+                      <assemblyIdentity name="Microsoft.Extensions.DependencyInjection" publicKeyToken="adb9793829ddae60" />
+                      <bindingRedirect oldVersion="0.0.0.0-32767.32767.32767.32767" newVersion="2.2.0.0" />
+                    </dependentAssembly>
+                  </node>-->
 
-									<!-- Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.DependencyInjection.Abstractions.dll, version 2.2.0.0 -->
-									<node path="/configuration/runtime/ab:assemblyBinding"
+                  <!-- Imageflow add bindingRedirects for bin\Imageflow\Microsoft.Extensions.DependencyInjection.Abstractions.dll, version 2.2.0.0 -->
+                  <!--<node path="/configuration/runtime/ab:assemblyBinding"
 									      action="update"
-									      collision="overwrite"
+									      collision="ignore"
 									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection.Abstractions'][ab:assemblyIdentity/@publicKeyToken='adb9793829ddae60']"
 									      nameSpace="urn:schemas-microsoft-com:asm.v1"
 									      nameSpacePrefix="ab">
-										<dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-											<assemblyIdentity name="Microsoft.Extensions.DependencyInjection.Abstractions" publicKeyToken="adb9793829ddae60"/>
-											<codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
-										</dependentAssembly>
-									</node>
+                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
+                      <assemblyIdentity name="Microsoft.Extensions.DependencyInjection.Abstractions" publicKeyToken="adb9793829ddae60"/>
+                      <bindingRedirect oldVersion="0.0.0.0-32767.32767.32767.32767" newVersion="2.2.0.0" />
+                    </dependentAssembly>
+                  </node>-->
 
 								</nodes>
 							</configuration>
@@ -160,6 +160,97 @@
 						</file>
 					</files>
 				</component>
+
+        <component type="Assembly">
+          <assemblies>
+            <basePath>bin</basePath>
+            <assembly>
+              <name>ToSic.Imageflow.Dnn.dll</name>
+            </assembly>
+
+            <!-- PackageReference -->
+            <!--<assembly>
+              <name>Imageflow.Net.dll</name>
+            </assembly>
+            <assembly>
+              <name>Imazen.Common.dll</name>
+            </assembly>
+            <assembly>
+              <name>Imazen.HybridCache.dll</name>
+            </assembly>-->
+            <!-- Microsoft.Extensions.Hosting.Abstractions transitive dependency -->
+            <assembly>
+              <name>Microsoft.Extensions.Configuration.Abstractions.dll</name>
+              <version>2.2.0.0</version>
+            </assembly>
+            <!-- Microsoft.Extensions.DependencyInjection transitive dependency -->
+            <!-- Microsoft.Extensions.Hosting.Abstractions transitive dependency -->
+            <assembly>
+              <name>Microsoft.Extensions.DependencyInjection.Abstractions.dll</name>
+              <version>2.2.0.0</version>
+            </assembly>
+            <!-- PackageReference -->
+            <assembly>
+              <name>Microsoft.Extensions.DependencyInjection.dll</name>
+              <version>2.2.0.0</version>
+            </assembly>
+            <!-- Microsoft.Extensions.Hosting.Abstractions transitive dependency -->
+            <!-- Microsoft.Extensions.Logging transitive dependency -->
+            <assembly>
+              <name>Microsoft.Extensions.FileProviders.Abstractions.dll</name>
+              <version>2.2.0.0</version>
+            </assembly>
+            <!-- Imazen.Common transitive dependency -->
+            <assembly>
+              <name>Microsoft.Extensions.Hosting.Abstractions.dll</name>
+              <version>2.2.0.0</version>
+            </assembly>
+            <!-- Microsoft.Extensions.Hosting.Abstractions transitive dependency -->
+            <assembly>
+              <name>Microsoft.Extensions.Logging.Abstractions.dll</name>
+              <version>2.2.0.0</version>
+            </assembly>
+            <!-- Microsoft.Extensions.Configuration.Abstractions transitive dependency -->
+            <!-- Microsoft.Extensions.FileProviders.Abstractions transitive dependency -->
+            <assembly>
+              <name>Microsoft.Extensions.Primitives.dll</name>
+              <version>2.2.0.0</version>
+            </assembly>
+            <!-- Imageflow.Net transitive dependency -->
+            <assembly>
+              <name>Microsoft.IO.RecyclableMemoryStream.dll</name>
+              <version>1.2.2.0</version>
+            </assembly>
+            <!-- Imageflow.Net transitive dependency -->
+            <assembly>
+              <name>Newtonsoft.Json.dll</name>
+              <version>10.0.0.0</version>
+            </assembly>
+            <!-- System.Memory transitive dependency -->
+            <!-- Microsoft.Extensions.Logging.Abstractions transitive dependency -->
+            <assembly>
+              <name>System.Buffers.dll</name>
+              <version>4.0.3.0</version>
+            </assembly>
+            <!-- Microsoft.Extensions.Primitives transitive dependency -->
+            <assembly>
+              <name>System.Memory.dll</name>
+              <version>4.0.1.0</version>
+            </assembly>
+            <!-- System.Memory transitive dependency -->
+            <assembly>
+              <name>System.Numerics.Vectors.dll</name>
+              <version>4.1.3.0</version>
+            </assembly>
+            <!-- System.Memory transitive dependency -->
+            <!-- Microsoft.Extensions.Primitives transitive dependency -->
+            <assembly>
+              <name>System.Runtime.CompilerServices.Unsafe.dll</name>
+              <version>4.0.4.1</version>
+            </assembly>
+
+          </assemblies>
+        </component>
 
 			</components>
 		</package>

@@ -21,97 +21,108 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 <Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<Import Project="MSBuild.Community.Tasks.Targets" />
-	<Target Name="PackageModule" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-		<XmlRead Prefix="n"
-		         Namespace="http://schemas.microsoft.com/developer/msbuild/2003"
-		         XPath="dotnetnuke/packages/package[1]/@version"
-		         XmlFileName="$(DNNFileName).dnn">
-			<Output TaskParameter="Value" PropertyName="Version" />
-		</XmlRead>
+  <Import Project="MSBuild.Community.Tasks.Targets" />
+  <Target Name="PackageModule" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <XmlRead Prefix="n" Namespace="http://schemas.microsoft.com/developer/msbuild/2003" XPath="dotnetnuke/packages/package[1]/@version" XmlFileName="$(DNNFileName).dnn">
+      <Output TaskParameter="Value" PropertyName="Version" />
+    </XmlRead>
 
-		<ItemGroup>
-			<BinInstallInclude Include="$(MSBuildProjectDirectory)\bin\Imageflow.Net.dll;
-				$(MSBuildProjectDirectory)\bin\Imazen.Common.dll;
-				$(MSBuildProjectDirectory)\bin\Imazen.HybridCache.dll;
-				$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Configuration.Abstractions.dll;
-				$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.FileProviders.Abstractions.dll;
-				$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Hosting.Abstractions.dll;
-				$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Logging.Abstractions.dll;
-				$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Primitives.dll;
-				$(MSBuildProjectDirectory)\bin\Microsoft.IO.RecyclableMemoryStream.dll;
-				$(MSBuildProjectDirectory)\bin\System.Buffers.dll;
-				$(MSBuildProjectDirectory)\bin\System.Memory.dll;
-				$(MSBuildProjectDirectory)\bin\System.Numerics.Vectors.dll;
-				$(MSBuildProjectDirectory)\bin\System.Runtime.CompilerServices.Unsafe.dll;
-				$(MSBuildProjectDirectory)\bin\ToSic.Imageflow.Dnn.dll" />
-			<BinImageflowInclude Include="$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.DependencyInjection.dll;
-				$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
-			<BinRuntimes Include="$(MSBuildProjectDirectory)\packages\Imageflow.NativeRuntime.win-x86.1.5.8-rc62\runtimes\**\*.*;
-						 $(MSBuildProjectDirectory)\packages\Imageflow.NativeRuntime.win-x86_64.1.5.8-rc62\runtimes\**\*.*" />
-		</ItemGroup>
-		<ItemGroup>
-			<InstallInclude Include="*.dnn" Exclude="**\obj\**;**\_ReSharper*\**;packages\**;*_Symbols.dnn" />
-			<InstallInclude Include="icon.png;ReleaseNotes.txt;License.txt" />
-		</ItemGroup>
+    <ItemGroup>
+      <!-- DNN specific DLLs -->
+      <AssemblyInclude Include="$(OutDir)\ToSic.Imageflow.Dnn.dll" />
 
-		<ItemGroup>
-			<SymbolsBinInclude Include="$(MSBuildProjectDirectory)\bin\ToSic.Imageflow.Dnn.pdb" />
-			<SymbolsBinInclude Include="$(MSBuildProjectDirectory)\bin\ToSic.Imageflow.Dnn.xml" />
-		</ItemGroup>
+      <!-- Imazen / Imageflow DLLs-->
+      <!--<AssemblyInclude Include="$(OutDir)\Imageflow.Net.dll" />
+      <AssemblyInclude Include="$(OutDir)\Imazen.Common.dll" />
+      <AssemblyInclude Include="$(OutDir)\Imazen.HybridCache.dll" />-->
 
-		<!-- Install Package -->
-		<Copy SourceFiles="@(InstallInclude)" DestinationFolder="$(MSBuildProjectDirectory)\Package"/>
-		<Copy SourceFiles="@(BinInstallInclude)" DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\bin"/>
-		<Copy SourceFiles="@(BinImageflowInclude)" DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\bin\Imageflow"/>
-		<Copy SourceFiles="@(BinRuntimes)" DestinationFiles="@(BinRuntimes->'$(MSBuildProjectDirectory)\ResourcesZip\bin\runtimes\%(RecursiveDir)%(Filename)%(Extension).pending')" />
+      <!-- netstandard2.0/framework 4.7.2 assemblies -->
+      <AssemblyInclude Include="$(OutDir)\Microsoft.Extensions.Configuration.Abstractions.dll" />
+      <AssemblyInclude Include="$(OutDir)\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+      <AssemblyInclude Include="$(OutDir)\Microsoft.Extensions.DependencyInjection.dll" />
+      <AssemblyInclude Include="$(OutDir)\Microsoft.Extensions.FileProviders.Abstractions.dll" />
+      <AssemblyInclude Include="$(OutDir)\Microsoft.Extensions.Hosting.Abstractions.dll" />
+      <AssemblyInclude Include="$(OutDir)\Microsoft.Extensions.Logging.Abstractions.dll" />
+      <AssemblyInclude Include="$(OutDir)\Microsoft.Extensions.Primitives.dll" />
+      <AssemblyInclude Include="$(OutDir)\Microsoft.IO.RecyclableMemoryStream.dll" />
+      <AssemblyInclude Include="$(OutDir)\Newtonsoft.Json.dll" />
+      <AssemblyInclude Include="$(OutDir)\System.Buffers.dll" />
+      <AssemblyInclude Include="$(OutDir)\System.Memory.dll" />
+      <AssemblyInclude Include="$(OutDir)\System.Numerics.Vectors.dll" />
+      <AssemblyInclude Include="$(OutDir)\System.Runtime.CompilerServices.Unsafe.dll" />
 
-		<CreateItem Include="$(MSBuildProjectDirectory)\ResourcesZip\**\*.*">
-			<Output TaskParameter="Include" ItemName="ResourcesContent" />
-		</CreateItem>
+    </ItemGroup>
 
-		<Zip Files="@(ResourcesContent)" WorkingDirectory="$(MSBuildProjectDirectory)\ResourcesZip" ZipFileName="Resources.$(Extension)" />
-		<Copy SourceFiles="$(MSBuildProjectDirectory)\Resources.$(Extension)" DestinationFolder="Package\" />
+    <ItemGroup>
+      <BinInstallInclude Include="$(MSBuildProjectDirectory)\bin\Imageflow.Net.dll;
+        $(MSBuildProjectDirectory)\bin\Imazen.Common.dll;
+        $(MSBuildProjectDirectory)\bin\Imazen.HybridCache.dll" />
+      <BinRuntimes Include="$(PkgImageflow_NativeRuntime_win-x86)\runtimes\**\*.*;
+        $(PkgImageflow_NativeRuntime_win-x86_64)\runtimes\**\*.*" />
+    </ItemGroup>
 
-		<CreateItem Include="$(MSBuildProjectDirectory)\Package\**\*.*">
-			<Output TaskParameter="Include" ItemName="OutputContent" />
-		</CreateItem>
+    <ItemGroup>
+      <InstallInclude Include="*.dnn" Exclude="**\obj\**;**\_ReSharper*\**;packages\**;*_Symbols.dnn" />
+      <InstallInclude Include="icon.png;ReleaseNotes.txt;License.txt" />
+    </ItemGroup>
 
-		<Zip Files="@(OutputContent)" WorkingDirectory="$(MSBuildProjectDirectory)\Package" ZipFileName="$(PackageName)_$(Version)_Install.$(Extension)" />
+    <ItemGroup>
+      <SymbolsBinInclude Include="$(MSBuildProjectDirectory)\bin\ToSic.Imageflow.Dnn.pdb" />
+      <SymbolsBinInclude Include="$(MSBuildProjectDirectory)\bin\ToSic.Imageflow.Dnn.xml" />
+    </ItemGroup>
 
-		<!-- Copy the Install package to the Packages folder -->
-		<Copy SourceFiles="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Install.$(Extension)" DestinationFolder="$(WebsiteInstallPath)" />
-		<Message Importance="High" Text="Install Package: $(WebsiteInstallPath)\$(PackageName)_$(Version)_Install.$(Extension)" />
+    <!-- Install Package -->
+    <Copy SourceFiles="@(InstallInclude)" DestinationFolder="$(MSBuildProjectDirectory)\Package" />
+    <Copy SourceFiles="@(AssemblyInclude)" DestinationFolder="$(MSBuildProjectDirectory)\Package\bin" />
+    <Copy SourceFiles="@(BinInstallInclude)" DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\bin" />
+    <Copy SourceFiles="@(BinRuntimes)" DestinationFiles="@(BinRuntimes->'$(MSBuildProjectDirectory)\ResourcesZip\bin\runtimes\%(RecursiveDir)%(Filename)%(Extension).pending')" />
 
-		<RemoveDir Directories="$(MSBuildProjectDirectory)\Package" />
-		<RemoveDir Directories="$(MSBuildProjectDirectory)\ResourcesZip" />
-		<Delete Files="$(MSBuildProjectDirectory)\Resources.$(Extension)" />
+    <CreateItem Include="$(MSBuildProjectDirectory)\ResourcesZip\**\*.*">
+      <Output TaskParameter="Include" ItemName="ResourcesContent" />
+    </CreateItem>
 
-		<!-- Symbols Package -->
-		<Copy SourceFiles="@(SymbolsInclude)" DestinationFolder="$(MSBuildProjectDirectory)\Package"/>
-		<Copy SourceFiles="@(SymbolsBinInclude)" DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\bin"/>
+    <Zip Files="@(ResourcesContent)" WorkingDirectory="$(MSBuildProjectDirectory)\ResourcesZip" ZipFileName="Resources.$(Extension)" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\Resources.$(Extension)" DestinationFolder="Package\" />
 
-		<CreateItem Include="$(MSBuildProjectDirectory)\ResourcesZip\**\*.*">
-			<Output TaskParameter="Include" ItemName="SymbolsResourcesContent" />
-		</CreateItem>
+    <CreateItem Include="$(MSBuildProjectDirectory)\Package\**\*.*">
+      <Output TaskParameter="Include" ItemName="OutputContent" />
+    </CreateItem>
 
-		<Zip Files="@(SymbolsResourcesContent)" WorkingDirectory="$(MSBuildProjectDirectory)\ResourcesZip" ZipFileName="Resources.$(Extension)" />
-		<Copy SourceFiles="$(MSBuildProjectDirectory)\Resources.$(Extension)" DestinationFolder="Package\" />
+    <Zip Files="@(OutputContent)" WorkingDirectory="$(MSBuildProjectDirectory)\Package" ZipFileName="$(PackageName)_$(Version)_Install.$(Extension)" />
 
-		<CreateItem Include="$(MSBuildProjectDirectory)\Package\**\*.*">
-			<Output TaskParameter="Include" ItemName="OutputSource" />
-		</CreateItem>
+    <!-- Copy the Install package to the Packages folder -->
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Install.$(Extension)" DestinationFolder="$(WebsiteInstallPath)" />
+    <Message Importance="High" Text="Install Package: $(WebsiteInstallPath)\$(PackageName)_$(Version)_Install.$(Extension)" />
 
-		<Zip Files="@(OutputSource)" WorkingDirectory="$(MSBuildProjectDirectory)\Package" ZipFileName="$(PackageName)_$(Version)_Symbols.$(Extension)" />
-		<Copy SourceFiles="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Symbols.$(Extension)" DestinationFolder="$(WebsiteInstallPath)" />
-		<Message Importance="High" Text="Symbols Package: $(WebsiteInstallPath)\$(PackageName)_$(Version)_Symbols.$(Extension)" />
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\Package" />
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\ResourcesZip" />
+    <Delete Files="$(MSBuildProjectDirectory)\Resources.$(Extension)" />
 
-		<!-- Cleanup -->
-		<RemoveDir Directories="$(MSBuildProjectDirectory)\Package" />
-		<RemoveDir Directories="$(MSBuildProjectDirectory)\ResourcesZip" />
-		<Delete Files="$(MSBuildProjectDirectory)\Resources.$(Extension)" />
-		<Delete Files="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Install.$(Extension)" />
-		<Delete Files="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Symbols.$(Extension)" />
+    <!-- Symbols Package -->
+    <Copy SourceFiles="@(SymbolsInclude)" DestinationFolder="$(MSBuildProjectDirectory)\Package" />
+    <Copy SourceFiles="@(SymbolsBinInclude)" DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\bin" />
 
-	</Target>
+    <CreateItem Include="$(MSBuildProjectDirectory)\ResourcesZip\**\*.*">
+      <Output TaskParameter="Include" ItemName="SymbolsResourcesContent" />
+    </CreateItem>
+
+    <Zip Files="@(SymbolsResourcesContent)" WorkingDirectory="$(MSBuildProjectDirectory)\ResourcesZip" ZipFileName="Resources.$(Extension)" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\Resources.$(Extension)" DestinationFolder="Package\" />
+
+    <CreateItem Include="$(MSBuildProjectDirectory)\Package\**\*.*">
+      <Output TaskParameter="Include" ItemName="OutputSource" />
+    </CreateItem>
+
+    <Zip Files="@(OutputSource)" WorkingDirectory="$(MSBuildProjectDirectory)\Package" ZipFileName="$(PackageName)_$(Version)_Symbols.$(Extension)" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Symbols.$(Extension)" DestinationFolder="$(WebsiteInstallPath)" />
+    <Message Importance="High" Text="Symbols Package: $(WebsiteInstallPath)\$(PackageName)_$(Version)_Symbols.$(Extension)" />
+
+    <!-- Cleanup -->
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\Package" />
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\ResourcesZip" />
+    <Delete Files="$(MSBuildProjectDirectory)\Resources.$(Extension)" />
+    <Delete Files="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Install.$(Extension)" />
+    <Delete Files="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Symbols.$(Extension)" />
+
+  </Target>
 </Project>
