@@ -6,7 +6,7 @@
     <Extension>zip</Extension>
     <BuildScriptsPath>$(MSBuildProjectDirectory)\Build</BuildScriptsPath>
     <WebsitePath>$(MSBuildProjectDirectory)\Website</WebsitePath>
-    <InstallPath>$(MSBuildProjectDirectory)\Install</InstallPath>
+    <InstallPath>$(MSBuildProjectDirectory)\InstallPackages</InstallPath>
     <FullModulePath>$(WebsitePath)\Bin</FullModulePath>
   </PropertyGroup>
   <Import Project="$(BuildScriptsPath)\LibraryPackage.Targets" />
