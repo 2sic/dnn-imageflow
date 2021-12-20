@@ -1,166 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dotnetnuke type="Package" version="6.0">
-	<packages>
-		<package name="ToSic.Imageflow.Dnn" type="Library" version="01.00.00">
-			<friendlyName>Imageflow</friendlyName>
+  <packages>
+    <package name="ToSic.Imageflow.Dnn" type="Library" version="01.00.00">
+      <friendlyName>Imageflow</friendlyName>
 
-			<description>
-				<![CDATA[<p>Imazen Imageflow - optimal images at incredible speeds - image resizer http module for high-performance image manipulation.</p>]]>
-			</description>
+      <description>
+        <![CDATA[<p>Imazen Imageflow - optimal images at incredible speeds - image resizer http module for high-performance image manipulation.</p>]]>
+      </description>
 
-			<iconFile>~/Resources/Libraries/ToSic/Imageflow/icon.png</iconFile>
+      <iconFile>~/Resources/Libraries/ToSic/Imageflow/icon.png</iconFile>
 
-			<owner>
-				<name>2sic + Imazen</name>
-				<organization>2sic internet solutions (Switzerland)</organization>
-				<url>http://2sxc.org/</url>
-				<email>info@2sxc.org</email>
-			</owner>
+      <owner>
+        <name>2sic + Imazen</name>
+        <organization>2sic internet solutions (Switzerland)</organization>
+        <url>http://2sxc.org/</url>
+        <email>info@2sxc.org</email>
+      </owner>
 
-			<license src="License.txt" />
-			<releaseNotes src="ReleaseNotes.txt" />
-			<azureCompatible>True</azureCompatible>
+      <license src="License.txt" />
+      <releaseNotes src="ReleaseNotes.txt" />
+      <azureCompatible>True</azureCompatible>
 
-			<dependencies>
+      <dependencies>
         <dependency type="CoreVersion">07.04.02</dependency>
-			</dependencies>
-			
-			<components>
+      </dependencies>
 
-				<component type="Config">
-					<!-- more on this here https://www.dnnsoftware.com/wiki/manifest-xml-merge -->
-					<config>
-						<configFile>web.config</configFile>
+      <components>
 
-						<install>
-							<configuration>
-								<nodes>
-
-									<!-- register the WebP Mime Type - seems complicated, but copied from DNNs registration of svg  https://github.com/dnnsoftware/Dnn.Platform/blob/c35fdc7fb75db0438f3b872ce4e279e3ea73e7c2/Dnn.AdminExperience/Library/Dnn.PersonaBar.UI/Dnn.PersonaBar.UI.dnn#L68-L97 -->
-									<node path="/configuration/system.webServer" targetpath="/configuration/system.webServer/staticContent" action="update" collision="ignore">
-										<staticContent>
-											<remove fileExtension=".webp" />
-											<mimeMap fileExtension=".webp" mimeType="image/webp" />
-										</staticContent>
-									</node>
-									<node path="/configuration/system.webServer/staticContent/remove[@fileExtension='.webp']" action="remove" />
-									<node path="/configuration/system.webServer/staticContent" action="add" key="remove" collision="overwrite">
-										<remove fileExtension=".webp" />
-									</node>
-									<node path="/configuration/system.webServer/staticContent/mimeMap[@fileExtension='.webp']" action="remove" />
-									<node path="/configuration/system.webServer/staticContent" action="add" key="mimeMap" collision="overwrite">
-										<mimeMap fileExtension=".webp" mimeType="image/webp" />
-									</node>
-
-									<!-- Remove the ImageResizer http-modules in old/new versions as needed -->
-									<!--<node path="/configuration/system.web/httpModules/remove[@name='ImageResizingModule']" action="remove" />
-									<node path="/configuration/system.webServer/modules/remove[@name='ImageResizingModule']" action="remove" />-->
-									<node path="/configuration/system.web/httpModules/add[@name='ImageResizingModule']" action="insertafter" key="add" collision="save">
-										<remove name="ImageResizingModule"/>
-									</node>
-									<node path="/configuration/system.webServer/modules/add[@name='ImageResizingModule']" action="insertafter" key="add" collision="save">
-										<remove name="ImageResizingModule"/>
-									</node>
-
-									<!-- Register the Imageflow http-modules in old/new versions as needed -->
-									<node path="/configuration/system.web/httpModules" action="update" key="name" collision="overwrite">
-										<add name="ImageflowModule" type="ToSic.Imageflow.Dnn.ImageflowModule, ToSic.Imageflow.Dnn"/>
-									</node>
-									<node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
-										<add name="ImageflowModule" type="ToSic.Imageflow.Dnn.ImageflowModule, ToSic.Imageflow.Dnn"/>
-									</node>
-
-                  <!-- Imageflow add bindingRedirects for bin\Microsoft.Extensions.DependencyInjection.dll, version 2.2.0.0 -->
-                  <!--<node path="/configuration/runtime/ab:assemblyBinding"
-									      action="update"
-									      collision="ignore"
-									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection'][ab:assemblyIdentity/@publicKeyToken='adb9793829ddae60']"
-									      nameSpace="urn:schemas-microsoft-com:asm.v1"
-									      nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.DependencyInjection" publicKeyToken="adb9793829ddae60" />
-                      <bindingRedirect oldVersion="0.0.0.0-32767.32767.32767.32767" newVersion="2.2.0.0" />
-                    </dependentAssembly>
-                  </node>-->
-
-                  <!-- Imageflow add bindingRedirects for bin\Imageflow\Microsoft.Extensions.DependencyInjection.Abstractions.dll, version 2.2.0.0 -->
-                  <!--<node path="/configuration/runtime/ab:assemblyBinding"
-									      action="update"
-									      collision="ignore"
-									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection.Abstractions'][ab:assemblyIdentity/@publicKeyToken='adb9793829ddae60']"
-									      nameSpace="urn:schemas-microsoft-com:asm.v1"
-									      nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.DependencyInjection.Abstractions" publicKeyToken="adb9793829ddae60"/>
-                      <bindingRedirect oldVersion="0.0.0.0-32767.32767.32767.32767" newVersion="2.2.0.0" />
-                    </dependentAssembly>
-                  </node>-->
-
-								</nodes>
-							</configuration>
-						</install>
-
-						<uninstall>
-							<configuration>
-								<nodes>
-									<node path="/configuration/system.web/httpModules/add[@name='ImageflowModule']" action="remove" />
-									<node path="/configuration/system.webServer/modules/add[@name='ImageflowModule']" action="remove" />
-								</nodes>
-							</configuration>
-						</uninstall>
-
-					</config>
-				</component>
-
-				<component type="ResourceFile">
-					<resourceFiles>
-						<basePath></basePath>
-						<resourceFile>
-							<name>Resources.zip</name>
-						</resourceFile>
-					</resourceFiles>
-				</component>
-
-				<!-- This is simplified "module" component in "library" package, just enough to support UpgradeModule -->
-				<component type="Module">
-					<desktopModule>
-						<moduleName>Imageflow</moduleName>
-						<businessControllerClass>ToSic.Imageflow.Dnn.BusinessController</businessControllerClass>
-						<isAdmin>true</isAdmin>
-						<isPremium>true</isPremium>
-						<supportedFeatures>
-							<supportedFeature type="Upgradeable" />
-						</supportedFeatures>
-					</desktopModule>
-					<eventMessage>
-						<processorType>
-							DotNetNuke.Entities.Modules.EventMessageProcessor,
-							DotNetNuke
-						</processorType>
-						<processorCommand>UpgradeModule</processorCommand>
-						<attributes>
-							<businessControllerClass>ToSic.Imageflow.Dnn.BusinessController</businessControllerClass>
-							<desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-							<upgradeVersionsList>01.00.00</upgradeVersionsList>
-						</attributes>
-					</eventMessage>
-				</component>
-
-				<component type="File">
-					<files>
-						<basePath>Resources\Libraries\ToSic\Imageflow</basePath>
-						<file>
-							<name>icon.png</name>
-						</file>
-						<file>
-							<name>License.txt</name>
-						</file>
-						<file>
-							<name>ReleaseNotes.txt</name>
-						</file>
-					</files>
-				</component>
-
+        <!-- "Assembly" component should be in front of "Config", or new/updated auto-generated assembly binding redirects in web.config are lost. -->
         <component type="Assembly">
           <assemblies>
             <basePath>bin</basePath>
@@ -252,7 +119,141 @@
           </assemblies>
         </component>
 
-			</components>
-		</package>
-	</packages>
+        <component type="Config">
+          <!-- more on this here https://www.dnnsoftware.com/wiki/manifest-xml-merge -->
+          <config>
+            <configFile>web.config</configFile>
+
+            <install>
+              <configuration>
+                <nodes>
+
+                  <!-- register the WebP Mime Type - seems complicated, but copied from DNNs registration of svg  https://github.com/dnnsoftware/Dnn.Platform/blob/c35fdc7fb75db0438f3b872ce4e279e3ea73e7c2/Dnn.AdminExperience/Library/Dnn.PersonaBar.UI/Dnn.PersonaBar.UI.dnn#L68-L97 -->
+                  <node path="/configuration/system.webServer" targetpath="/configuration/system.webServer/staticContent" action="update" collision="ignore">
+                    <staticContent>
+                      <remove fileExtension=".webp" />
+                      <mimeMap fileExtension=".webp" mimeType="image/webp" />
+                    </staticContent>
+                  </node>
+                  <node path="/configuration/system.webServer/staticContent/remove[@fileExtension='.webp']" action="remove" />
+                  <node path="/configuration/system.webServer/staticContent" action="add" key="remove" collision="overwrite">
+                    <remove fileExtension=".webp" />
+                  </node>
+                  <node path="/configuration/system.webServer/staticContent/mimeMap[@fileExtension='.webp']" action="remove" />
+                  <node path="/configuration/system.webServer/staticContent" action="add" key="mimeMap" collision="overwrite">
+                    <mimeMap fileExtension=".webp" mimeType="image/webp" />
+                  </node>
+
+                  <!-- Remove the ImageResizer http-modules in old/new versions as needed -->
+                  <!--<node path="/configuration/system.web/httpModules/remove[@name='ImageResizingModule']" action="remove" />
+									<node path="/configuration/system.webServer/modules/remove[@name='ImageResizingModule']" action="remove" />-->
+                  <node path="/configuration/system.web/httpModules/add[@name='ImageResizingModule']" action="insertafter" key="add" collision="save">
+                    <remove name="ImageResizingModule"/>
+                  </node>
+                  <node path="/configuration/system.webServer/modules/add[@name='ImageResizingModule']" action="insertafter" key="add" collision="save">
+                    <remove name="ImageResizingModule"/>
+                  </node>
+
+                  <!-- Register the Imageflow http-modules in old/new versions as needed -->
+                  <node path="/configuration/system.web/httpModules" action="update" key="name" collision="overwrite">
+                    <add name="ImageflowModule" type="ToSic.Imageflow.Dnn.ImageflowModule, ToSic.Imageflow.Dnn"/>
+                  </node>
+                  <node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
+                    <add name="ImageflowModule" type="ToSic.Imageflow.Dnn.ImageflowModule, ToSic.Imageflow.Dnn"/>
+                  </node>
+
+                  <!-- Imageflow add bindingRedirects for bin\Microsoft.Extensions.DependencyInjection.dll, version 2.2.0.0 -->
+                  <!--<node path="/configuration/runtime/ab:assemblyBinding"
+									      action="update"
+									      collision="ignore"
+									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection'][ab:assemblyIdentity/@publicKeyToken='adb9793829ddae60']"
+									      nameSpace="urn:schemas-microsoft-com:asm.v1"
+									      nameSpacePrefix="ab">
+                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
+                      <assemblyIdentity name="Microsoft.Extensions.DependencyInjection" publicKeyToken="adb9793829ddae60" />
+                      <bindingRedirect oldVersion="0.0.0.0-32767.32767.32767.32767" newVersion="2.2.0.0" />
+                    </dependentAssembly>
+                  </node>-->
+
+                  <!-- Imageflow add bindingRedirects for bin\Imageflow\Microsoft.Extensions.DependencyInjection.Abstractions.dll, version 2.2.0.0 -->
+                  <!--<node path="/configuration/runtime/ab:assemblyBinding"
+									      action="update"
+									      collision="ignore"
+									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection.Abstractions'][ab:assemblyIdentity/@publicKeyToken='adb9793829ddae60']"
+									      nameSpace="urn:schemas-microsoft-com:asm.v1"
+									      nameSpacePrefix="ab">
+                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
+                      <assemblyIdentity name="Microsoft.Extensions.DependencyInjection.Abstractions" publicKeyToken="adb9793829ddae60"/>
+                      <bindingRedirect oldVersion="0.0.0.0-32767.32767.32767.32767" newVersion="2.2.0.0" />
+                    </dependentAssembly>
+                  </node>-->
+
+                </nodes>
+              </configuration>
+            </install>
+
+            <uninstall>
+              <configuration>
+                <nodes>
+                  <node path="/configuration/system.web/httpModules/add[@name='ImageflowModule']" action="remove" />
+                  <node path="/configuration/system.webServer/modules/add[@name='ImageflowModule']" action="remove" />
+                </nodes>
+              </configuration>
+            </uninstall>
+
+          </config>
+        </component>
+
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath></basePath>
+            <resourceFile>
+              <name>Resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+
+        <!-- This is simplified "module" component in "library" package, just enough to support UpgradeModule -->
+        <component type="Module">
+          <desktopModule>
+            <moduleName>Imageflow</moduleName>
+            <businessControllerClass>ToSic.Imageflow.Dnn.BusinessController</businessControllerClass>
+            <isAdmin>true</isAdmin>
+            <isPremium>true</isPremium>
+            <supportedFeatures>
+              <supportedFeature type="Upgradeable" />
+            </supportedFeatures>
+          </desktopModule>
+          <eventMessage>
+            <processorType>
+              DotNetNuke.Entities.Modules.EventMessageProcessor,
+              DotNetNuke
+            </processorType>
+            <processorCommand>UpgradeModule</processorCommand>
+            <attributes>
+              <businessControllerClass>ToSic.Imageflow.Dnn.BusinessController</businessControllerClass>
+              <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
+              <upgradeVersionsList>01.00.00</upgradeVersionsList>
+            </attributes>
+          </eventMessage>
+        </component>
+
+        <component type="File">
+          <files>
+            <basePath>Resources\Libraries\ToSic\Imageflow</basePath>
+            <file>
+              <name>icon.png</name>
+            </file>
+            <file>
+              <name>License.txt</name>
+            </file>
+            <file>
+              <name>ReleaseNotes.txt</name>
+            </file>
+          </files>
+        </component>
+
+      </components>
+    </package>
+  </packages>
 </dotnetnuke>
