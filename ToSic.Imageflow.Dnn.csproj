@@ -2,9 +2,6 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <DnnVersion>07.04.02</DnnVersion>
-    <ReferencesPath>..\Website\bin</ReferencesPath>
-    <DnnReferencePath>$(ReferencesPath)</DnnReferencePath>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{37FAEC2A-9ED5-43B9-BDC5-3F26CEEC52FF}</ProjectGuid>
@@ -39,7 +36,6 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\ToSic.Imageflow.Dnn.xml</DocumentationFile>
   </PropertyGroup>
-  <Import Project="Build\SolutionReferences.targets" />
   <ItemGroup>
     <Compile Include="BusinessController.cs" />
     <Compile Include="Providers\BlobFetchCache.cs" />
@@ -72,7 +68,6 @@
   <ItemGroup>
     <Content Include="NuGet.config" />
     <None Include="Build\LibraryPackage.targets" />
-    <None Include="Build\SolutionReferences.targets" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ToSic.Imageflow.Dnn.dnn" />
