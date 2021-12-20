@@ -162,32 +162,11 @@
                     <add name="ImageflowModule" type="ToSic.Imageflow.Dnn.ImageflowModule, ToSic.Imageflow.Dnn"/>
                   </node>
 
-                  <!-- Imageflow add bindingRedirects for bin\Microsoft.Extensions.DependencyInjection.dll, version 2.2.0.0 -->
-                  <!--<node path="/configuration/runtime/ab:assemblyBinding"
-									      action="update"
-									      collision="ignore"
-									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection'][ab:assemblyIdentity/@publicKeyToken='adb9793829ddae60']"
-									      nameSpace="urn:schemas-microsoft-com:asm.v1"
-									      nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.DependencyInjection" publicKeyToken="adb9793829ddae60" />
-                      <bindingRedirect oldVersion="0.0.0.0-32767.32767.32767.32767" newVersion="2.2.0.0" />
-                    </dependentAssembly>
-                  </node>-->
+                  <!-- register netstandard2.0 (more: http://stackoverflow.com/questions/16675171/what-does-the-web-config-compilation-assemblies-element-do/19942274#19942274) -->
+                  <node path="/configuration/system.web/compilation/assemblies" action="update" key="assembly" collision="ignore">
 
-                  <!-- Imageflow add bindingRedirects for bin\Imageflow\Microsoft.Extensions.DependencyInjection.Abstractions.dll, version 2.2.0.0 -->
-                  <!--<node path="/configuration/runtime/ab:assemblyBinding"
-									      action="update"
-									      collision="ignore"
-									      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection.Abstractions'][ab:assemblyIdentity/@publicKeyToken='adb9793829ddae60']"
-									      nameSpace="urn:schemas-microsoft-com:asm.v1"
-									      nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.DependencyInjection.Abstractions" publicKeyToken="adb9793829ddae60"/>
-                      <bindingRedirect oldVersion="0.0.0.0-32767.32767.32767.32767" newVersion="2.2.0.0" />
-                    </dependentAssembly>
-                  </node>-->
-
+                    <add assembly="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+                  </node>
                 </nodes>
               </configuration>
             </install>
