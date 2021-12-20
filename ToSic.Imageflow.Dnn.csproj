@@ -79,19 +79,14 @@
     <None Include="ToSic.Imageflow.Dnn_Symbols.dnn" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="DotNetNuke">
-      <HintPath>..\Website\bin\DotNetNuke.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="DotNetNuke.Web">
-      <HintPath>..\Website\bin\DotNetNuke.Web.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DotNetNuke.Web">
+      <Version>9.10.2</Version>
+    </PackageReference>
     <PackageReference Include="Imageflow.NativeRuntime.win-x86" GeneratePathProperty="true">
       <Version>1.5.8-rc62</Version>
     </PackageReference>
@@ -111,27 +106,28 @@
       <Version>4.5.2</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="Build/Library.Build" />
   <PropertyGroup>
-    <PostBuildEvent>:: robocopy $(PkgImageflow_NativeRuntime_win-x86_1_5_8-rc62)runtimes ..\..\Website\bin\runtimes /E
-:: robocopy $(PkgImageflow_NativeRuntime_win-x86_64_1_5_8-rc62)runtimes ..\..\Website\bin\runtimes /E
-robocopy .\ ..\..\Website\bin Imageflow.*
-robocopy .\ ..\..\Website\bin Imazen.*
-robocopy .\ ..\..\Website\bin Microsoft.Extensions.Configuration.Abstractions.dll
-robocopy .\ ..\..\Website\bin Microsoft.Extensions.DependencyInjection.Abstractions.dll
-robocopy .\ ..\..\Website\bin Microsoft.Extensions.DependencyInjection.dll
-robocopy .\ ..\..\Website\bin Microsoft.Extensions.FileProviders.Abstractions.dll
-robocopy .\ ..\..\Website\bin Microsoft.Extensions.Hosting.Abstractions.dll
-robocopy .\ ..\..\Website\bin Microsoft.Extensions.Logging.Abstractions.dll
-robocopy .\ ..\..\Website\bin Microsoft.Extensions.Primitives.dll
-robocopy .\ ..\..\Website\bin Microsoft.IO.RecyclableMemoryStream.dll
-robocopy .\ ..\..\Website\bin Newtonsoft.Json.dll
-robocopy .\ ..\..\Website\bin System.Buffers.dll
-robocopy .\ ..\..\Website\bin System.Memory.dll
-robocopy .\ ..\..\Website\bin System.Numerics.Vectors.dll
-robocopy .\ ..\..\Website\bin System.Runtime.CompilerServices.Unsafe.dll
-robocopy .\ ..\..\Website\bin ToSic.Imageflow.Dnn.*
+    <PostBuildEvent>:: robocopy $(PkgImageflow_NativeRuntime_win-x86_1_5_8-rc62)runtimes $(Dev2sxcDnnRoot)bin\runtimes /E
+:: robocopy $(PkgImageflow_NativeRuntime_win-x86_64_1_5_8-rc62)runtimes $(Dev2sxcDnnRoot)bin\runtimes /E
+:: robocopy $(Dev2sxcDnnRoot)bin Imageflow.*
+:: robocopy $(Dev2sxcDnnRoot)bin Imazen.*
+:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.Extensions.Configuration.Abstractions.dll
+:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.Extensions.DependencyInjection.Abstractions.dll
+:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.Extensions.DependencyInjection.dll
+:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.Extensions.FileProviders.Abstractions.dll
+:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.Extensions.Hosting.Abstractions.dll
+:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.Extensions.Logging.Abstractions.dll
+:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.Extensions.Primitives.dll
+:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.IO.RecyclableMemoryStream.dll
+:: robocopy $(Dev2sxcDnnRoot)bin Newtonsoft.Json.dll
+:: robocopy $(Dev2sxcDnnRoot)bin System.Buffers.dll
+:: robocopy $(Dev2sxcDnnRoot)bin System.Memory.dll
+:: robocopy $(Dev2sxcDnnRoot)bin System.Numerics.Vectors.dll
+:: robocopy $(Dev2sxcDnnRoot)bin System.Runtime.CompilerServices.Unsafe.dll
+:: robocopy $(Dev2sxcDnnRoot)bin ToSic.Imageflow.Dnn.*
 exit 0</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
