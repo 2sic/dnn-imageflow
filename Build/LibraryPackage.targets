@@ -91,8 +91,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <Zip Files="@(OutputContent)" WorkingDirectory="$(MSBuildProjectDirectory)\Package" ZipFileName="$(PackageName)_$(Version)_Install.$(Extension)" />
 
     <!-- Copy the Install package to the Packages folder -->
-    <Copy SourceFiles="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Install.$(Extension)" DestinationFolder="$(WebsiteInstallPath)" />
-    <Message Importance="High" Text="Install Package: $(WebsiteInstallPath)\$(PackageName)_$(Version)_Install.$(Extension)" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Install.$(Extension)" DestinationFolder="$(InstallPath)" />
+    <Message Importance="High" Text="Install Package: $(InstallPath)\$(PackageName)_$(Version)_Install.$(Extension)" />
 
     <RemoveDir Directories="$(MSBuildProjectDirectory)\Package" />
     <RemoveDir Directories="$(MSBuildProjectDirectory)\ResourcesZip" />
@@ -114,8 +114,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     </CreateItem>
 
     <Zip Files="@(OutputSource)" WorkingDirectory="$(MSBuildProjectDirectory)\Package" ZipFileName="$(PackageName)_$(Version)_Symbols.$(Extension)" />
-    <Copy SourceFiles="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Symbols.$(Extension)" DestinationFolder="$(WebsiteInstallPath)" />
-    <Message Importance="High" Text="Symbols Package: $(WebsiteInstallPath)\$(PackageName)_$(Version)_Symbols.$(Extension)" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Symbols.$(Extension)" DestinationFolder="$(InstallPath)" />
+    <Message Importance="High" Text="Symbols Package: $(InstallPath)\$(PackageName)_$(Version)_Symbols.$(Extension)" />
 
     <!-- Cleanup -->
     <RemoveDir Directories="$(MSBuildProjectDirectory)\Package" />

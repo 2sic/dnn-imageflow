@@ -1,0 +1,2 @@
+For Relase mode.
+Folder contains DNN module installation ZIP's. 

@@ -5,8 +5,8 @@
     <PackageName>ToSic.Imageflow.Dnn</PackageName>
     <Extension>zip</Extension>
     <BuildScriptsPath>$(MSBuildProjectDirectory)\Build</BuildScriptsPath>
-    <WebsitePath>$(MSBuildProjectDirectory)\..\Website</WebsitePath>
-    <WebsiteInstallPath>$(WebsitePath)\Install\Library</WebsiteInstallPath>
+    <WebsitePath>$(MSBuildProjectDirectory)\Website</WebsitePath>
+    <InstallPath>$(MSBuildProjectDirectory)\Install</InstallPath>
     <FullModulePath>$(WebsitePath)\Bin</FullModulePath>
   </PropertyGroup>
   <Import Project="$(BuildScriptsPath)\LibraryPackage.Targets" />
