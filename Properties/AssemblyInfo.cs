@@ -1,5 +1,4 @@
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
@@ -10,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("2sic")]
 [assembly: AssemblyProduct("ToSic.Imageflow.Dnn")]
-[assembly: AssemblyCopyright("Copyright 2021 2sic")]
+[assembly: AssemblyCopyright("Copyright 2022 2sic")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +28,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("01.00.00")]
-[assembly: AssemblyFileVersion("01.00.00")]
+[assembly: AssemblyVersion("01.00.01")]
+[assembly: AssemblyFileVersion("01.00.01")]
