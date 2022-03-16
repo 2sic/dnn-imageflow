@@ -107,10 +107,23 @@ namespace ToSic.Imageflow.Dnn.Job
                 {
                     var jobResult = buildJob.BuildCommandString(
                             blobs[0].GetBytesSource(),
-                            new BytesDestination(), 
+                            new BytesDestination(),
                             CommandString)
                         .Finish()
                         .InProcessAsync().Result.First;
+
+                    // POC GRAVITY
+                    //Constraint constraint =
+                    //    new Constraint(ConstraintMode.Fit_Crop, 640, 480)
+                    //        .SetGravity(new ConstraintGravity(25, 25));
+
+                    ////constraint.Gravity = new ConstraintGravity(25, 25);
+
+                    //var jobResult = buildJob.Decode(blobs[0].GetBytesSource()).Constrain(constraint)
+                    //    .ResizerCommands(CommandString)
+                    //    .EncodeToBytes(new GifEncoder())
+                    //    .Finish()
+                    //    .InProcessAsync().Result.First;
 
                     // TryGetBytes returns the buffer from a regular MemoryStream, not a recycled one
                     var resultBytes = jobResult.TryGetBytes();
