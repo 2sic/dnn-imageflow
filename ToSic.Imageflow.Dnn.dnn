@@ -36,81 +36,22 @@
               <name>ToSic.Imageflow.Dnn.dll</name>
             </assembly>
 
+            <!-- *** DNN shared assemblies -->
+
             <!-- Imageflow.Net transitive dependency -->
             <assembly>
               <name>Newtonsoft.Json.dll</name>
               <version>10.0.0.0</version>
             </assembly>
-          </assemblies>
 
-          <!--<assemblies>
-            <basePath>bin\Imageflow</basePath>
-            --><!-- Microsoft.Extensions.Hosting.Abstractions transitive dependency --><!--
-            <assembly>
-              <name>Microsoft.Extensions.Configuration.Abstractions.dll</name>
-              <version>2.2.0.0</version>
-            </assembly>
-            --><!-- Microsoft.Extensions.DependencyInjection transitive dependency --><!--
-            --><!-- Microsoft.Extensions.Hosting.Abstractions transitive dependency --><!--
-            <assembly>
-              <name>Microsoft.Extensions.DependencyInjection.Abstractions.dll</name>
-              <version>2.2.0.0</version>
-            </assembly>
-            --><!-- PackageReference --><!--
-            <assembly>
-              <name>Microsoft.Extensions.DependencyInjection.dll</name>
-              <version>2.2.0.0</version>
-            </assembly>
-            --><!-- Microsoft.Extensions.Hosting.Abstractions transitive dependency --><!--
-            --><!-- Microsoft.Extensions.Logging transitive dependency --><!--
-            <assembly>
-              <name>Microsoft.Extensions.FileProviders.Abstractions.dll</name>
-              <version>2.2.0.0</version>
-            </assembly>
-            --><!-- Imazen.Common transitive dependency --><!--
-            <assembly>
-              <name>Microsoft.Extensions.Hosting.Abstractions.dll</name>
-              <version>2.2.0.0</version>
-            </assembly>
-            --><!-- Microsoft.Extensions.Hosting.Abstractions transitive dependency --><!--
-            <assembly>
-              <name>Microsoft.Extensions.Logging.Abstractions.dll</name>
-              <version>2.2.0.0</version>
-            </assembly>
-            --><!-- Microsoft.Extensions.Configuration.Abstractions transitive dependency --><!--
-            --><!-- Microsoft.Extensions.FileProviders.Abstractions transitive dependency --><!--
-            <assembly>
-              <name>Microsoft.Extensions.Primitives.dll</name>
-              <version>2.2.0.0</version>
-            </assembly>
-            --><!-- Imageflow.Net transitive dependency --><!--
-            <assembly>
-              <name>Microsoft.IO.RecyclableMemoryStream.dll</name>
-              <version>1.2.2.0</version>
-            </assembly>
-            --><!-- System.Memory transitive dependency --><!--
-            --><!-- Microsoft.Extensions.Logging.Abstractions transitive dependency --><!--
+            <!-- System.Memory transitive dependency -->
+            <!-- Microsoft.Extensions.Logging.Abstractions transitive dependency -->
             <assembly>
               <name>System.Buffers.dll</name>
               <version>4.0.2.0</version>
             </assembly>
-            --><!-- Microsoft.Extensions.Primitives transitive dependency --><!--
-            <assembly>
-              <name>System.Memory.dll</name>
-              <version>4.0.1.0</version>
-            </assembly>
-            --><!-- System.Memory transitive dependency --><!--
-            <assembly>
-              <name>System.Numerics.Vectors.dll</name>
-              <version>4.1.3.0</version>
-            </assembly>
-            --><!-- System.Memory transitive dependency --><!--
-            --><!-- Microsoft.Extensions.Primitives transitive dependency --><!--
-            <assembly>
-              <name>System.Runtime.CompilerServices.Unsafe.dll</name>
-              <version>4.0.4.1</version>
-            </assembly>
-          </assemblies>-->
+
+          </assemblies>
 
         </component>
 

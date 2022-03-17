@@ -109,19 +109,19 @@
 :: robocopy $(PkgImageflow_NativeRuntime_win-x86_64_1_5_8-rc62)runtimes $(Dev2sxcDnnRoot)bin\runtimes /E
 :: robocopy $(Dev2sxcDnnRoot)bin Imageflow.*
 :: robocopy $(Dev2sxcDnnRoot)bin Imazen.*
-:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.Extensions.Configuration.Abstractions.dll
-:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.Extensions.DependencyInjection.Abstractions.dll
-:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.Extensions.DependencyInjection.dll
-:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.Extensions.FileProviders.Abstractions.dll
-:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.Extensions.Hosting.Abstractions.dll
-:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.Extensions.Logging.Abstractions.dll
-:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.Extensions.Primitives.dll
-:: robocopy $(Dev2sxcDnnRoot)bin Microsoft.IO.RecyclableMemoryStream.dll
-:: robocopy $(Dev2sxcDnnRoot)bin Newtonsoft.Json.dll
-:: robocopy $(Dev2sxcDnnRoot)bin System.Buffers.dll
-:: robocopy $(Dev2sxcDnnRoot)bin System.Memory.dll
-:: robocopy $(Dev2sxcDnnRoot)bin System.Numerics.Vectors.dll
-:: robocopy $(Dev2sxcDnnRoot)bin System.Runtime.CompilerServices.Unsafe.dll
+:: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.Configuration.Abstractions.dll
+:: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.DependencyInjection.Abstractions.dll
+:: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.DependencyInjection.dll
+:: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.FileProviders.Abstractions.dll
+:: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.Hosting.Abstractions.dll
+:: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.Logging.Abstractions.dll
+:: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.Primitives.dll
+:: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.IO.RecyclableMemoryStream.dll
+:: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Newtonsoft.Json.dll
+:: robocopy $(Dev2sxcDnnRoot)bin\Imageflow System.Buffers.dll
+:: robocopy $(Dev2sxcDnnRoot)bin\Imageflow System.Memory.dll
+:: robocopy $(Dev2sxcDnnRoot)bin\Imageflow System.Numerics.Vectors.dll
+:: robocopy $(Dev2sxcDnnRoot)bin\Imageflow System.Runtime.CompilerServices.Unsafe.dll
 :: robocopy $(Dev2sxcDnnRoot)bin ToSic.Imageflow.Dnn.*
 exit 0</PostBuildEvent>
   </PropertyGroup>
