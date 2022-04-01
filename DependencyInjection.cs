@@ -2,7 +2,9 @@
 using System;
 using System.IO;
 using System.Web;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using ToSic.Imageflow.Dnn.Cache;
+using ToSic.Sxc.Services;
 
 namespace ToSic.Imageflow.Dnn
 {
@@ -77,6 +79,13 @@ namespace ToSic.Imageflow.Dnn
                     // The maximum size of the cache (1GB)
                     CacheSizeLimitInBytes = 1024 * 1024 * 1024,
                 });
+
+            // because of missing DI in DNN 7, can't reuse one registered in 2sxc
+            // (in DNN 7 it is in different container)
+            services.AddTransient<IImageflowRewriteService, ImageflowRewriteService>();
+
+            //// 2sxc will provide its own implementation, this one is just for fallback
+            //services.TryAddTransient<IImageflowRewriteService, NothingRewriteService>();
         }
     }
 }

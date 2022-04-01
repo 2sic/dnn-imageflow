@@ -9,6 +9,7 @@ using Imazen.Common.Storage;
 using ToSic.Imageflow.Dnn.Helpers;
 using ToSic.Imageflow.Dnn.Options;
 using ToSic.Imageflow.Dnn.Providers;
+using ToSic.Sxc.Services;
 
 namespace ToSic.Imageflow.Dnn.Job
 {
@@ -36,8 +37,9 @@ namespace ToSic.Imageflow.Dnn.Job
 
         private void Process(HttpContext context, ImageflowModuleOptions options)
         {
-            var args = new UrlEventArgs(context, context.Request.Path, PathHelpers.ToQueryDictionary(context.Request.QueryString));
-
+            var imageflowRewriteService = DependencyInjection.Resolve<IImageflowRewriteService>();
+            var qs = imageflowRewriteService.QueryStringRewrite(context.Request.QueryString);
+            var args = new UrlEventArgs(context, context.Request.Path, PathHelpers.ToQueryDictionary(qs));
             FinalVirtualPath = args.VirtualPath;
             FinalQuery = args.Query;
         }

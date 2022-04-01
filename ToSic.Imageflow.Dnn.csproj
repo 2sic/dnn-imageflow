@@ -38,6 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BusinessController.cs" />
+    <Compile Include="NothingRewriteService.cs" />
     <Compile Include="Providers\BlobFetchCache.cs" />
     <Compile Include="Providers\BlobFetchResult.cs" />
     <Compile Include="Providers\BlobProvider.cs" />
@@ -77,6 +78,10 @@
     <Reference Include="System" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Web" />
+    <Reference Include="ToSic.Sxc">
+      <HintPath>..\..\2sxc\2sxc\Src\Sxc\ToSic.Sxc\bin\Debug\netstandard2.0\ToSic.Sxc.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DotNetNuke.Web">
