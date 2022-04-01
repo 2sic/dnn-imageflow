@@ -28,6 +28,7 @@
         $(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Logging.Abstractions.dll;
         $(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Primitives.dll;
         $(MSBuildProjectDirectory)\bin\Microsoft.IO.RecyclableMemoryStream.dll;
+        $(MSBuildProjectDirectory)\bin\System.Buffers.dll;
         $(MSBuildProjectDirectory)\bin\System.Memory.dll;
         $(MSBuildProjectDirectory)\bin\System.Numerics.Vectors.dll;
         $(MSBuildProjectDirectory)\bin\System.Runtime.CompilerServices.Unsafe.dll" />
