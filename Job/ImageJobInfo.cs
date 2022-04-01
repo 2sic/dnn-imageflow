@@ -1,20 +1,24 @@
-﻿using System;
+﻿using Imageflow.Fluent;
+using Imazen.Common.Storage;
+using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using Imageflow.Fluent;
-using Imazen.Common.Storage;
 using ToSic.Imageflow.Dnn.Helpers;
 using ToSic.Imageflow.Dnn.Options;
 using ToSic.Imageflow.Dnn.Providers;
-using ToSic.Sxc.Services;
 
 namespace ToSic.Imageflow.Dnn.Job
 {
     internal class ImageJobInfo
     {
+        // after registration should contain ImageflowRewrite.QueryStringRewrite functionality
+        // from main 2sxc dnn module
+        public static Func<NameValueCollection, NameValueCollection> QueryStringRewrite;
+
         public ImageJobInfo(HttpContext context, ImageflowModuleOptions options, BlobProvider provider)
         {
             Process(context, options);
@@ -37,8 +41,11 @@ namespace ToSic.Imageflow.Dnn.Job
 
         private void Process(HttpContext context, ImageflowModuleOptions options)
         {
-            var imageflowRewriteService = DependencyInjection.Resolve<IImageflowRewriteService>();
-            var qs = imageflowRewriteService.QueryStringRewrite(context.Request.QueryString);
+            // rewrite query string
+            var qs = QueryStringRewrite == null 
+                ? context.Request.QueryString // when RegisterQueryStringRewrite is not executed
+                : QueryStringRewrite(new NameValueCollection(context.Request.QueryString)); // implemented in main 2sxc dnn module
+            
             var args = new UrlEventArgs(context, context.Request.Path, PathHelpers.ToQueryDictionary(qs));
             FinalVirtualPath = args.VirtualPath;
             FinalQuery = args.Query;

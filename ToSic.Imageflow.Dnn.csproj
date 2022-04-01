@@ -56,6 +56,7 @@
     <Compile Include="Helpers\PathHelpers.cs" />
     <Compile Include="Helpers\PathMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StartUp.cs" />
     <Compile Include="StartupDnn.cs" />
     <Compile Include="Options\UrlEventArgs.cs" />
     <Compile Include="UpgradeUtil.cs" />
