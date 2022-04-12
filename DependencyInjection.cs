@@ -2,9 +2,7 @@
 using System;
 using System.IO;
 using System.Web;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using ToSic.Imageflow.Dnn.Cache;
-using ToSic.Sxc.Services;
 
 namespace ToSic.Imageflow.Dnn
 {

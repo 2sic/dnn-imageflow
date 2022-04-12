@@ -12,7 +12,6 @@
 
       <!-- DNN shared assemblies -->
       <AssemblyInclude Include="$(OutDir)\Newtonsoft.Json.dll" />
-      <AssemblyInclude Include="$(OutDir)\System.Buffers.dll" />
 
     </ItemGroup>
 

@@ -74,3 +74,28 @@ In image link use [Querystring API](https://docs.imageflow.io/querystring/introd
 1. If all is OK, in `\InstallPackages` you should find DNN Library **extension packages** (to install Imageflow on other DNN installations):
 	1. `ToSic.Imageflow.Dnn_NN.NN.NN_Install.zip`
 	1. `ToSic.Imageflow.Dnn_NN.NN.NN_Symbols.zip`
+
+## References
+
+* DotNetNuke.Web (>= 7.4.0)
+  
+## Included dependencies (.NETStandard 2.0)
+
+* Imageflow.Net (0.7.24)
+* Imazen.HybridCache (0.5.10)
+* Imazen.Common (0.5.10)
+* Imageflow.NativeRuntime.win-x86 (1.5.8-rc62)
+* Imageflow.NativeRuntime.win-x86_64 (1.5.8-rc62)
+* Microsoft.Extensions.Configuration.Abstractions (2.2.0)
+* Microsoft.Extensions.DependencyInjection.Abstractions (2.2.0)
+* Microsoft.Extensions.DependencyInjection (2.2.0)
+* Microsoft.Extensions.FileProviders.Abstractions (2.2.0)
+* Microsoft.Extensions.Hosting.Abstractions (2.2.0)
+* Microsoft.Extensions.Logging.Abstractions (2.2.0)
+* Microsoft.Extensions.Primitives (2.2.0)
+* Microsoft.IO.RecyclableMemoryStream (1.2.2)
+* Newtonsoft.Json (10.0.3)
+* System.Buffers (4.5.1) Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
+* System.Memory (4.5.4) Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
+* System.Numerics.Vectors (4.4.0) Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
+* System.Runtime.CompilerServices.Unsafe (4.5.3) Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
