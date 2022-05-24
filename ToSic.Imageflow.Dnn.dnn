@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="ToSic.Imageflow.Dnn" type="Library" version="01.00.02">
+    <package name="ToSic.Imageflow.Dnn" type="Library" version="01.00.03">
       <friendlyName>Imageflow</friendlyName>
 
       <description>
@@ -22,7 +22,7 @@
       <azureCompatible>True</azureCompatible>
 
       <dependencies>
-        <dependency type="CoreVersion">07.04.02</dependency>
+        <dependency type="CoreVersion">09.06.01</dependency>
       </dependencies>
 
       <components>
@@ -39,10 +39,10 @@
             <!-- *** DNN shared assemblies -->
 
             <!-- Imageflow.Net transitive dependency -->
-            <assembly>
+            <!--<assembly>
               <name>Newtonsoft.Json.dll</name>
               <version>10.0.0.0</version>
-            </assembly>
+            </assembly>-->
 
           </assemblies>
 
