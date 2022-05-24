@@ -11,7 +11,7 @@
       <AssemblyInclude Include="$(OutDir)\ToSic.Imageflow.Dnn.dll" />
 
       <!-- DNN shared assemblies -->
-      <AssemblyInclude Include="$(OutDir)\Newtonsoft.Json.dll" />
+      <!--<AssemblyInclude Include="$(OutDir)\Newtonsoft.Json.dll" />-->
 
     </ItemGroup>
 
