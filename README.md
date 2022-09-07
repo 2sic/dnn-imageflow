@@ -77,7 +77,7 @@ In image link use [Querystring API](https://docs.imageflow.io/querystring/introd
 
 ## References
 
-* DotNetNuke.Web (>= 7.4.0)
+* DotNetNuke.Web (>= 9.6.1)
   
 ## Included dependencies (.NETStandard 2.0)
 
@@ -99,3 +99,9 @@ In image link use [Querystring API](https://docs.imageflow.io/querystring/introd
 * System.Memory (4.5.4) Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
 * System.Numerics.Vectors (4.4.0) Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
 * System.Runtime.CompilerServices.Unsafe (4.5.3) Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
+
+## Places with version number 
+
+* Properties/AssemblyInfo.cs, bump version on 2 places
+* ToSic.Imageflow.Dnn.dnn, bump version in package
+* ToSic.Imageflow.Dnn_Symbols.dnn, bump version on 2 places: package, dependency
