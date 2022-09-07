@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="ToSic.Imageflow.Dnn" type="Library" version="01.00.05">
+    <package name="ToSic.Imageflow.Dnn" type="Library" version="01.00.06">
       <friendlyName>Imageflow</friendlyName>
 
       <description>
@@ -1160,7 +1160,7 @@
           <resourceFiles>
             <basePath></basePath>
             <resourceFile>
-              <name>Imageflow.zip</name>
+              <name>ToSic.Imageflow.Dnn.zip</name>
             </resourceFile>
           </resourceFiles>
         </component>
@@ -1205,7 +1205,7 @@
           </files>
         </component>
 
-        <component type="Cleanup" version="01.00.05">
+        <component type="Cleanup" version="01.00.06">
           <files>
             <file>
               <path></path>

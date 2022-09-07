@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="ToSic.Imageflow.Dnn_Symbols" type="Library" version="01.00.05">
+    <package name="ToSic.Imageflow.Dnn_Symbols" type="Library" version="01.00.06">
       <friendlyName>Imageflow Symbols</friendlyName>
 
       <description><![CDATA[Symbols for Imazen Imageflow]]></description>
@@ -20,7 +20,7 @@
       <azureCompatible>True</azureCompatible>
 
       <dependencies>
-        <dependency type="managedPackage" version="01.00.05">ToSic.Imageflow.Dnn</dependency>
+        <dependency type="managedPackage" version="01.00.06">ToSic.Imageflow.Dnn</dependency>
       </dependencies>
 
       <components>
@@ -29,7 +29,7 @@
           <resourceFiles>
             <basePath></basePath>
             <resourceFile>
-              <name>ImageflowSymbols.zip</name>
+              <name>ToSic.Imageflow.Dnn_Symbols.zip</name>
             </resourceFile>
           </resourceFiles>
         </component>
