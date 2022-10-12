@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="ToSic.Imageflow.Dnn" type="Library" version="01.00.07">
+    <package name="ToSic.Imageflow.Dnn" type="Library" version="01.01.00">
       <friendlyName>Imageflow</friendlyName>
 
       <description>
@@ -12,7 +12,7 @@
 
       <owner>
         <name>2sic + Imazen</name>
-        <organization>2sic internet solutions (Switzerland)</organization>
+        <organization>2sic internet solutions GmbH, Switzerland</organization>
         <url>http://2sxc.org/</url>
         <email>info@2sxc.org</email>
       </owner>
@@ -35,15 +35,6 @@
             <assembly>
               <name>ToSic.Imageflow.Dnn.dll</name>
             </assembly>
-
-            <!-- *** DNN shared assemblies -->
-
-            <!-- Imageflow.Net transitive dependency -->
-            <!--<assembly>
-              <name>Newtonsoft.Json.dll</name>
-              <version>10.0.0.0</version>
-            </assembly>-->
-
           </assemblies>
 
         </component>
@@ -1000,6 +991,17 @@
                   </node>-->
 
                   <!-- 09 - Imageflow add codeBase and update bindingRedirects for bin\Imageflow\System.Buffers.dll, version 4.0.3.0 (aka 4.5.1) -->
+                  <node path="/configuration/runtime/ab:assemblyBinding"
+                        targetpath="/configuration/runtime/ab:assemblyBinding[ab:dependentAssembly/ab:assemblyIdentity/@name='System.Buffers']"
+                        action="add"
+                        collision="ignore"
+                        nameSpace="urn:schemas-microsoft-com:asm.v1"
+                        nameSpacePrefix="ab">
+                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
+                      <assemblyIdentity name="System.Buffers" publicKeyToken="cc7b13ffcd2ddd51" />
+                      <codeBase version="4.0.3.0" href="bin\Imageflow\System.Buffers.dll" />
+                    </dependentAssembly>
+                  </node>
                   <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='System.Buffers'][ab:bindingRedirect]/ab:codeBase[@href='bin\Imageflow\System.Buffers.dll']"
                         action="remove"
                         collision="overwrite"

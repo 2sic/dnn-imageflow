@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="ToSic.Imageflow.Dnn_Symbols" type="Library" version="01.00.07">
+    <package name="ToSic.Imageflow.Dnn_Symbols" type="Library" version="01.01.00">
       <friendlyName>Imageflow Symbols</friendlyName>
 
       <description><![CDATA[Symbols for Imazen Imageflow]]></description>
@@ -10,7 +10,7 @@
 
       <owner>
         <name>2sic + Imazen</name>
-        <organization>2sic internet solutions (Switzerland)</organization>
+        <organization>2sic internet solutions GmbH, Switzerland</organization>
         <url>http://2sxc.org/</url>
         <email>info@2sxc.org</email>
       </owner>
@@ -20,7 +20,7 @@
       <azureCompatible>True</azureCompatible>
 
       <dependencies>
-        <dependency type="managedPackage" version="01.00.07">ToSic.Imageflow.Dnn</dependency>
+        <dependency type="managedPackage" version="01.01.00">ToSic.Imageflow.Dnn</dependency>
       </dependencies>
 
       <components>

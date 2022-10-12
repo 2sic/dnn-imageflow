@@ -38,13 +38,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BusinessController.cs" />
+    <Compile Include="DependencyInjection.cs" />
     <Compile Include="NothingRewriteService.cs" />
     <Compile Include="Providers\BlobFetchCache.cs" />
     <Compile Include="Providers\BlobFetchResult.cs" />
     <Compile Include="Providers\BlobProvider.cs" />
     <Compile Include="Providers\BlobProviderFile.cs" />
     <Compile Include="Providers\BlobProviderResult.cs" />
-    <Compile Include="DependencyInjection.cs" />
     <Compile Include="Cache\HybridCacheOptions.cs" />
     <Compile Include="Cache\HybridCacheService.cs" />
     <Compile Include="Cache\HybridCacheServiceExtensions.cs" />
@@ -85,16 +85,16 @@
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="Imageflow.NativeRuntime.win-x86" GeneratePathProperty="true">
-      <Version>1.5.8-rc62</Version>
+      <Version>1.7.3-rc67</Version>
     </PackageReference>
     <PackageReference Include="Imageflow.NativeRuntime.win-x86_64" GeneratePathProperty="true">
-      <Version>1.5.8-rc62</Version>
+      <Version>1.7.3-rc67</Version>
     </PackageReference>
     <PackageReference Include="Imageflow.Net">
-      <Version>0.7.24</Version>
+      <Version>0.8.3</Version>
     </PackageReference>
     <PackageReference Include="Imazen.HybridCache">
-      <Version>0.5.10</Version>
+      <Version>0.7.7</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection">
       <Version>2.2.0</Version>
@@ -103,15 +103,15 @@
       <Version>4.5.1</Version>
     </PackageReference>
     <PackageReference Include="System.Memory">
-      <Version>4.5.4</Version>
+      <Version>4.5.5</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="Build/Library.Build" />
   <PropertyGroup>
-    <PostBuildEvent>:: robocopy $(PkgImageflow_NativeRuntime_win-x86_1_5_8-rc62)runtimes $(Dev2sxcDnnRoot)bin\runtimes /E
-:: robocopy $(PkgImageflow_NativeRuntime_win-x86_64_1_5_8-rc62)runtimes $(Dev2sxcDnnRoot)bin\runtimes /E
+    <PostBuildEvent>:: robocopy $(PkgImageflow_NativeRuntime_win-x86_1_7_3-rc67)runtimes $(Dev2sxcDnnRoot)bin\runtimes /E
+:: robocopy $(PkgImageflow_NativeRuntime_win-x86_64_1_7_3-rc67)runtimes $(Dev2sxcDnnRoot)bin\runtimes /E
 :: robocopy $(Dev2sxcDnnRoot)bin Imageflow.*
 :: robocopy $(Dev2sxcDnnRoot)bin Imazen.*
 :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.Configuration.Abstractions.dll

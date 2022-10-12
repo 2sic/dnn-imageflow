@@ -123,11 +123,11 @@ namespace ToSic.Imageflow.Dnn
                     {
                         throw new InvalidOperationException("Image job returned zero bytes.");
                     }
-                    return new Tuple<string, ArraySegment<byte>>(result.ContentType, result.ResultBytes);
+                    return new StreamCacheInput(result.ContentType, result.ResultBytes);
                 }
 
                 var bytes = await info.GetPrimaryBlobBytesAsync();
-                return new Tuple<string, ArraySegment<byte>>(null, new ArraySegment<byte>(bytes));
+                return new StreamCacheInput(null, new ArraySegment<byte>(bytes));
 
             }, CancellationToken.None, false);
 

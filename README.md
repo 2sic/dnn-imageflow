@@ -16,7 +16,7 @@ It is similar to [oqt-imageflow](https://github.com/2sic/oqtane-imageflow) for [
 1. More DNN [info...](https://azing.org/dnn-community/)
 
 ### Note
-1. As part of dnn extension installation it will automatically unregister older ImageResizer http module in web.config. 
+1. As part of dnn extension installation it will automatically unregister older ImageResizer http module in web.config.
 
 ## Usage
 
@@ -78,30 +78,32 @@ In image link use [Querystring API](https://docs.imageflow.io/querystring/introd
 ## References
 
 * DotNetNuke.Web (>= 9.6.1)
-  
-## Included dependencies (.NETStandard 2.0)
 
-* Imageflow.Net (0.7.24)
-* Imazen.HybridCache (0.5.10)
-* Imazen.Common (0.5.10)
-* Imageflow.NativeRuntime.win-x86 (1.5.8-rc62)
-* Imageflow.NativeRuntime.win-x86_64 (1.5.8-rc62)
+## Included dependencies (.NETStandard 2.0/.NET Framework v4.7.2)
+
+* Imageflow.NativeRuntime.win-x86 (1.7.3-rc67)
+* Imageflow.NativeRuntime.win-x86_64 (1.7.3-rc67)
+* Imageflow.Net 0.8.3
+* Imazen.HybridCache 0.7.7
+* Imazen.Common (>= 0.7.7)
+* Microsoft.CSharp (>= 4.7.0)
 * Microsoft.Extensions.Configuration.Abstractions (2.2.0)
 * Microsoft.Extensions.DependencyInjection.Abstractions (2.2.0)
 * Microsoft.Extensions.DependencyInjection (2.2.0)
 * Microsoft.Extensions.FileProviders.Abstractions (2.2.0)
-* Microsoft.Extensions.Hosting.Abstractions (2.2.0)
+* Microsoft.Extensions.Hosting.Abstractions (>= 2.2.0)
 * Microsoft.Extensions.Logging.Abstractions (2.2.0)
 * Microsoft.Extensions.Primitives (2.2.0)
-* Microsoft.IO.RecyclableMemoryStream (1.2.2)
-* Newtonsoft.Json (10.0.3)
-* System.Buffers (4.5.1) Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
-* System.Memory (4.5.4) Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
-* System.Numerics.Vectors (4.4.0) Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
-* System.Runtime.CompilerServices.Unsafe (4.5.3) Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
+* Microsoft.IO.RecyclableMemoryStream (>= 1.2.2 && < 3.0.0)
+* Newtonsoft.Json (>= 10.0.3 && < 14.0.0) -> DNN 9.6.1
+* System.Buffers (>= 4.5.1)
+* System.Memory (>= 4.5.5)
+* System.Numerics.Vectors (>= 4.5.0)
+* System.Runtime.CompilerServices.Unsafe (>= 4.5.3)
 
-## Places with version number 
+## Places with version number
 
 * Properties/AssemblyInfo.cs, bump version on 2 places
 * ToSic.Imageflow.Dnn.dnn, bump version in package
 * ToSic.Imageflow.Dnn_Symbols.dnn, bump version on 2 places: package, dependency
+* releasenotes.txt, bump version in one place

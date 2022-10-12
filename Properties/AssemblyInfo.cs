@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Imageflow Extension for DNN")]
 [assembly: AssemblyDescription("ImageFlow image resizer http module for Dnn")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("2sic")]
+[assembly: AssemblyCompany("2sic internet solutions GmbH, Switzerland")]
 [assembly: AssemblyProduct("ToSic.Imageflow.Dnn")]
-[assembly: AssemblyCopyright("Copyright 2022 2sic")]
+[assembly: AssemblyCopyright("Copyright MIT © 2sic 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -28,5 +28,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("01.00.07")]
-[assembly: AssemblyFileVersion("01.00.07")]
+[assembly: AssemblyVersion("01.01.00")]
+[assembly: AssemblyFileVersion("01.01.00")]

@@ -29,7 +29,8 @@ namespace ToSic.Imageflow.Dnn
             lock (UpgradeLock)
             {
                 // after waiting...Any pending native assemblies?
-                if (!Upgraded) Upgraded = Directory.GetFiles(Runtimes, $"*.{PendingExtension}", SearchOption.AllDirectories).Length == 0;
+                if (!Upgraded && Directory.Exists(Runtimes))
+                    Upgraded = Directory.GetFiles(Runtimes, $"*.{PendingExtension}", SearchOption.AllDirectories).Length == 0;
 
                 // if upgrade is already done before and there is no pending assemblies, than we are done
                 if (Upgraded) return;
