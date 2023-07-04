@@ -10,8 +10,8 @@
       <!-- DNN specific DLLs -->
       <AssemblyInclude Include="$(OutDir)\ToSic.Imageflow.Dnn.dll" />
 
-      <!-- DNN shared assemblies -->
-      <!--<AssemblyInclude Include="$(OutDir)\Newtonsoft.Json.dll" />-->
+      <!-- DNN shared assemblies, Imageflow.NET transitive dependency -->
+      <AssemblyInclude Include="$(OutDir)\Newtonsoft.Json.dll" />
 
     </ItemGroup>
 

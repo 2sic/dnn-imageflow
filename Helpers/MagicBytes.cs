@@ -18,7 +18,7 @@ namespace ToSic.Imageflow.Dnn.Helpers
             {
                 return "application/octet-stream";
             }
-            return ImageJob.GetContentTypeForBytes(data) ?? "application/octet-stream";
+            return new Imazen.Common.FileTypeDetection.FileTypeDetector().GuessMimeType(data) ?? "application/octet-stream";
         }
 
         /// <summary>

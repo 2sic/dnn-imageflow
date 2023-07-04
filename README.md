@@ -10,7 +10,7 @@ It is similar to [oqt-imageflow](https://github.com/2sic/oqtane-imageflow) for [
 
 ## Installation
 
-1. Please [install](https://www.nvquicksite.com/) [DNN 9.2+](https://github.com/dnnsoftware/Dnn.Platform/releases).
+1. Please [install](https://www.nvquicksite.com/) [DNN 9.6.1+](https://github.com/dnnsoftware/Dnn.Platform/releases).
 1. Download latest *ToSic.Imageflow.Dnn_NN.NN.NN_Install.zip* from dnn-imageflow [releases](https://github.com/2sic/dnn-imageflow/releases) [](https://github.com/2sic/dnn-imageflow).
 1. Install *ToSic.Imageflow.Dnn_NN.NN.NN_Install.zip* dnn extension [as usually](https://www.dnnsoftware.com/docs/administrators/extensions/install-extension.html).
 1. More DNN [info...](https://azing.org/dnn-community/)
@@ -81,11 +81,11 @@ In image link use [Querystring API](https://docs.imageflow.io/querystring/introd
 
 ## Included dependencies (.NETStandard 2.0/.NET Framework v4.7.2)
 
-* Imageflow.NativeRuntime.win-x86 (1.7.3-rc67)
-* Imageflow.NativeRuntime.win-x86_64 (1.7.3-rc67)
-* Imageflow.Net 0.8.3
-* Imazen.HybridCache 0.7.7
-* Imazen.Common (>= 0.7.7)
+* Imageflow.NativeRuntime.win-x86 (2.0.0-preview5)
+* Imageflow.NativeRuntime.win-x86_64 (2.0.0-preview5)
+* Imageflow.Net 0.10.0
+* Imazen.HybridCache 0.8.1
+* Imazen.Common (>= 0.8.1)
 * Microsoft.CSharp (>= 4.7.0)
 * Microsoft.Extensions.Configuration.Abstractions (2.2.0)
 * Microsoft.Extensions.DependencyInjection.Abstractions (2.2.0)
@@ -95,7 +95,7 @@ In image link use [Querystring API](https://docs.imageflow.io/querystring/introd
 * Microsoft.Extensions.Logging.Abstractions (2.2.0)
 * Microsoft.Extensions.Primitives (2.2.0)
 * Microsoft.IO.RecyclableMemoryStream (>= 1.2.2 && < 3.0.0)
-* Newtonsoft.Json (>= 10.0.3 && < 14.0.0) -> DNN 9.6.1
+* Newtonsoft.Json (>= 13.0.3 && < 14.0.0) -> DNN 9.6.1
 * System.Buffers (>= 4.5.1)
 * System.Memory (>= 4.5.5)
 * System.Numerics.Vectors (>= 4.5.0)
