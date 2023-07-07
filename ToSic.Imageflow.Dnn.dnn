@@ -1033,8 +1033,8 @@
                     <bindingRedirect oldVersion="0.0.0.0-4.0.3.0" newVersion="4.0.3.0" xmlns="urn:schemas-microsoft-com:asm.v1"/>
                   </node>
 
-                  <!-- 10 - Imageflow add codeBase and update bindingRedirects for bin\Imageflow\System.Memory.dll, version 4.0.1.1 (aka 4.5.4) -->
-                  <node path="/configuration/runtime/ab:assemblyBinding"
+                  <!-- 10 - Imageflow add codeBase and update bindingRedirects for bin\Imageflow\System.Memory.dll, version 4.0.1.2 (aka 4.5.5) -->
+                  <!--<node path="/configuration/runtime/ab:assemblyBinding"
                         targetpath="/configuration/runtime/ab:assemblyBinding[ab:dependentAssembly/ab:assemblyIdentity/@name='System.Memory']"
                         action="add"
                         collision="ignore"
@@ -1069,7 +1069,7 @@
                         nameSpacePrefix="ab">
                     <codeBase version="4.0.1.1" href="bin\Imageflow\System.Memory.dll" xmlns="urn:schemas-microsoft-com:asm.v1"/>
                     <bindingRedirect oldVersion="0.0.0.0-4.0.1.1" newVersion="4.0.1.1" xmlns="urn:schemas-microsoft-com:asm.v1"/>
-                  </node>
+                  </node>-->
 
                   <!-- 11 - Imageflow add codeBase and update bindingRedirects for bin\Imageflow\System.Numerics.Vectors.dll, version 4.1.3.0 -->
                   <node path="/configuration/runtime/ab:assemblyBinding"
