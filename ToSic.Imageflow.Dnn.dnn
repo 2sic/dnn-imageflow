@@ -38,7 +38,7 @@
             <!-- Imageflow.NET transitive dependency -->
             <assembly>
               <name>Newtonsoft.Json.dll</name>
-              <version>13.0.0.0</version>
+              <version>13.0.3</version>
             </assembly>
           </assemblies>
 
