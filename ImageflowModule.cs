@@ -140,7 +140,7 @@ namespace ToSic.Imageflow.Dnn
                         throw new InvalidOperationException($"{typeName} returned cache entry with zero bytes");
                     }
                     SetCachingHeaders(context, cacheKey);
-                    await MagicBytes.ProxyToStream(cacheResult.Data, context.Response);
+                    await FileFormatHelper.ProxyToStream(cacheResult.Data, context.Response);
                     context.Response.End();
                 }
             }
