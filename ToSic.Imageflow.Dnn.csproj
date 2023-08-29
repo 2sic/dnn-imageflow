@@ -110,6 +110,8 @@
       :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow System.Numerics.Vectors.dll
       :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow System.Runtime.CompilerServices.Unsafe.dll
       :: robocopy $(Dev2sxcDnnRoot)bin ToSic.Imageflow.Dnn.*
+      cd $(ProjectDir)bin
+      robocopy .\ "..\..\Website\bin" ToSic.Imageflow.Dnn.*
       exit 0</PostBuildEvent>
   </PropertyGroup>
 </Project>
