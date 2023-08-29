@@ -23,9 +23,7 @@ namespace ToSic.Imageflow.Dnn.Helpers
         };
 
         public static bool IsImagePath(string path)
-        {
-            return AcceptedImageExtensions.Any(imageFileExtension => path.EndsWith(imageFileExtension, StringComparison.OrdinalIgnoreCase));
-        }
+            => AcceptedImageExtensions.Any(imageFileExtension => path.EndsWith(imageFileExtension, StringComparison.OrdinalIgnoreCase));
 
         public static readonly string[] SupportedQuerystringKeys = {
             "mode", "anchor", "flip", "sflip", "scale", "cache", "process",
@@ -40,28 +38,44 @@ namespace ToSic.Imageflow.Dnn.Helpers
             "encoder", "decoder", "builder", "s.roundcorners.", "paddingwidth", "paddingheight", "margin", "borderwidth", "decoder.min_precise_scaling_ratio"
         };
 
+        /// <summary>
+        /// Return the Base64 encoded hash string
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public static string Base64Hash(string data)
         {
+            // Create an instance of the SHA256 hashing algorithm.
             using (var sha2 = SHA256.Create())
             {
+                // Get the bytes of the input string.
                 var stringBytes = Encoding.UTF8.GetBytes(data);
-                // check cache and return if cached
-                var hashBytes =
-                    sha2.ComputeHash(stringBytes);
-                return Convert.ToBase64String(hashBytes)
-                    .Replace("=", string.Empty)
-                    .Replace('+', '-')
-                    .Replace('/', '_');
+
+                // Compute the hash of bytes using the SHA256 algorithm
+                var hashBytes = sha2.ComputeHash(stringBytes);
+
+                // Convert the hash bytes to a Base64 encoded string.
+                var base64String = Convert.ToBase64String(hashBytes);
+
+                // Remove the padding characters and any URL encoding characters
+                base64String = base64String.Replace("=", string.Empty)
+                                           .Replace('+', '-')
+                                           .Replace('/', '_');
+
+                
+                return base64String;
             }
         }
 
+        ///<summary>
+        ///Create a dictionary from a name value collection.
+        ///</summary>
+        ///<returns>A dictionary containing all the key-value pairs from a NameValueCollection</returns>
+        ///<param name="requestQuery">The NameValueCollection containing the input key-value pairs.</param>
         public static Dictionary<string, string> ToQueryDictionary(NameValueCollection requestQuery)
         {
             var dict = new Dictionary<string, string>(requestQuery.Count, StringComparer.OrdinalIgnoreCase);
-            foreach (var key in requestQuery.AllKeys)
-            {
-                dict.Add(key, requestQuery[key]);
-            }
+            foreach (var key in requestQuery.AllKeys) dict.Add(key, requestQuery[key]);
             return dict;
         }
 
@@ -69,11 +83,8 @@ namespace ToSic.Imageflow.Dnn.Helpers
         {
             var sb = new StringBuilder();
             foreach (var key in finalQuery.Keys.Where(k => !string.IsNullOrEmpty(k)))
-            {
                 sb.Append($"&{key}={HttpUtility.UrlEncode(finalQuery[key])}");
-            }
             return sb.ToString()?.TrimStart('&');
-
         }
     }
 }

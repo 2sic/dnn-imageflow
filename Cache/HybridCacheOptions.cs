@@ -44,9 +44,6 @@ namespace ToSic.Imageflow.Dnn.Cache
         /// HybridCacheOptions with cache folder
         /// </summary>
         /// <param name="cacheDir"></param>
-        public HybridCacheOptions(string cacheDir)
-        {
-            DiskCacheDirectory = cacheDir;
-        }
+        public HybridCacheOptions(string cacheDir) => DiskCacheDirectory = cacheDir;
     }
 }
