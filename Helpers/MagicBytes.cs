@@ -9,7 +9,7 @@ namespace ToSic.Imageflow.Dnn.Helpers
     /// <summary>
     /// Identify common file formats and proxy streams to the HTTP response.
     /// </summary>
-    internal static class FileFormatHelper
+    internal static class MagicBytes
     {
         /// <summary>
         /// Returns the MIME type based on the provided byte array data.
