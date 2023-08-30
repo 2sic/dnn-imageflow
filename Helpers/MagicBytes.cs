@@ -30,37 +30,34 @@ namespace ToSic.Imageflow.Dnn.Helpers
         /// <exception cref="InvalidOperationException"></exception>
         internal static async Task ProxyToStream(Stream sourceStream, HttpResponse response)
         {
+            // Response content length
             if (sourceStream.CanSeek)
                 response.AddHeader("Content-Length", (sourceStream.Length - sourceStream.Position).ToString());
 
-            // Define the buffer size to improve efficiency when reading from the stream
+            // Prepare buffer to improve efficiency when reading from the source stream
             const int bufferSize = 4096;
             var buffer = ArrayPool<byte>.Shared.Rent(bufferSize);
 
-            // Clear the buffer immediately after renting it
-            Array.Clear(buffer, 0, buffer.Length);
-            var bytesRead = 0;
+            // Response content type and image binary data starting part (from buffered data)
             try
             {
-                // Read from the source stream into the buffer and check for empty data
-                bytesRead = await sourceStream.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
+                // Read from the source stream into the buffer
+                var bytesRead = await sourceStream.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
                 if (bytesRead == 0)
                     throw new InvalidOperationException("Source blob has zero bytes.");
 
                 // Determine the content type based on the buffered data
                 response.ContentType = bytesRead >= 12 ? GetContentTypeFromBytes(buffer) : "application/octet-stream";
 
-                // Write the buffered data to the response stream
+                // Write the buffered image binary data to the response stream
                 await response.OutputStream.WriteAsync(buffer, 0, bytesRead).ConfigureAwait(false);
             }
             finally
             {
-                // Clear the buffer before returning it to the pool
-                Array.Clear(buffer, 0, bytesRead);
-                ArrayPool<byte>.Shared.Return(buffer);
+                ArrayPool<byte>.Shared.Return(buffer, true);
             }
 
-            // Copy the remaining data from the source stream to the response stream
+            // Response image binary data remaining part (from the source stream)
             await sourceStream.CopyToAsync(response.OutputStream).ConfigureAwait(false);
         }
     }
