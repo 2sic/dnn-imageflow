@@ -102,12 +102,7 @@ namespace ToSic.Imageflow.Dnn
 
             _blobProviders = DependencyInjection.Resolve<IEnumerable<IBlobProvider>>();
 
-            var mappedPaths = new List<PathMapping>
-            {
-                new PathMapping("/", HttpContext.Current.Server.MapPath("~"))
-            };
-
-            _blobProvider = new BlobProvider(_blobProviders, mappedPaths);
+            _blobProvider = new BlobProvider(_blobProviders);
         }
 
         private async Task ProcessWithStreamCache(HttpContext context, string cacheKey, ImageJobInfo info)
