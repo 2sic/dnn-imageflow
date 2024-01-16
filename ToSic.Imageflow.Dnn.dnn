@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="ToSic.Imageflow.Dnn" type="Library" version="01.02.02">
+    <package name="ToSic.Imageflow.Dnn" type="Library" version="01.02.03">
       <friendlyName>Imageflow</friendlyName>
 
       <description>
