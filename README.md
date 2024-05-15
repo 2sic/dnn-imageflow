@@ -81,11 +81,11 @@ In image link use [Querystring API](https://docs.imageflow.io/querystring/introd
 
 ## Included dependencies (.NETStandard 2.0/.NET Framework v4.7.2)
 
-* Imageflow.NativeRuntime.win-x86 (2.0.0-preview5)
-* Imageflow.NativeRuntime.win-x86_64 (2.0.0-preview5)
-* Imageflow.Net 0.10.0
-* Imazen.HybridCache 0.8.1
-* Imazen.Common (>= 0.8.1)
+* Imageflow.NativeRuntime.win-x86 (2.0.0-preview8)
+* Imageflow.NativeRuntime.win-x86_64 (2.0.0-preview8)
+* Imageflow.Net 0.10.2
+* Imazen.HybridCache 0.8.3
+* Imazen.Common (>= 0.8.3)
 * Microsoft.CSharp (>= 4.7.0)
 * Microsoft.Extensions.Configuration.Abstractions (2.2.0)
 * Microsoft.Extensions.DependencyInjection.Abstractions (2.2.0)

@@ -66,16 +66,16 @@
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="Imageflow.NativeRuntime.win-x86" GeneratePathProperty="true">
-      <Version>2.0.0-preview5</Version>
+      <Version>2.0.0-preview8</Version>
     </PackageReference>
     <PackageReference Include="Imageflow.NativeRuntime.win-x86_64" GeneratePathProperty="true">
-      <Version>2.0.0-preview5</Version>
+      <Version>2.0.0-preview8</Version>
     </PackageReference>
     <PackageReference Include="Imageflow.Net">
-      <Version>0.10.0</Version>
+      <Version>0.10.2</Version>
     </PackageReference>
     <PackageReference Include="Imazen.HybridCache">
-      <Version>0.8.1</Version>
+      <Version>0.8.3</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection">
       <Version>2.2.0</Version>
@@ -92,8 +92,8 @@
   <Import Project="Build/Library.Build" />
   <PropertyGroup>
     <PostBuildEvent>
-      :: robocopy $(PkgImageflow_NativeRuntime_win-x86_2_0_0-preview5)runtimes $(Dev2sxcDnnRoot)bin\runtimes /E
-      :: robocopy $(PkgImageflow_NativeRuntime_win-x86_64_2_0_0-preview5)runtimes $(Dev2sxcDnnRoot)bin\runtimes /E
+      :: robocopy $(PkgImageflow_NativeRuntime_win-x86_2_0_0-preview8)runtimes $(Dev2sxcDnnRoot)bin\runtimes /E
+      :: robocopy $(PkgImageflow_NativeRuntime_win-x86_64_2_0_0-preview8)runtimes $(Dev2sxcDnnRoot)bin\runtimes /E
       :: robocopy $(Dev2sxcDnnRoot)bin Imageflow.*
       :: robocopy $(Dev2sxcDnnRoot)bin Imazen.*
       :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.Configuration.Abstractions.dll
