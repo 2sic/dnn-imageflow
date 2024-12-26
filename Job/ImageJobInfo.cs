@@ -45,8 +45,19 @@ namespace ToSic.Imageflow.Dnn.Job
             var qs = QueryStringRewrite == null 
                 ? context.Request.QueryString // when RegisterQueryStringRewrite is not executed
                 : QueryStringRewrite(new NameValueCollection(context.Request.QueryString)); // implemented in main 2sxc dnn module
-            
-            var args = new UrlEventArgs(context, context.Request.Path, PathHelpers.ToQueryDictionary(qs));
+
+            var dicQs = PathHelpers.ToQueryDictionary(qs);
+
+            // thienvc: auto response webp if browser support and No format specified or format=auto
+            if (!dicQs.ContainsKey("format") || dicQs["format"].Equals("auto", StringComparison.OrdinalIgnoreCase))
+            {
+                if(context.Request.AcceptTypes.Contains("image/webp"))
+                {
+                    dicQs["format"] = "webp";
+                }
+            }
+
+            var args = new UrlEventArgs(context, context.Request.Path, dicQs);
             FinalVirtualPath = args.VirtualPath;
             FinalQuery = args.Query;
         }
