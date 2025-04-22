@@ -10,6 +10,7 @@ namespace ToSic.Imageflow.Dnn
 
         // Replace native assemblies
         private static readonly string[] NativeAssemblies = {
+            @"win-arm64\native\imageflow.dll",
             @"win-x64\native\imageflow.dll",
             @"win-x86\native\imageflow.dll"
         };

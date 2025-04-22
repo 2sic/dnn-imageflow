@@ -9,10 +9,15 @@
     <AssemblyName>ToSic.Imageflow.Dnn</AssemblyName>
     <TargetFramework>net472</TargetFramework>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <Determinitic>true</Determinitic>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>bin\ToSic.Imageflow.Dnn.xml</DocumentationFile>
+    <WarningLevel>4</WarningLevel>
+    <Deterministic>true</Deterministic>
     <FileAlignment>512</FileAlignment>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
-    <!-- Don't generate assembly properties from this XML which should come from the core file, like version - these lines must be in sync in all ToSic.Eav.*.csproj files -->
+    <!-- Don't generate assembly properties from this XML which should come from the core file, like
+    version - these lines must be in sync in all ToSic.Eav.*.csproj files -->
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
@@ -23,34 +28,29 @@
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <!-- end: Don't generate... -->
   </PropertyGroup>
-  <PropertyGroup>
-    <OutputPath>bin\</OutputPath>
-    <DocumentationFile>bin\ToSic.Imageflow.Dnn.xml</DocumentationFile>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="Build\Library.Build" />
+    <Compile Remove="Build\**" />
+    <Compile Remove="InstallPackages\**" />
+    <EmbeddedResource Remove="Build\**" />
+    <EmbeddedResource Remove="InstallPackages\**" />
+    <None Remove="Build\**" />
+    <None Remove="InstallPackages\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="icon.png" />
     <Content Include="License.txt" />
     <Content Include="ReleaseNotes.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="NuGet.config" />
-    <None Include="Build\LibraryPackage.targets" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ToSic.Imageflow.Dnn.dnn" />
@@ -61,57 +61,35 @@
     <Reference Include="System.Numerics" />
     <Reference Include="System.Web" />
   </ItemGroup>
+  <!-- NuGet Packages -->
   <ItemGroup>
-    <PackageReference Include="DotNetNuke.Web" Version="9.6.1">
-      <ExcludeAssets>runtime</ExcludeAssets>
-    </PackageReference>
-    <PackageReference Include="Imageflow.NativeRuntime.win-x86" GeneratePathProperty="true">
-      <Version>2.0.0-preview8</Version>
-    </PackageReference>
-    <PackageReference Include="Imageflow.NativeRuntime.win-x86_64" GeneratePathProperty="true">
-      <Version>2.0.0-preview8</Version>
-    </PackageReference>
-    <PackageReference Include="Imageflow.Net">
-      <Version>0.10.2</Version>
-    </PackageReference>
-    <PackageReference Include="Imazen.HybridCache">
-      <Version>0.8.3</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection">
-      <Version>2.2.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Buffers">
-      <Version>4.5.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Memory">
-      <Version>4.5.5</Version>
-    </PackageReference>
+    <PackageReference Include="DotNetNuke.Web" Version="9.11.0" ExcludeAssets="runtime" />
+    <PackageReference Include="Imageflow.Net" Version="0.14.0-rc01" />
+    <PackageReference Include="Imageflow.NativeRuntime.win-arm64" Version="2.1.0-rc11" GeneratePathProperty="true" />
+    <PackageReference Include="Imageflow.NativeRuntime.win-x86" Version="2.1.0-rc11" GeneratePathProperty="true" />
+    <PackageReference Include="Imageflow.NativeRuntime.win-x86_64" Version="2.1.0-rc11" GeneratePathProperty="true" />
+    <PackageReference Include="Imazen.HybridCache" Version="0.8.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <!-- update to DNN 10.0.0 dependecie -->
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
   </ItemGroup>
-  <ItemGroup />
+  <!-- Build and Post-build events -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="Build/Library.Build" />
   <PropertyGroup>
     <PostBuildEvent>
-      :: robocopy $(PkgImageflow_NativeRuntime_win-x86_2_0_0-preview8)runtimes $(Dev2sxcDnnRoot)bin\runtimes /E
-      :: robocopy $(PkgImageflow_NativeRuntime_win-x86_64_2_0_0-preview8)runtimes $(Dev2sxcDnnRoot)bin\runtimes /E
-      :: robocopy $(Dev2sxcDnnRoot)bin Imageflow.*
-      :: robocopy $(Dev2sxcDnnRoot)bin Imazen.*
-      :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.Configuration.Abstractions.dll
-      :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.DependencyInjection.Abstractions.dll
-      :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.DependencyInjection.dll
-      :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.FileProviders.Abstractions.dll
-      :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.Hosting.Abstractions.dll
-      :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.Logging.Abstractions.dll
-      :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.Extensions.Primitives.dll
-      :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.IO.RecyclableMemoryStream.dll
-      @REM robocopy $(Dev2sxcDnnRoot)bin\Imageflow Newtonsoft.Json.dll
-      :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow System.Buffers.dll
-      :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow System.Memory.dll
-      :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow System.Numerics.Vectors.dll
-      :: robocopy $(Dev2sxcDnnRoot)bin\Imageflow System.Runtime.CompilerServices.Unsafe.dll
-      :: robocopy $(Dev2sxcDnnRoot)bin ToSic.Imageflow.Dnn.*
+      REM Copy native runtimes and dependencies
+      robocopy $(PkgImageflow_NativeRuntime_win-arm64)\runtimes $(Dev2sxcDnnRoot)runtimes /E
+      robocopy $(PkgImageflow_NativeRuntime_win-x86)\runtimes $(Dev2sxcDnnRoot)runtimes /E
+      robocopy $(PkgImageflow_NativeRuntime_win-x86_64)\runtimes $(Dev2sxcDnnRoot)runtimes /E
+      REM robocopy $(Dev2sxcDnnRoot)bin Imageflow.*
+      REM robocopy $(Dev2sxcDnnRoot)bin Imazen.*
+      REM robocopy $(Dev2sxcDnnRoot)bin ToSic.Imageflow.Dnn.*
+      REM robocopy $(Dev2sxcDnnRoot)bin\Imageflow Microsoft.*
+      REM robocopy $(Dev2sxcDnnRoot)bin\Imageflow System.*
       cd $(ProjectDir)bin
       robocopy .\ "..\..\Website\bin" ToSic.Imageflow.Dnn.*
-      exit 0</PostBuildEvent>
+      exit 0
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

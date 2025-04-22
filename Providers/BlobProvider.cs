@@ -97,7 +97,7 @@ namespace ToSic.Imageflow.Dnn.Providers
                 // Safely map the path
                 return HttpContext.Current.Server.MapPath(virtualPath);
             }
-            catch (HttpException e)
+            catch (HttpException)
             {
                 return null;
             }

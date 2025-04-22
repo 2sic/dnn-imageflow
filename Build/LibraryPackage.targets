@@ -7,11 +7,17 @@
     </XmlRead>
 
     <ItemGroup>
-      <!-- DNN specific DLLs -->
-      <AssemblyInclude Include="$(OutDir)\ToSic.Imageflow.Dnn.dll" />
-
-      <!-- DNN shared assemblies, Imageflow.NET transitive dependency -->
-      <AssemblyInclude Include="$(OutDir)\Newtonsoft.Json.dll" />
+      <!-- DNN specific DLLs, DNN shared assemblies, Imageflow.NET transitive dependency -->
+      <AssemblyInclude Include="$(OutDir)\ToSic.Imageflow.Dnn.dll;
+        $(OutDir)\Microsoft.Bcl.AsyncInterfaces.dll;
+        $(OutDir)\System.Buffers.dll;
+        $(OutDir)\System.Memory.dll;
+        $(OutDir)\System.Numerics.Vectors.dll;
+        $(OutDir)\System.Runtime.CompilerServices.Unsafe.dll;
+        $(OutDir)\System.Text.Encodings.Web.dll;
+        $(OutDir)\System.Text.Json.dll;
+        $(OutDir)\System.Threading.Tasks.Extensions.dll;
+        $(OutDir)\System.ValueTuple.dll" />
 
     </ItemGroup>
 
@@ -26,13 +32,8 @@
         $(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Hosting.Abstractions.dll;
         $(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Logging.Abstractions.dll;
         $(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Primitives.dll;
-        $(MSBuildProjectDirectory)\bin\Microsoft.IO.RecyclableMemoryStream.dll;
-        $(MSBuildProjectDirectory)\bin\System.Buffers.dll;
-        $(MSBuildProjectDirectory)\bin\System.Memory.dll;
-        $(MSBuildProjectDirectory)\bin\System.Numerics.Vectors.dll;
-        $(MSBuildProjectDirectory)\bin\System.Runtime.CompilerServices.Unsafe.dll" />
-      <BinRuntimes Include="$(PkgImageflow_NativeRuntime_win-x86)\runtimes\**\*.*;
-        $(PkgImageflow_NativeRuntime_win-x86_64)\runtimes\**\*.*" />
+        $(MSBuildProjectDirectory)\bin\Microsoft.IO.RecyclableMemoryStream.dll" />
+      <BinRuntimes Include="$(OutDir)\runtimes\win-*\native\imageflow.dll" />
     </ItemGroup>
 
     <ItemGroup>

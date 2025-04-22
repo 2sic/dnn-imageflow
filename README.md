@@ -1,45 +1,49 @@
-# dnn-imageflow
+# DNN-Imageflow
 
-## Imageflow image processing and optimizing http module for DNN
+## Overview
 
-It use Imazen [Imageflow.NET](https://github.com/imazen/imageflow-dotnet) wrapper for [Imageflow](https://www.imageflow.io/), the image processing library for servers.
+The **DNN-Imageflow** module provides advanced image processing and optimization for DNN websites. It leverages the Imazen [Imageflow.NET](https://github.com/imazen/imageflow-dotnet) wrapper for [Imageflow](https://www.imageflow.io/), a high-performance image processing library for servers.
 
-It is upgrade for very successful [dnn-imazen-imageresizer](https://github.com/2sic/dnn-imazen-imageresizer) commonly used with [2sxc](https://2sxc.org/) revolutionizing content management module on [DNN](https://www.dnnsoftware.com/). Older brother is based on classic [Imageresizer](https://imageresizing.net/) while [Imageflow](https://www.imageflow.io/) is next-generation product.
+This module is an upgrade to the popular [dnn-imazen-imageresizer](https://github.com/2sic/dnn-imazen-imageresizer), commonly used with the [2sxc](https://2sxc.org/) content management module for [DNN](https://www.dnnsoftware.com/). While the older version was based on [ImageResizer](https://imageresizing.net/), this module uses the next-generation [Imageflow](https://www.imageflow.io/).
 
-It is similar to [oqt-imageflow](https://github.com/2sic/oqtane-imageflow) for [Oqtane](https://www.oqtane.org/) and [Imageflow.NET Server](https://github.com/imazen/imageflow-dotnet-server) a super-fast image server for [ASP.NET Core](https://dotnet.microsoft.com/learn/aspnet/what-is-aspnet-core).
+It is also similar to:
+- [oqt-imageflow](https://github.com/2sic/oqtane-imageflow) for [Oqtane](https://www.oqtane.org/)
+- [Imageflow.NET Server](https://github.com/imazen/imageflow-dotnet-server), a high-performance image server for [ASP.NET Core](https://dotnet.microsoft.com/learn/aspnet/what-is-aspnet-core).
+
+---
 
 ## Installation
 
-1. Please [install](https://www.nvquicksite.com/) [DNN 9.6.1+](https://github.com/dnnsoftware/Dnn.Platform/releases).
-1. Download latest *ToSic.Imageflow.Dnn_NN.NN.NN_Install.zip* from dnn-imageflow [releases](https://github.com/2sic/dnn-imageflow/releases) [](https://github.com/2sic/dnn-imageflow).
-1. Install *ToSic.Imageflow.Dnn_NN.NN.NN_Install.zip* dnn extension [as usually](https://www.dnnsoftware.com/docs/administrators/extensions/install-extension.html).
-1. More DNN [info...](https://azing.org/dnn-community/)
+1. Install [DNN 9.11.0+](https://github.com/dnnsoftware/Dnn.Platform/releases) using [nvQuickSite](https://www.nvquicksite.com/).
+2. Download the latest `ToSic.Imageflow.Dnn_NN.NN.NN_Install.zip` from the [releases page](https://github.com/2sic/dnn-imageflow/releases).
+3. Install the extension using the [DNN extension installation guide](https://www.dnnsoftware.com/docs/administrators/extensions/install-extension.html).
+4. For more DNN-related information, visit the [DNN Community](https://azing.org/dnn-community/).
 
 ### Note
-1. As part of dnn extension installation it will automatically unregister older ImageResizer http module in web.config.
+- During installation, the module will automatically unregister the older `ImageResizer` HTTP module in `web.config`.
+
+---
 
 ## Usage
 
-Simply store files with images in DNN website (as any other, normal, unrestricted image, eg `/Portals/0/Images/img.jpg`).
+Store image files in your DNN website (e.g., `/Portals/0/Images/img.jpg`). Use the [Querystring API](https://docs.imageflow.io/querystring/introduction.html) to manipulate images dynamically.
 
-In image link use [Querystring API](https://docs.imageflow.io/querystring/introduction.html) for image manipulation, like is:
-- automatically crop away whitespace
-- sharpen
-- fix white balance
-- adjust contrast/saturation/brightness
-- rotate & flip images
-- crop
-- resize & constrain
-- produce highly optimized jpeg or webp images to reduce download times
-- [more](https://docs.imageflow.io/)
+### Features
+- Automatically crop whitespace
+- Sharpen images
+- Adjust white balance, contrast, saturation, and brightness
+- Rotate and flip images
+- Crop and resize images
+- Generate highly optimized JPEG or WebP images
+- [More features...](https://docs.imageflow.io/)
 
 ### Examples
 
 ```html
 <img src="img.jpg?w=50" />
-<img src="img.jpg?width=100&amp;height=100&amp;mode=max&amp;scale=down" />
-<img src="img.jpg?w=300&amp;h=300&amp;mode=crop&amp;scale=both" />
-<img src="img.jpg?format=webp" />
+<img src="img.jpg?width=100&height=100&mode=max&scale=down" /> 
+<img src="img.jpg?w=300&h=300&mode=crop&scale=both" /> 
+<img src="img.jpg?format=webp" /> 
 <img src="img.jpg?s.grayscale=true" />
 <img src="img.jpg?s.grayscale=ry" />
 <img src="img.jpg?s.grayscale=bt709" />
@@ -52,58 +56,58 @@ In image link use [Querystring API](https://docs.imageflow.io/querystring/introd
 <img src="img.jpg?s.saturation=-0.5" />
 ```
 
+---
+
 ## Caching
 
-- High performance [Imazen.HybridCache](https://www.nuget.org/packages/Imazen.HybridCache/)  (in-memory persisted database for tracking filenames with files used for bytes) is enabled by default with persistance in `App_Data\imageflow_hybrid_cache\`.
+The module uses the high-performance [Imazen.HybridCache](https://www.nuget.org/packages/Imazen.HybridCache/) by default. This in-memory persisted database tracks filenames and file bytes. Cache data is stored in `App_Data\imageflow_hybrid_cache\`.
+
+---
 
 ## Roadmap
 
-- watermarks
-- presets
-- extensionless paths
-- mapped paths
-- command defaults
-- ...
+Planned features include:
+- Watermarks
+- Presets
+- Extensionless paths
+- Mapped paths
+- Command defaults
+- And more...
 
-## Setup DEV ENV
+---
 
-1. Git clone this repo.
-1. In VS open `ToSic.Imageflow.Dnn` solution.
-1. Set **Release** configuration in configuration manager.
-1. Build Solution
-1. If all is OK, in `\InstallPackages` you should find DNN Library **extension packages** (to install Imageflow on other DNN installations):
-	1. `ToSic.Imageflow.Dnn_NN.NN.NN_Install.zip`
-	1. `ToSic.Imageflow.Dnn_NN.NN.NN_Symbols.zip`
+## Development Setup
+
+1. Clone this repository.
+2. Open the `ToSic.Imageflow.Dnn` solution in Visual Studio.
+3. Set the **Release** configuration in the Configuration Manager.
+4. Build the solution.
+5. If successful, the following extension packages will be available in the `\InstallPackages` folder:
+   - `ToSic.Imageflow.Dnn_NN.NN.NN_Install.zip`
+   - `ToSic.Imageflow.Dnn_NN.NN.NN_Symbols.zip`
+
+---
 
 ## References
 
-* DotNetNuke.Web (>= 9.6.1)
+- [DotNetNuke.Web (>= 9.11.0)](https://www.nuget.org/packages/DotNetNuke.Web)
+- [Imageflow.NativeRuntime.win-x86_64](https://www.nuget.org/packages/Imageflow.NativeRuntime.win-x86_64) ([2.1.0-rc11](https://www.nuget.org/packages/Imageflow.NativeRuntime.win-x86_64/2.1.0-rc11))
+- [Imageflow.Net](https://www.nuget.org/packages/Imageflow.Net) ([0.14.0-rc01](https://www.nuget.org/packages/Imageflow.Net/0.14.0-rc01))
+- [Imazen.HybridCache](https://www.nuget.org/packages/Imazen.HybridCache) ([0.8.3](https://www.nuget.org/packages/Imazen.HybridCache/0.8.3))
 
-## Included dependencies (.NETStandard 2.0/.NET Framework v4.7.2)
+---
 
-* Imageflow.NativeRuntime.win-x86 (2.0.0-preview8)
-* Imageflow.NativeRuntime.win-x86_64 (2.0.0-preview8)
-* Imageflow.Net 0.10.2
-* Imazen.HybridCache 0.8.3
-* Imazen.Common (>= 0.8.3)
-* Microsoft.CSharp (>= 4.7.0)
-* Microsoft.Extensions.Configuration.Abstractions (2.2.0)
-* Microsoft.Extensions.DependencyInjection.Abstractions (2.2.0)
-* Microsoft.Extensions.DependencyInjection (2.2.0)
-* Microsoft.Extensions.FileProviders.Abstractions (2.2.0)
-* Microsoft.Extensions.Hosting.Abstractions (>= 2.2.0)
-* Microsoft.Extensions.Logging.Abstractions (2.2.0)
-* Microsoft.Extensions.Primitives (2.2.0)
-* Microsoft.IO.RecyclableMemoryStream (>= 1.2.2 && < 3.0.0)
-* Newtonsoft.Json (>= 13.0.3 && < 14.0.0) -> DNN 9.6.1
-* System.Buffers (>= 4.5.1)
-* System.Memory (>= 4.5.5)
-* System.Numerics.Vectors (>= 4.5.0)
-* System.Runtime.CompilerServices.Unsafe (>= 4.5.3)
+## Dependencies
 
-## Places with version number
+- [DNN Imageflow v1.12.0](Docs/dependecies-v1.12.0.md)
+- [DNN Core Shared Dependencies by Version](Docs/dnn-shared-dependecies.md)
 
-* Properties/AssemblyInfo.cs, bump version on 2 places
-* ToSic.Imageflow.Dnn.dnn, bump version in package
-* ToSic.Imageflow.Dnn_Symbols.dnn, bump version on 2 places: package, dependency
-* releasenotes.txt, bump version in one place
+---
+
+## Versioning
+
+When updating the version, ensure the following files are updated:
+- `Properties/AssemblyInfo.cs` (update in 2 places)
+- `ToSic.Imageflow.Dnn.dnn` (update the package version)
+- `ToSic.Imageflow.Dnn_Symbols.dnn` (update in 2 places: package and dependency)
+- `releasenotes.txt` (update the version in 1 place)

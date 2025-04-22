@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("2sic internet solutions GmbH, Switzerland")]
 [assembly: AssemblyProduct("ToSic.Imageflow.Dnn")]
-[assembly: AssemblyCopyright("Copyright MIT © 2sic 2024")]
+[assembly: AssemblyCopyright("Copyright MIT © 2sic 2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -28,5 +28,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("01.11.00")]
-[assembly: AssemblyFileVersion("01.11.00")]
+[assembly: AssemblyVersion("01.12.00")]
+[assembly: AssemblyFileVersion("01.12.00")]
