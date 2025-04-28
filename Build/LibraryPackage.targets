@@ -33,7 +33,9 @@
         $(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Logging.Abstractions.dll;
         $(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Primitives.dll;
         $(MSBuildProjectDirectory)\bin\Microsoft.IO.RecyclableMemoryStream.dll" />
-      <BinRuntimes Include="$(OutDir)\runtimes\win-*\native\imageflow.dll" />
+      <!-- Native libraries for arm64 and x86 platforms are excluded to minimize the extension zip size -->
+      <!--<BinRuntimes Include="$(OutDir)\runtimes\win-*\native\imageflow.dll" />-->
+      <BinRuntimes Include="$(OutDir)\runtimes\win-x64\native\imageflow.dll" />
     </ItemGroup>
 
     <ItemGroup>
@@ -51,7 +53,9 @@
     <Copy SourceFiles="@(AssemblyInclude)" DestinationFolder="$(MSBuildProjectDirectory)\Package\bin" />
     <Copy SourceFiles="@(BinInstallInclude)" DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\bin" />
     <Copy SourceFiles="@(ImageflowAssemblyInclude)" DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\bin\Imageflow" />
-    <Copy SourceFiles="@(BinRuntimes)" DestinationFiles="@(BinRuntimes->'$(MSBuildProjectDirectory)\ResourcesZip\bin\runtimes\%(RecursiveDir)%(Filename)%(Extension).pending')" />
+    <!-- Native libraries for arm64 and x86 platforms are excluded to minimize the extension zip size -->
+    <!--<Copy SourceFiles="@(BinRuntimes)" DestinationFiles="@(BinRuntimes->'$(MSBuildProjectDirectory)\ResourcesZip\bin\runtimes\%(RecursiveDir)%(Filename)%(Extension).pending')" />-->
+    <Copy SourceFiles="@(BinRuntimes)" DestinationFiles="@(BinRuntimes->'$(MSBuildProjectDirectory)\ResourcesZip\bin\runtimes\win-x64\native\%(Filename)%(Extension).pending')" />
 
     <CreateItem Include="$(MSBuildProjectDirectory)\ResourcesZip\**\*.*">
       <Output TaskParameter="Include" ItemName="ResourcesContent" />
