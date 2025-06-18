@@ -10,7 +10,12 @@ namespace ToSic.Imageflow.Dnn.Providers
         public bool? Exists { get; set; }
         public DateTime? LastModifiedDateUtc { get; set; }
 
-        public Stream OpenRead() => new FileStream(Path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, FileOptions.Asynchronous | FileOptions.SequentialScan);
+        public Stream OpenRead()
+        {
+            // Read the file into memory and return a MemoryStream to avoid file locks
+            var bytes = File.ReadAllBytes(Path);
+            return new MemoryStream(bytes, writable: false);
+        }
 
         public void Dispose() { }
     }
