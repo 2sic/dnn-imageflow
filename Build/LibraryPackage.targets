@@ -7,32 +7,21 @@
     </XmlRead>
 
     <ItemGroup>
-      <!-- DNN specific DLLs, DNN shared assemblies, Imageflow.NET transitive dependency -->
+      <!-- Module-owned managed assemblies. DNN 10 already ships the broader System.* and DI dependency set. -->
       <AssemblyInclude Include="$(OutDir)\ToSic.Imageflow.Dnn.dll;
-        $(OutDir)\Microsoft.Bcl.AsyncInterfaces.dll;
-        $(OutDir)\System.Buffers.dll;
-        $(OutDir)\System.Memory.dll;
-        $(OutDir)\System.Numerics.Vectors.dll;
-        $(OutDir)\System.Runtime.CompilerServices.Unsafe.dll;
-        $(OutDir)\System.Text.Encodings.Web.dll;
-        $(OutDir)\System.Text.Json.dll;
-        $(OutDir)\System.Threading.Tasks.Extensions.dll;
-        $(OutDir)\System.ValueTuple.dll" />
+        $(OutDir)\Imageflow.Net.dll;
+        $(OutDir)\Imazen.Common.dll;
+        $(OutDir)\Imazen.HybridCache.dll;
+        $(OutDir)\Microsoft.Extensions.Configuration.Abstractions.dll;
+        $(OutDir)\Microsoft.Extensions.FileProviders.Abstractions.dll;
+        $(OutDir)\Microsoft.Extensions.Hosting.Abstractions.dll;
+        $(OutDir)\Microsoft.Extensions.Logging.Abstractions.dll;
+        $(OutDir)\Microsoft.Extensions.Primitives.dll;
+        $(OutDir)\Microsoft.IO.RecyclableMemoryStream.dll" />
 
     </ItemGroup>
 
     <ItemGroup>
-      <BinInstallInclude Include="$(MSBuildProjectDirectory)\bin\Imageflow.Net.dll;
-        $(MSBuildProjectDirectory)\bin\Imazen.Common.dll;
-        $(MSBuildProjectDirectory)\bin\Imazen.HybridCache.dll" />
-      <ImageflowAssemblyInclude Include="$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Configuration.Abstractions.dll;
-        $(MSBuildProjectDirectory)\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll;
-        $(MSBuildProjectDirectory)\bin\Microsoft.Extensions.DependencyInjection.dll;
-        $(MSBuildProjectDirectory)\bin\Microsoft.Extensions.FileProviders.Abstractions.dll;
-        $(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Hosting.Abstractions.dll;
-        $(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Logging.Abstractions.dll;
-        $(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Primitives.dll;
-        $(MSBuildProjectDirectory)\bin\Microsoft.IO.RecyclableMemoryStream.dll" />
       <!-- Native libraries for arm64 and x86 platforms are excluded to minimize the extension zip size -->
       <!--<BinRuntimes Include="$(OutDir)\runtimes\win-*\native\imageflow.dll" />-->
       <BinRuntimes Include="$(OutDir)\runtimes\win-x64\native\imageflow.dll" />
@@ -51,8 +40,6 @@
     <!-- Install Package -->
     <Copy SourceFiles="@(InstallInclude)" DestinationFolder="$(MSBuildProjectDirectory)\Package" />
     <Copy SourceFiles="@(AssemblyInclude)" DestinationFolder="$(MSBuildProjectDirectory)\Package\bin" />
-    <Copy SourceFiles="@(BinInstallInclude)" DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\bin" />
-    <Copy SourceFiles="@(ImageflowAssemblyInclude)" DestinationFolder="$(MSBuildProjectDirectory)\ResourcesZip\bin\Imageflow" />
     <!-- Native libraries for arm64 and x86 platforms are excluded to minimize the extension zip size -->
     <!--<Copy SourceFiles="@(BinRuntimes)" DestinationFiles="@(BinRuntimes->'$(MSBuildProjectDirectory)\ResourcesZip\bin\runtimes\%(RecursiveDir)%(Filename)%(Extension).pending')" />-->
     <Copy SourceFiles="@(BinRuntimes)" DestinationFiles="@(BinRuntimes->'$(MSBuildProjectDirectory)\ResourcesZip\bin\runtimes\win-x64\native\%(Filename)%(Extension).pending')" />

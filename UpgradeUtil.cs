@@ -48,27 +48,48 @@ namespace ToSic.Imageflow.Dnn
         /// </summary>
         private static void ReplaceNativeAssemblies()
         {
-            var withoutExceptions = true;
-
             foreach (var file in NativeAssemblies)
             {
                 var sourceFile = Path.Combine(Runtimes, $"{file}.{PendingExtension}");
-                if (!File.Exists(sourceFile)) continue;
+                if (!File.Exists(sourceFile))
+                    continue;
 
+                var destinationFile = Path.Combine(Runtimes, file);
                 try
                 {
-                    var destinationFile = Path.Combine(Runtimes, file);
-                    if (File.Exists(destinationFile)) File.Delete(destinationFile);
+                    if (File.Exists(destinationFile))
+                    {
+                        if (SameFileContent(sourceFile, destinationFile))
+                        {
+                            try
+                            {
+                                File.Delete(sourceFile);
+                            }
+                            catch
+                            {
+                                // Same native runtime is already active; pending cleanup can wait.
+                            }
+                            continue;
+                        }
+
+                        File.Delete(destinationFile);
+                    }
+
                     // Rename file, remove ".pending" extension to get normal "assembly.dll" filename
                     File.Move(sourceFile, destinationFile);
                 }
-                catch
+                catch (System.Exception ex) when (ex is IOException || ex is System.UnauthorizedAccessException)
                 {
-                    withoutExceptions = false;
+                    throw new IOException(
+                        $"Imageflow native runtime upgrade is pending, but '{destinationFile}' could not be replaced. Restart the DNN app pool/IIS process, then retry the request.",
+                        ex);
                 }
             }
 
-            Upgraded = withoutExceptions;
+            Upgraded = true;
         }
+
+        private static bool SameFileContent(string left, string right)
+            => new FileInfo(left).Length == new FileInfo(right).Length;
     }
 }

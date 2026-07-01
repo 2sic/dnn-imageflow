@@ -1,7 +1,9 @@
-﻿# DNN Imageflow v1.12.0
+﻿# DNN Imageflow v1.12.0 (historical reference)
+
+This document captures the older v1.12.0 packaging baseline. The current DNN 10.2.2 compatibility preparation and the upcoming 1.13.0 package work are documented in [dependecies-v1.13.0-prep.md](dependecies-v1.13.0-prep.md).
 
 ## Referenced Dependencies (with Transitive Dependency Tree)  
-_Targets: .NET Standard 2.0 / .NET Framework 4.7.2_
+_Historical baseline for the pre-1.13.0 package; current work targets .NET Framework 4.8 / DNN 10.2.2._
 
 - **Imageflow.NativeRuntime.win-arm64** (2.1.0-rc11)
 - **Imageflow.NativeRuntime.win-x86** (2.1.0-rc11)

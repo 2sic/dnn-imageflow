@@ -14,7 +14,7 @@ It is also similar to:
 
 ## Installation
 
-1. Install [DNN 9.11.0+](https://github.com/dnnsoftware/Dnn.Platform/releases) using [nvQuickSite](https://www.nvquicksite.com/).
+1. Install [DNN 10.2.2+](https://github.com/dnnsoftware/Dnn.Platform/releases) using [nvQuickSite](https://www.nvquicksite.com/).
 2. Download the latest `ToSic.Imageflow.Dnn_NN.NN.NN_Install.zip` from the [releases page](https://github.com/2sic/dnn-imageflow/releases).
 3. Install the extension using the [DNN extension installation guide](https://www.dnnsoftware.com/docs/administrators/extensions/install-extension.html).
 4. For more DNN-related information, visit the [DNN Community](https://azing.org/dnn-community/).
@@ -90,16 +90,18 @@ Planned features include:
 
 ## References
 
-- [DotNetNuke.Web (>= 9.11.0)](https://www.nuget.org/packages/DotNetNuke.Web)
-- [Imageflow.NativeRuntime.win-x86_64](https://www.nuget.org/packages/Imageflow.NativeRuntime.win-x86_64) ([2.1.0-rc11](https://www.nuget.org/packages/Imageflow.NativeRuntime.win-x86_64/2.1.0-rc11))
-- [Imageflow.Net](https://www.nuget.org/packages/Imageflow.Net) ([0.14.0-rc01](https://www.nuget.org/packages/Imageflow.Net/0.14.0-rc01))
-- [Imazen.HybridCache](https://www.nuget.org/packages/Imazen.HybridCache) ([0.8.3](https://www.nuget.org/packages/Imazen.HybridCache/0.8.3))
+- [DotNetNuke.Web](https://www.nuget.org/packages/DotNetNuke.Web) ([10.2.2](https://www.nuget.org/packages/DotNetNuke.Web/10.2.2))
+- [Imageflow.Net](https://www.nuget.org/packages/Imageflow.Net) ([0.15.1](https://www.nuget.org/packages/Imageflow.Net/0.15.1))
+- [Imageflow.NativeRuntime.win-arm64](https://www.nuget.org/packages/Imageflow.NativeRuntime.win-arm64) ([2.3.1-rc01](https://www.nuget.org/packages/Imageflow.NativeRuntime.win-arm64/2.3.1-rc01))
+- [Imageflow.NativeRuntime.win-x86](https://www.nuget.org/packages/Imageflow.NativeRuntime.win-x86) ([2.3.1-rc01](https://www.nuget.org/packages/Imageflow.NativeRuntime.win-x86/2.3.1-rc01))
+- [Imageflow.NativeRuntime.win-x86_64](https://www.nuget.org/packages/Imageflow.NativeRuntime.win-x86_64) ([2.3.1-rc01](https://www.nuget.org/packages/Imageflow.NativeRuntime.win-x86_64/2.3.1-rc01))
+- [Imazen.HybridCache](https://www.nuget.org/packages/Imazen.HybridCache) ([0.9.0](https://www.nuget.org/packages/Imazen.HybridCache/0.9.0))
 
 ---
 
 ## Dependencies
 
-- [DNN Imageflow v1.12.0](Docs/dependecies-v1.12.0.md)
+- [DNN Imageflow compatibility for DNN 10.2.2](Docs/dependecies-v1.13.0.md)
 - [DNN Core Shared Dependencies by Version](Docs/dnn-shared-dependecies.md)
 
 ---

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dotnetnuke type="Package" version="6.0">
   <packages>
-    <package name="ToSic.Imageflow.Dnn" type="Library" version="01.12.01">
-      <friendlyName>Imageflow</friendlyName>
+    <package name="ToSic.Imageflow.Dnn" type="Library" version="01.13.00">
+      <friendlyName>Imageflow for DNN</friendlyName>
 
       <description>
         <![CDATA[<p>Imazen Imageflow - optimal images at incredible speeds - image resizer http module for high-performance image manipulation.</p>]]>
@@ -22,67 +22,55 @@
       <azureCompatible>True</azureCompatible>
 
       <dependencies>
-        <dependency type="CoreVersion">09.11.00</dependency>
+        <dependency type="CoreVersion">10.2.2</dependency>
       </dependencies>
 
       <components>
 
         <!-- "Assembly" component should be in front of "Config", or new/updated auto-generated assembly binding redirects in web.config are lost. -->
         <component type="Assembly">
-
           <assemblies>
             <basePath>bin</basePath>
             <assembly>
               <name>ToSic.Imageflow.Dnn.dll</name>
             </assembly>
-            <!-- transitive dependencies -->
             <assembly>
-              <name>Microsoft.Bcl.AsyncInterfaces.dll</name>
-              <!-- v8.0.0.0 - updated to version in DNN 10 upgrade.zip -->
-              <version>8.0.23.53103</version>
+              <name>Imageflow.Net.dll</name>
+              <version>0.15.1.0</version>
             </assembly>
             <assembly>
-              <name>System.Buffers.dll</name>
-              <!-- v4.0.4.0 -->
-              <version>4.600.24.56208</version>
+              <name>Imazen.Common.dll</name>
+              <version>0.9.0.0</version>
             </assembly>
             <assembly>
-              <name>System.Memory.dll</name>
-              <!-- v4.0.1.2 -->
-              <version>4.6.31308.01</version>
+              <name>Imazen.HybridCache.dll</name>
+              <version>0.9.0.0</version>
             </assembly>
             <assembly>
-              <name>System.Numerics.Vectors.dll</name>
-              <!-- v4.1.4.0 - same as in DNN 9 upgrade.zip -->
-              <version>4.6.26515.06</version>
+              <name>Microsoft.Extensions.Configuration.Abstractions.dll</name>
+              <version>2.2.0.18315</version>
             </assembly>
             <assembly>
-              <name>System.Runtime.CompilerServices.Unsafe.dll</name>
-              <!-- v6.0.0.0 -->
-              <version>6.0.21.52210</version>
+              <name>Microsoft.Extensions.FileProviders.Abstractions.dll</name>
+              <version>2.2.0.18315</version>
             </assembly>
             <assembly>
-              <name>System.Text.Encodings.Web.dll</name>
-              <!-- v6.0.0.1 -->
-              <version>6.0.3624.51421</version>
+              <name>Microsoft.Extensions.Hosting.Abstractions.dll</name>
+              <version>2.2.0.18316</version>
             </assembly>
             <assembly>
-              <name>System.Text.Json.dll</name>
-              <!-- v6.0.0.11 -->
-              <version>6.0.3624.51421</version>
+              <name>Microsoft.Extensions.Logging.Abstractions.dll</name>
+              <version>2.2.0.18315</version>
             </assembly>
             <assembly>
-              <name>System.Threading.Tasks.Extensions.dll</name>
-              <!-- v4.2.0.1 - same as in DNN 9,10 upgrade.zip -->
-              <version>4.6.28619.01</version>
+              <name>Microsoft.Extensions.Primitives.dll</name>
+              <version>2.2.0.18315</version>
             </assembly>
             <assembly>
-              <name>System.ValueTuple.dll</name>
-              <!-- v4.0.3.0 - same as in DNN 10 upgrade.zip -->
-              <version>4.6.26515.06</version>
+              <name>Microsoft.IO.RecyclableMemoryStream.dll</name>
+              <version>3.0.1.0</version>
             </assembly>
           </assemblies>
-
         </component>
 
         <component type="Config">
@@ -133,219 +121,30 @@
                     <add assembly="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
                   </node>
 
-                  <!-- 01 - Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.Configuration.Abstractions.dll, version 2.2.0.0 -->
-                  <!-- remove older bindingRedirects -->
-                  <!--<node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[
-                          ab:assemblyIdentity/@name='Microsoft.Extensions.Configuration.Abstractions'
-                          and ab:codeBase/@href='bin\Imageflow\Microsoft.Extensions.Configuration.Abstractions.dll'
-                          and not(ab:bindingRedirect)
-                        ]"
-                        action="remove"
-                        collision="overwrite"
-                        nameSpace="urn:schemas-microsoft-com:asm.v1"
-                        nameSpacePrefix="ab" />-->
-                  <!-- 2sxc module: if dependentAssembly has bindingRedirect for @newVersion='2.1.1.0', add codeBase and adjust bindingRedirect --> 
-                  <!--<node path="/configuration/runtime/ab:assemblyBinding"
-                        action="update"
-                        targetpath="ab:dependentAssembly[
-                          ab:assemblyIdentity/@name='Microsoft.Extensions.Configuration.Abstractions'
-                          and ab:bindingRedirect[@oldVersion='0.0.0.0-32767.32767.32767.32767' and @newVersion='2.1.1.0']
-                        ]"
-                        collision="overwrite"
-                        nameSpace="urn:schemas-microsoft-com:asm.v1"
-                        nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.Configuration.Abstractions" publicKeyToken="adb9793829ddae60" />
-                      <bindingRedirect oldVersion="0.0.0.0-2.1.1.0" newVersion="2.1.1.0" />
-                      <bindingRedirect oldVersion="2.2.0.0-32767.32767.32767.32767" newVersion="2.2.0.0" />
-                      <codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.Configuration.Abstractions.dll" />
-                    </dependentAssembly>
-                  </node>-->
-                  <!-- standalone ImageFlow: if dependentAssembly is missing, just add codeBase -->
-                  <node path="/configuration/runtime/ab:assemblyBinding[not(ab:dependentAssembly/ab:assemblyIdentity/@name='Microsoft.Extensions.Configuration.Abstractions')]"
-                        action="add"
-                        collision="overwrite"
-                        nameSpace="urn:schemas-microsoft-com:asm.v1"
-                        nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.Configuration.Abstractions" publicKeyToken="adb9793829ddae60" />
-                      <codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.Configuration.Abstractions.dll" />
-                    </dependentAssembly>
-                  </node>
-
-
-                  <!-- 02 - Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.DependencyInjection.Abstractions.dll, version 2.2.0.0 -->
-                  <node path="/configuration/runtime/ab:assemblyBinding[not(ab:dependentAssembly/ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection.Abstractions')]"
-                        action="add"
-                        collision="overwrite"
-                        nameSpace="urn:schemas-microsoft-com:asm.v1"
-                        nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.DependencyInjection.Abstractions" publicKeyToken="adb9793829ddae60" />
-                      <codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
-                    </dependentAssembly>
-                  </node>
-
-
-                  <!-- 03 - Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.DependencyInjection.dll, version 2.2.0.0 -->
-                  <node path="/configuration/runtime/ab:assemblyBinding[not(ab:dependentAssembly/ab:assemblyIdentity[@name='Microsoft.Extensions.DependencyInjection'])]"
-                        action="add"
-                        collision="overwrite"
-                        nameSpace="urn:schemas-microsoft-com:asm.v1"
-                        nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.DependencyInjection" publicKeyToken="adb9793829ddae60" />
-                      <codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.DependencyInjection.dll" />
-                    </dependentAssembly>
-                  </node>
-
-
-                  <!-- 04 - Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.FileProviders.Abstractions.dll, version 2.2.0.0 -->
-                  <!-- if dependentAssembly has bindingRedirect for @newVersion='2.1.1.0', add codeBase and adjust bindingRedirect --> 
-                  <!--<node path="/configuration/runtime/ab:assemblyBinding"
-                        action="update"
-                        targetpath="ab:dependentAssembly[
-                          ab:assemblyIdentity/@name='Microsoft.Extensions.FileProviders.Abstractions'
-                          and ab:bindingRedirect[@oldVersion='0.0.0.0-32767.32767.32767.32767' and @newVersion='2.1.1.0']
-                        ]"
-                        collision="overwrite"
-                        nameSpace="urn:schemas-microsoft-com:asm.v1"
-                        nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.FileProviders.Abstractions" publicKeyToken="adb9793829ddae60" />
-                      <bindingRedirect oldVersion="0.0.0.0-2.1.1.0" newVersion="2.1.1.0" />
-                      <bindingRedirect oldVersion="2.2.0.0-32767.32767.32767.32767" newVersion="2.2.0.0" />
-                      <codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.FileProviders.Abstractions.dll" />
-                    </dependentAssembly>
-                  </node>-->
-                  <!-- standalone ImageFlow: if dependentAssembly is missing, just add codeBase -->
-                  <node path="/configuration/runtime/ab:assemblyBinding[not(ab:dependentAssembly/ab:assemblyIdentity/@name='Microsoft.Extensions.FileProviders.Abstractions')]"
-                        action="add"
-                        collision="overwrite"
-                        nameSpace="urn:schemas-microsoft-com:asm.v1"
-                        nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.FileProviders.Abstractions" publicKeyToken="adb9793829ddae60" />
-                      <codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.FileProviders.Abstractions.dll" />
-                    </dependentAssembly>
-                  </node>
-
-
-                  <!-- 05 - Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.Hosting.Abstractions.dll, version 2.2.0.0 -->
-                  <!-- if dependentAssembly has bindingRedirect for @newVersion='2.1.1.0', add codeBase and adjust bindingRedirect --> 
-                  <!--<node path="/configuration/runtime/ab:assemblyBinding"
-                        action="update"
-                        targetpath="ab:dependentAssembly[
-                          ab:assemblyIdentity/@name='Microsoft.Extensions.Hosting.Abstractions'
-                          and ab:bindingRedirect[@oldVersion='0.0.0.0-32767.32767.32767.32767' and @newVersion='2.1.1.0']
-                        ]"
-                        collision="overwrite"
-                        nameSpace="urn:schemas-microsoft-com:asm.v1"
-                        nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.Hosting.Abstractions" publicKeyToken="adb9793829ddae60" />
-                      <bindingRedirect oldVersion="0.0.0.0-2.1.1.0" newVersion="2.1.1.0" />
-                      <bindingRedirect oldVersion="2.2.0.0-32767.32767.32767.32767" newVersion="2.2.0.0" />
-                      <codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.Hosting.Abstractions.dll" />
-                    </dependentAssembly>
-                  </node>-->
-                  <!-- standalone ImageFlow: if dependentAssembly is missing, just add codeBase -->
-                  <node path="/configuration/runtime/ab:assemblyBinding[not(ab:dependentAssembly/ab:assemblyIdentity/@name='Microsoft.Extensions.Hosting.Abstractions')]"
-                        action="add"
-                        collision="overwrite"
-                        nameSpace="urn:schemas-microsoft-com:asm.v1"
-                        nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.Hosting.Abstractions" publicKeyToken="adb9793829ddae60" />
-                      <codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.Hosting.Abstractions.dll" />
-                    </dependentAssembly>
-                  </node>
-
+                  <!-- DNN's Assembly component owns binding redirects. These nodes only remove stale codeBase entries from previous bin\Imageflow layouts. -->
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.Configuration.Abstractions']/ab:codeBase[@href='bin\Imageflow\Microsoft.Extensions.Configuration.Abstractions.dll' or @href='bin\Microsoft.Extensions.Configuration.Abstractions.dll']" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.Configuration.Abstractions' and not(ab:bindingRedirect) and not(ab:codeBase)]" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
                   
-                  <!-- 06 - Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.Logging.Abstractions.dll, version 2.2.0.0 -->
-                  <!-- 2sxc module: if dependentAssembly has bindingRedirect for @newVersion='2.1.1.0', add codeBase and adjust bindingRedirect --> 
-                  <!--<node path="/configuration/runtime/ab:assemblyBinding"
-                        action="update"
-                        targetpath="ab:dependentAssembly[
-                          ab:assemblyIdentity/@name='Microsoft.Extensions.Logging.Abstractions'
-                          and ab:bindingRedirect[@oldVersion='0.0.0.0-32767.32767.32767.32767' and @newVersion='2.1.1.0']
-                        ]"
-                        collision="overwrite"
-                        nameSpace="urn:schemas-microsoft-com:asm.v1"
-                        nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.Logging.Abstractions" publicKeyToken="adb9793829ddae60" />
-                      <bindingRedirect oldVersion="0.0.0.0-2.1.1.0" newVersion="2.1.1.0" />
-                      <bindingRedirect oldVersion="2.2.0.0-32767.32767.32767.32767" newVersion="2.2.0.0" />
-                      <codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.Logging.Abstractions.dll" />
-                    </dependentAssembly>
-                  </node>-->
-                  <!-- standalone ImageFlow: if dependentAssembly is missing, just add codeBase -->
-                  <node path="/configuration/runtime/ab:assemblyBinding[not(ab:dependentAssembly/ab:assemblyIdentity/@name='Microsoft.Extensions.Logging.Abstractions')]"
-                        action="add"
-                        collision="overwrite"
-                        nameSpace="urn:schemas-microsoft-com:asm.v1"
-                        nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.Logging.Abstractions" publicKeyToken="adb9793829ddae60" />
-                      <codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.Logging.Abstractions.dll" />
-                    </dependentAssembly>
-                  </node>
-
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection.Abstractions']/ab:codeBase[@href='bin\Imageflow\Microsoft.Extensions.DependencyInjection.Abstractions.dll' or @href='bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll']" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection.Abstractions' and not(ab:bindingRedirect) and not(ab:codeBase)]" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
                   
-                  <!-- 07 - Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.Extensions.Primitives.dll, version 2.2.0.0 -->
-                  <!-- 2sxc module: if dependentAssembly has bindingRedirect for @newVersion='2.1.1.0', add codeBase and adjust bindingRedirect --> 
-                  <!--<node path="/configuration/runtime/ab:assemblyBinding"
-                        action="update"
-                        targetpath="ab:dependentAssembly[
-                          ab:assemblyIdentity/@name='Microsoft.Extensions.Primitives'
-                          and ab:bindingRedirect[@oldVersion='0.0.0.0-32767.32767.32767.32767' and @newVersion='2.1.1.0']
-                        ]"
-                        collision="overwrite"
-                        nameSpace="urn:schemas-microsoft-com:asm.v1"
-                        nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.Primitives" publicKeyToken="adb9793829ddae60" />
-                      <bindingRedirect oldVersion="0.0.0.0-2.1.1.0" newVersion="2.1.1.0" />
-                      <bindingRedirect oldVersion="2.2.0.0-32767.32767.32767.32767" newVersion="2.2.0.0" />
-                      <codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.Primitives.dll" />
-                    </dependentAssembly>
-                  </node>-->
-                  <!-- standalone ImageFlow: if dependentAssembly is missing, just add codeBase -->
-                  <node path="/configuration/runtime/ab:assemblyBinding[not(ab:dependentAssembly/ab:assemblyIdentity/@name='Microsoft.Extensions.Primitives')]"
-                        action="add"
-                        collision="overwrite"
-                        nameSpace="urn:schemas-microsoft-com:asm.v1"
-                        nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.Extensions.Primitives" publicKeyToken="adb9793829ddae60" />
-                      <codeBase version="2.2.0.0" href="bin\Imageflow\Microsoft.Extensions.Primitives.dll" />
-                    </dependentAssembly>
-                  </node>
-
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection']/ab:codeBase[@href='bin\Imageflow\Microsoft.Extensions.DependencyInjection.dll' or @href='bin\Microsoft.Extensions.DependencyInjection.dll']" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.DependencyInjection' and not(ab:bindingRedirect) and not(ab:codeBase)]" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
                   
-                  <!-- 08 - Imageflow add codeBase and update bindingRedirects for bin\Imageflow\Microsoft.IO.RecyclableMemoryStream.dll, version 3.0.1.0 -->
-                  <!-- remove older bindingRedirects -->
-                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[
-                          ab:assemblyIdentity/@name='Microsoft.IO.RecyclableMemoryStream'
-                          and ab:codeBase/@href='bin\Imageflow\Microsoft.IO.RecyclableMemoryStream.dll'
-                          and not(ab:bindingRedirect)
-                        ]"
-                        action="remove"
-                        collision="overwrite"
-                        nameSpace="urn:schemas-microsoft-com:asm.v1"
-                        nameSpacePrefix="ab" />
-                  <!-- standalone ImageFlow: if dependentAssembly is missing, just add codeBase -->
-                  <node path="/configuration/runtime/ab:assemblyBinding[not(ab:dependentAssembly/ab:assemblyIdentity/@name='Microsoft.IO.RecyclableMemoryStream')]"
-                        action="add"
-                        collision="overwrite"
-                        nameSpace="urn:schemas-microsoft-com:asm.v1"
-                        nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Microsoft.IO.RecyclableMemoryStream" publicKeyToken="31bf3856ad364e35" />
-                      <codeBase version="3.0.1.0" href="bin\Imageflow\Microsoft.IO.RecyclableMemoryStream.dll" />
-                    </dependentAssembly>
-                  </node>
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.FileProviders.Abstractions']/ab:codeBase[@href='bin\Imageflow\Microsoft.Extensions.FileProviders.Abstractions.dll' or @href='bin\Microsoft.Extensions.FileProviders.Abstractions.dll']" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.FileProviders.Abstractions' and not(ab:bindingRedirect) and not(ab:codeBase)]" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
+                  
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.Hosting.Abstractions']/ab:codeBase[@href='bin\Imageflow\Microsoft.Extensions.Hosting.Abstractions.dll' or @href='bin\Microsoft.Extensions.Hosting.Abstractions.dll']" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.Hosting.Abstractions' and not(ab:bindingRedirect) and not(ab:codeBase)]" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
+                  
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.Logging.Abstractions']/ab:codeBase[@href='bin\Imageflow\Microsoft.Extensions.Logging.Abstractions.dll' or @href='bin\Microsoft.Extensions.Logging.Abstractions.dll']" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.Logging.Abstractions' and not(ab:bindingRedirect) and not(ab:codeBase)]" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
+                  
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.Primitives']/ab:codeBase[@href='bin\Imageflow\Microsoft.Extensions.Primitives.dll' or @href='bin\Microsoft.Extensions.Primitives.dll']" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.Extensions.Primitives' and not(ab:bindingRedirect) and not(ab:codeBase)]" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
+                  
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.IO.RecyclableMemoryStream']/ab:codeBase[@href='bin\Imageflow\Microsoft.IO.RecyclableMemoryStream.dll' or @href='bin\Microsoft.IO.RecyclableMemoryStream.dll']" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
+                  <node path="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Microsoft.IO.RecyclableMemoryStream' and not(ab:bindingRedirect) and not(ab:codeBase)]" action="remove" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab" />
 
                 </nodes>
               </configuration>

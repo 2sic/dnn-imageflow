@@ -250,6 +250,34 @@ If a dependency has an `assemblyBinding` entry, the full XML is shown in a separ
 
 ---
 
+## DNN 10.2.2 compatibility baseline
+
+For the current Imageflow preparation work, module-owned assemblies live directly in the main `bin` folder. DNN's Assembly component manages binding redirects, and the Config component only removes stale `codeBase` entries from older `bin/Imageflow` layouts.
+
+| DLL Name | Assembly Version | Notes |
+|----------|------------------|-------|
+| Microsoft.Bcl.AsyncInterfaces | 8.0.0.0 | Already provided by DNN 10.2.2, so it is not packaged by the module |
+| Microsoft.Extensions.DependencyInjection.Abstractions | 8.0.0.0 | Already provided by DNN 10.2.2, so it is not packaged by the module |
+| Microsoft.Extensions.DependencyInjection | 8.0.0.0 | Already provided by DNN 10.2.2, so it is not packaged by the module |
+| Microsoft.Extensions.Configuration.Abstractions | 2.2.0.0 | Packaged by the module because clean DNN 10.2.2 cannot be relied on to provide this 2.2 line |
+| Microsoft.Extensions.FileProviders.Abstractions | 2.2.0.0 | Packaged by the module because clean DNN 10.2.2 cannot be relied on to provide this 2.2 line |
+| Microsoft.Extensions.Hosting.Abstractions | 2.2.0.0 | Packaged by the module because clean DNN 10.2.2 cannot be relied on to provide this 2.2 line |
+| Microsoft.Extensions.Logging.Abstractions | 2.2.0.0 | Packaged by the module because clean DNN 10.2.2 cannot be relied on to provide this 2.2 line |
+| Microsoft.Extensions.Primitives | 2.2.0.0 | Packaged by the module because clean DNN 10.2.2 cannot be relied on to provide this 2.2 line |
+| Microsoft.IO.RecyclableMemoryStream | 3.0.1.0 | Packaged by the module because clean DNN 10.2.2 does not provide it |
+| System.Buffers | 4.0.4.0+ | Already provided by DNN 10.2.2, so it is not packaged by the module |
+| System.Memory | 4.0.2.0+ | Already provided by DNN 10.2.2, so it is not packaged by the module |
+| System.Numerics.Vectors | 4.1.5.0+ | Already provided by DNN 10.2.2, so it is not packaged by the module |
+| System.Runtime.CompilerServices.Unsafe | 6.0.3.0 | Already provided by DNN 10.2.2, so it is not packaged by the module |
+| System.Text.Encodings.Web | 8.0.0.0+ | Already provided by DNN 10.2.2, so it is not packaged by the module |
+| System.Text.Json | 8.0.0.5+ | Already provided by DNN 10.2.2, so it is not packaged by the module |
+| System.Threading.Tasks.Extensions | 4.2.0.1 | Already provided by DNN 10.2.2, so it is not packaged by the module |
+| System.ValueTuple | 4.0.3.0 | Already provided by DNN 10.2.2, so it is not packaged by the module |
+
+This layout keeps the module-owned assemblies in the shared `bin` folder while avoiding duplicates for assemblies already provided by the DNN 10 runtime.
+
+---
+
 **Legend:**  
 - `-` in Notes means no special `assemblyBinding` in web.config.  
 - If "see below", the full `assemblyBinding` XML is shown after the table.
