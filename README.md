@@ -14,7 +14,7 @@ It is also similar to:
 
 ## Installation
 
-1. Install [DNN 10.2.2+](https://github.com/dnnsoftware/Dnn.Platform/releases) using [nvQuickSite](https://www.nvquicksite.com/).
+1. Install [DNN 10.1.0+](https://github.com/dnnsoftware/Dnn.Platform/releases) using [nvQuickSite](https://www.nvquicksite.com/).
 2. Download the latest `ToSic.Imageflow.Dnn_NN.NN.NN_Install.zip` from the [releases page](https://github.com/2sic/dnn-imageflow/releases).
 3. Install the extension using the [DNN extension installation guide](https://www.dnnsoftware.com/docs/administrators/extensions/install-extension.html).
 4. For more DNN-related information, visit the [DNN Community](https://azing.org/dnn-community/).
@@ -82,7 +82,11 @@ Planned features include:
 2. Open the `ToSic.Imageflow.Dnn` solution in Visual Studio.
 3. Set the **Release** configuration in the Configuration Manager.
 4. Build the solution.
-5. If successful, the following extension packages will be available in the `\InstallPackages` folder:
+5. Generate the extension packages with full-framework MSBuild:
+   ```powershell
+   msbuild ToSic.Imageflow.Dnn.csproj /t:PackageModule /p:Configuration=Release /p:Platform=AnyCPU
+   ```
+6. If successful, the following extension packages will be available in the `\InstallPackages` folder:
    - `ToSic.Imageflow.Dnn_NN.NN.NN_Install.zip`
    - `ToSic.Imageflow.Dnn_NN.NN.NN_Symbols.zip`
 
@@ -90,7 +94,7 @@ Planned features include:
 
 ## References
 
-- [DotNetNuke.Web](https://www.nuget.org/packages/DotNetNuke.Web) ([10.2.2](https://www.nuget.org/packages/DotNetNuke.Web/10.2.2))
+- [DotNetNuke.Web](https://www.nuget.org/packages/DotNetNuke.Web) ([10.1.0](https://www.nuget.org/packages/DotNetNuke.Web/10.1.0))
 - [Imageflow.Net](https://www.nuget.org/packages/Imageflow.Net) ([0.15.1](https://www.nuget.org/packages/Imageflow.Net/0.15.1))
 - [Imageflow.NativeRuntime.win-arm64](https://www.nuget.org/packages/Imageflow.NativeRuntime.win-arm64) ([2.3.1-rc01](https://www.nuget.org/packages/Imageflow.NativeRuntime.win-arm64/2.3.1-rc01))
 - [Imageflow.NativeRuntime.win-x86](https://www.nuget.org/packages/Imageflow.NativeRuntime.win-x86) ([2.3.1-rc01](https://www.nuget.org/packages/Imageflow.NativeRuntime.win-x86/2.3.1-rc01))
@@ -101,7 +105,7 @@ Planned features include:
 
 ## Dependencies
 
-- [DNN Imageflow compatibility for DNN 10.2.2](Docs/dependecies-v1.13.0.md)
+- [DNN Imageflow compatibility for DNN 10.1.0](Docs/dependecies-v1.13.0.md)
 - [DNN Core Shared Dependencies by Version](Docs/dnn-shared-dependecies.md)
 
 ---

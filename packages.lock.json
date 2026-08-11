@@ -4,11 +4,11 @@
     ".NETFramework,Version=v4.8": {
       "DotNetNuke.Web": {
         "type": "Direct",
-        "requested": "[10.2.2, )",
-        "resolved": "10.2.2",
-        "contentHash": "XDP/E8dWLfRiMwJHsW2+u9eZ5YKAW+TeM75XVK+N1iyH270+SCMfJKYjgsMzGJrEauov4ZTbK9m/s7PZnwyUvA==",
+        "requested": "[10.1.0, )",
+        "resolved": "10.1.0",
+        "contentHash": "zbOm5P6H27VMkmxhQwOW+ohz2rFNMqWXJ8E5OoBfGPiQ5+0n9jpg3Cxce1Kf8dnS2grH2ry90VLcnO+G7RMDMg==",
         "dependencies": {
-          "DotNetNuke.Core": "10.2.2",
+          "DotNetNuke.Core": "10.1.0",
           "Microsoft.AspNet.WebApi.Core": "5.3.0"
         }
       },
@@ -53,25 +53,25 @@
       },
       "DotNetNuke.Core": {
         "type": "Transitive",
-        "resolved": "10.2.2",
-        "contentHash": "c5Q/8CTbeyonH1PycrmhzJ90VHlStX2tq7hDmPd+Y+QIrTfdoAN/BtKwoeq02uIo9jAjj4x1TVtjl5N5iJlPNQ==",
+        "resolved": "10.1.0",
+        "contentHash": "q4xiPwRX5OaBgysmKu7BM9DvuPG8iRADfwW2SxLMjNLYHu5DO6ouvi8RBBeTUh2VbQs4hEGob1rAp8nYxqgrAw==",
         "dependencies": {
-          "DotNetNuke.DependencyInjection": "10.2.2"
+          "DotNetNuke.DependencyInjection": "10.1.0"
         }
       },
       "DotNetNuke.DependencyInjection": {
         "type": "Transitive",
-        "resolved": "10.2.2",
-        "contentHash": "ZP+/NAoE3eA5q8JIVlabSlX9PxEMQhvTCg42A0mam0yn60W/DbxfPTVKhKnyGnze8c1GG2EGmkW9zHqlAFhIwA==",
+        "resolved": "10.1.0",
+        "contentHash": "TSo1UYBftZNbwb+jStLLh8cxCVYP05kZoi9NjgHN1wkaPD55Iy4T/n+QfhXdE4k8CqL2HgLw2fUs6ORaLH6IgA==",
         "dependencies": {
-          "DotNetNuke.Instrumentation": "10.2.2",
+          "DotNetNuke.Instrumentation": "10.1.0",
           "Microsoft.Extensions.DependencyInjection": "8.0.0"
         }
       },
       "DotNetNuke.Instrumentation": {
         "type": "Transitive",
-        "resolved": "10.2.2",
-        "contentHash": "JhHRu0Qm9iIZyn/zKcaZ1cV+hKnkDRkkkk1zcjkhwE+izPN4TU8WX2UXJdfKTBvZTBJut61s9NDXlu4uBTr5Hg=="
+        "resolved": "10.1.0",
+        "contentHash": "V8ES1rMEpS2aGuOY9jr91+4u7ZW46h2Q13FGu8m6pYhtjhumLosNMqHfc06QIivLyT8IiFLZyE1vSsq9JRxErw=="
       },
       "Imazen.Common": {
         "type": "Transitive",

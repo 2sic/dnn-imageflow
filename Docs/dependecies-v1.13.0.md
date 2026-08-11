@@ -1,10 +1,10 @@
-# DNN Imageflow compatibility for DNN 10.2.2
+# DNN Imageflow compatibility for DNN 10.1.0
 
 This document captures the packaging and runtime layout that the current Imageflow work is preparing for the 1.13.0 release.
 
 ## Target baseline
 
-- DNN minimum/core dependency: 10.2.2
+- DNN minimum/core dependency: 10.1.0
 - Project target framework: .NET Framework 4.8
 - Compatibility line kept for shared dependencies: Microsoft.Extensions.DependencyInjection 8.0.0 and Microsoft.Bcl.AsyncInterfaces 8.0.0
 
@@ -29,7 +29,7 @@ The DNN-shipped `System.*`, `Microsoft.Bcl.AsyncInterfaces`, and `Microsoft.Exte
 
 ## Why this layout exists
 
-This preserves compatibility with DNN 10.2.2+ by relying on the DNN-provided shared runtime assemblies and only shipping the Imageflow-specific managed dependencies in the main `bin` folder. The manifest removes stale `codeBase` entries left by older `bin/Imageflow` installs and lets DNN's Assembly component manage binding redirects.
+This preserves compatibility with DNN 10.1.0+ by relying on the DNN-provided shared runtime assemblies and only shipping the Imageflow-specific managed dependencies in the main `bin` folder. The manifest removes stale `codeBase` entries left by older `bin/Imageflow` installs and lets DNN's Assembly component manage binding redirects.
 
 ## Packaging notes
 

@@ -2,7 +2,7 @@
 <dotnetnuke type="Package" version="6.0">
   <packages>
     <package name="ToSic.Imageflow.Dnn" type="Library" version="01.13.00">
-      <friendlyName>Imageflow for DNN</friendlyName>
+      <friendlyName>Imageflow</friendlyName>
 
       <description>
         <![CDATA[<p>Imazen Imageflow - optimal images at incredible speeds - image resizer http module for high-performance image manipulation.</p>]]>
@@ -22,7 +22,7 @@
       <azureCompatible>True</azureCompatible>
 
       <dependencies>
-        <dependency type="CoreVersion">10.2.2</dependency>
+        <dependency type="CoreVersion">10.01.00</dependency>
       </dependencies>
 
       <components>
