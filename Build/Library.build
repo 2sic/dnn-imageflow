@@ -10,8 +10,10 @@
     <FullModulePath>$(WebsitePath)\Bin</FullModulePath>
   </PropertyGroup>
   <Import Project="$(BuildScriptsPath)\LibraryPackage.Targets" />
-  <Target Name="AfterBuild" DependsOnTargets="CopyBin;GetFiles;PackageModule">
-  </Target>
+  <Target Name="PackageAfterBuild"
+          AfterTargets="Build"
+          Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'"
+          DependsOnTargets="CopyBin;GetFiles;PackageModule" />
   <Target Name="GetFiles">
     <ItemGroup>
       <Manifest Include="*.dnn;*.dnn5;*.dnn6" Exclude="*_Symbols.dnn" />

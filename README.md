@@ -79,16 +79,17 @@ Planned features include:
 ## Development Setup
 
 1. Clone this repository.
-2. Open the `ToSic.Imageflow.Dnn` solution in Visual Studio.
-3. Set the **Release** configuration in the Configuration Manager.
-4. Build the solution.
-5. Generate the extension packages with full-framework MSBuild:
-   ```powershell
-   msbuild ToSic.Imageflow.Dnn.csproj /t:PackageModule /p:Configuration=Release /p:Platform=AnyCPU
-   ```
-6. If successful, the following extension packages will be available in the `\InstallPackages` folder:
+2. Open the `ToSic.Imageflow.Dnn` solution in Visual Studio 2026.
+3. Select **Release** and **Any CPU** in the Configuration Manager.
+4. Build the solution. A Release build automatically creates both extension packages.
+5. The packages are written to the `\InstallPackages` folder:
    - `ToSic.Imageflow.Dnn_NN.NN.NN_Install.zip`
    - `ToSic.Imageflow.Dnn_NN.NN.NN_Symbols.zip`
+
+For command-line builds, run full-framework MSBuild from a Visual Studio Developer PowerShell:
+   ```powershell
+   msbuild ToSic.Imageflow.Dnn.csproj /t:Build /p:Configuration=Release /p:Platform=AnyCPU
+   ```
 
 ---
 
