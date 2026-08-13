@@ -1,12 +1,23 @@
 <h2>Imageflow Extension for DNN</h2>
 <p><strong>Version:</strong> 01.13.00</p>
 
+<h3>Requirements</h3>
+<ul>
+  <li>DNN 10.1.0 or later.</li>
+</ul>
+
 <h3>Changelog</h3>
 <ul>
-  <li>Fix #6 Read the file into memory and return a MemoryStream to avoid file locks.</li>
+  <li>Updated the Imageflow stack to <code>Imageflow 0.15.1</code>, <code>Imazen 0.9.0</code>, and Imageflow native runtime <code>2.3.1-rc01</code>.</li>
+  <li>Retargeted the extension to .NET Framework 4.8 and the DNN 10.1.0 platform.</li>
+  <li>Simplified dependency packaging by using DNN 10 shared dependencies and removing DNN 9-specific workarounds, making future upgrades easier.</li>
+  <li>Improved native runtime replacement during installation and upgrades.</li>
 </ul>
 
 <h3>Notes</h3>
 <ul>
   <li>During installation, the extension will automatically unregister the older <code>ImageResizer</code> HTTP module in <code>web.config</code>.</li>
+  <li>After upgrading the extension, recycle the IIS application pool to release locks on the previous native Imageflow library and prevent an <code>ABI mismatch</code> exception.</li>
 </ul>
+
+<p><strong>Full Changelog:</strong> <a href="https://github.com/2sic/dnn-imageflow/compare/v1.12.1...v1.13.0">v1.12.1...v1.13.0</a></p>
